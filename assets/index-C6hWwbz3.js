@@ -24,7 +24,7 @@ Error generating stack: `+e.message+`
     {id:11,title:`Alexis, Mi Hermano`,artist:`Motte`,duration:`03:41`,releaseDate:`2026-03-16`,cover:`/Koenigliche-AI-Songs/covers/Alexis-Mi-Hermano.jpg`,file:`/Koenigliche-AI-Songs/songs/Alexis-Mi-Hermano.mp3`,isSingle:!0},
     {id:12,title:`Alexis Brother`,artist:`Motte`,duration:`03:36`,releaseDate:`2026-03-16`,cover:`/Koenigliche-AI-Songs/covers/Alexis_Brother.jpg`,file:`/Koenigliche-AI-Songs/songs/Alexis_Brother.mp3`,isSingle:!0},
     {id:13,title:`Il Ritorno del Don Motte`,artist:`Erdbeerenfresser`,album:`Il Ritorno del Don Motte - Single`,albumCover:`/Koenigliche-AI-Songs/covers/il-ritorno-del-don-motte.jpg`,trackNumber:1,duration:`03:37`,releaseDate:`2026-04-10`,cover:`/Koenigliche-AI-Songs/covers/il-ritorno-del-don-motte.jpg`,file:`/Koenigliche-AI-Songs/songs/il-ritorno-del-don-motte.mp3`,isSingle:!0},
-    {id:14,title:`Rückfahrt Zwei Stunden`,artist:`Erdbeerenfresser`,duration:`02:44`,releaseDate:`2026-04-12`,cover:`/Koenigliche-AI-Songs/covers/Rückfahrt_Zwei_Stunden.jpg`,file:`/Koenigliche-AI-Songs/songs/Rückfahrt_Zwei_Stunden.mp3`,isSingle:!0}
+    {id:14,title:`Rückfahrt Zwei Stunden`,artist:`Erdbeerenfresser`,duration:`02:44`,releaseDate:`2026-04-12`,cover:`/Koenigliche-AI-Songs/covers/Rückfahrt_Zwei_Stunden.jpg`,file:`/Koenigliche-AI-Songs/songs/Rückfahrt_Zwei_Stunden.mp3`,isSingle:!0},
     {id:15,title:`Jascha Winter und der Freizeitparkzauber`,artist:`Motte`,duration:`04:44`,releaseDate:`2026-03-05`,cover:`/Koenigliche-AI-Songs/covers/Jascha-Winter-und-der-Freizeitparkzauber.jpg`,file:`/Koenigliche-AI-Songs/songs/Jascha-Winter-und-der-Freizeitparkzauber.mp3`,isSingle:!0},
 ],$n=[
     {version:`1.0.1`,label:`2026-04-12 22:45`,changes:[`Website war down. Problem behoben`]},
