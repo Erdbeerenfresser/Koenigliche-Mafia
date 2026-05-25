@@ -10,7 +10,7 @@ Error generating stack: `+e.message+`
     To pick up a draggable item, press the space bar.
     While dragging, use the arrow keys to move the item.
     Press space again to drop the item in its new position, or press escape to cancel.
-  `},Ce={onDragStart(e){let{active:t}=e;return`Picked up draggable item `+t.id+`.`},onDragOver(e){let{active:t,over:n}=e;return n?`Draggable item `+t.id+` was moved over droppable area `+n.id+`.`:`Draggable item `+t.id+` is no longer over a droppable area.`},onDragEnd(e){let{active:t,over:n}=e;return n?`Draggable item `+t.id+` was dropped over droppable area `+n.id:`Draggable item `+t.id+` was dropped.`},onDragCancel(e){let{active:t}=e;return`Dragging was cancelled. Draggable item `+t.id+` was dropped.`}};function we(e){let{announcements:t=Ce,container:n,hiddenTextDescribedById:r,screenReaderInstructions:i=Se}=e,{announce:a,announcement:o}=ve(),s=k(`DndLiveRegion`),[c,l]=(0,y.useState)(!1);if((0,y.useEffect)(()=>{l(!0)},[]),be((0,y.useMemo)(()=>({onDragStart(e){let{active:n}=e;a(t.onDragStart({active:n}))},onDragMove(e){let{active:n,over:r}=e;t.onDragMove&&a(t.onDragMove({active:n,over:r}))},onDragOver(e){let{active:n,over:r}=e;a(t.onDragOver({active:n,over:r}))},onDragEnd(e){let{active:n,over:r}=e;a(t.onDragEnd({active:n,over:r}))},onDragCancel(e){let{active:n,over:r}=e;a(t.onDragCancel({active:n,over:r}))}}),[a,t])),!c)return null;let u=y.createElement(y.Fragment,null,y.createElement(ge,{id:r,value:i.draggable}),y.createElement(_e,{id:s,announcement:o}));return n?(0,_.createPortal)(u,n):u}var N;(function(e){e.DragStart=`dragStart`,e.DragMove=`dragMove`,e.DragEnd=`dragEnd`,e.DragCancel=`dragCancel`,e.DragOver=`dragOver`,e.RegisterDroppable=`registerDroppable`,e.SetDroppableDisabled=`setDroppableDisabled`,e.UnregisterDroppable=`unregisterDroppable`})(N||={});function Te(){}function Ee(e,t){return(0,y.useMemo)(()=>({sensor:e,options:t??{}}),[e,t])}function De(){var e=[...arguments];return(0,y.useMemo)(()=>[...e].filter(e=>e!=null),[...e])}var Oe=Object.freeze({x:0,y:0});function ke(e,t){return Math.sqrt((e.x-t.x)**2+(e.y-t.y)**2)}function Ae(e,t){let{data:{value:n}}=e,{data:{value:r}}=t;return n-r}function je(e,t){let{data:{value:n}}=e,{data:{value:r}}=t;return r-n}function Me(e,t){if(!e||e.length===0)return null;let[n]=e;return t?n[t]:n}function Ne(e,t,n){return t===void 0&&(t=e.left),n===void 0&&(n=e.top),{x:t+e.width*.5,y:n+e.height*.5}}var Pe=e=>{let{collisionRect:t,droppableRects:n,droppableContainers:r}=e,i=Ne(t,t.left,t.top),a=[];for(let e of r){let{id:t}=e,r=n.get(t);if(r){let n=ke(Ne(r),i);a.push({id:t,data:{droppableContainer:e,value:n}})}}return a.sort(Ae)};function Fe(e,t){let n=Math.max(t.top,e.top),r=Math.max(t.left,e.left),i=Math.min(t.left+t.width,e.left+e.width),a=Math.min(t.top+t.height,e.top+e.height),o=i-r,s=a-n;if(r<i&&n<a){let n=t.width*t.height,r=e.width*e.height,i=o*s,a=i/(n+r-i);return Number(a.toFixed(4))}return 0}var Ie=e=>{let{collisionRect:t,droppableRects:n,droppableContainers:r}=e,i=[];for(let e of r){let{id:r}=e,a=n.get(r);if(a){let n=Fe(a,t);n>0&&i.push({id:r,data:{droppableContainer:e,value:n}})}}return i.sort(je)};function Le(e,t,n){return{...e,scaleX:t&&n?t.width/n.width:1,scaleY:t&&n?t.height/n.height:1}}function Re(e,t){return e&&t?{x:e.left-t.left,y:e.top-t.top}:Oe}function ze(e){return function(t){return[...arguments].slice(1).reduce((t,n)=>({...t,top:t.top+e*n.y,bottom:t.bottom+e*n.y,left:t.left+e*n.x,right:t.right+e*n.x}),{...t})}}var Be=ze(1);function Ve(e){if(e.startsWith(`matrix3d(`)){let t=e.slice(9,-1).split(/, /);return{x:+t[12],y:+t[13],scaleX:+t[0],scaleY:+t[5]}}else if(e.startsWith(`matrix(`)){let t=e.slice(7,-1).split(/, /);return{x:+t[4],y:+t[5],scaleX:+t[0],scaleY:+t[3]}}return null}function He(e,t,n){let r=Ve(t);if(!r)return e;let{scaleX:i,scaleY:a,x:o,y:s}=r,c=e.left-o-(1-i)*parseFloat(n),l=e.top-s-(1-a)*parseFloat(n.slice(n.indexOf(` `)+1)),u=i?e.width/i:e.width,d=a?e.height/a:e.height;return{width:u,height:d,top:l,right:c+u,bottom:l+d,left:c}}var Ue={ignoreTransform:!1};function We(e,t){t===void 0&&(t=Ue);let n=e.getBoundingClientRect();if(t.ignoreTransform){let{transform:t,transformOrigin:r}=w(e).getComputedStyle(e);t&&(n=He(n,t,r))}let{top:r,left:i,width:a,height:o,bottom:s,right:c}=n;return{top:r,left:i,width:a,height:o,bottom:s,right:c}}function Ge(e){return We(e,{ignoreTransform:!0})}function Ke(e){let t=e.innerWidth,n=e.innerHeight;return{top:0,left:0,right:t,bottom:n,width:t,height:n}}function qe(e,t){return t===void 0&&(t=w(e).getComputedStyle(e)),t.position===`fixed`}function Je(e,t){t===void 0&&(t=w(e).getComputedStyle(e));let n=/(auto|scroll|overlay)/;return[`overflow`,`overflowX`,`overflowY`].some(e=>{let r=t[e];return typeof r==`string`?n.test(r):!1})}function Ye(e,t){let n=[];function r(i){if(t!=null&&n.length>=t||!i)return n;if(ee(i)&&i.scrollingElement!=null&&!n.includes(i.scrollingElement))return n.push(i.scrollingElement),n;if(!T(i)||te(i)||n.includes(i))return n;let a=w(e).getComputedStyle(i);return i!==e&&Je(i,a)&&n.push(i),qe(i,a)?n:r(i.parentNode)}return e?r(e):n}function Xe(e){let[t]=Ye(e,1);return t??null}function Ze(e){return!x||!e?null:S(e)?e:C(e)?ee(e)||e===E(e).scrollingElement?window:T(e)?e:null:null}function Qe(e){return S(e)?e.scrollX:e.scrollLeft}function $e(e){return S(e)?e.scrollY:e.scrollTop}function et(e){return{x:Qe(e),y:$e(e)}}var P;(function(e){e[e.Forward=1]=`Forward`,e[e.Backward=-1]=`Backward`})(P||={});function tt(e){return!x||!e?!1:e===document.scrollingElement}function nt(e){let t={x:0,y:0},n=tt(e)?{height:window.innerHeight,width:window.innerWidth}:{height:e.clientHeight,width:e.clientWidth},r={x:e.scrollWidth-n.width,y:e.scrollHeight-n.height};return{isTop:e.scrollTop<=t.y,isLeft:e.scrollLeft<=t.x,isBottom:e.scrollTop>=r.y,isRight:e.scrollLeft>=r.x,maxScroll:r,minScroll:t}}var rt={x:.2,y:.2};function it(e,t,n,r,i){let{top:a,left:o,right:s,bottom:c}=n;r===void 0&&(r=10),i===void 0&&(i=rt);let{isTop:l,isBottom:u,isLeft:d,isRight:f}=nt(e),p={x:0,y:0},m={x:0,y:0},h={height:t.height*i.y,width:t.width*i.x};return!l&&a<=t.top+h.height?(p.y=P.Backward,m.y=r*Math.abs((t.top+h.height-a)/h.height)):!u&&c>=t.bottom-h.height&&(p.y=P.Forward,m.y=r*Math.abs((t.bottom-h.height-c)/h.height)),!f&&s>=t.right-h.width?(p.x=P.Forward,m.x=r*Math.abs((t.right-h.width-s)/h.width)):!d&&o<=t.left+h.width&&(p.x=P.Backward,m.x=r*Math.abs((t.left+h.width-o)/h.width)),{direction:p,speed:m}}function at(e){if(e===document.scrollingElement){let{innerWidth:e,innerHeight:t}=window;return{top:0,left:0,right:e,bottom:t,width:e,height:t}}let{top:t,left:n,right:r,bottom:i}=e.getBoundingClientRect();return{top:t,left:n,right:r,bottom:i,width:e.clientWidth,height:e.clientHeight}}function ot(e){return e.reduce((e,t)=>le(e,et(t)),Oe)}function st(e){return e.reduce((e,t)=>e+Qe(t),0)}function F(e){return e.reduce((e,t)=>e+$e(t),0)}function ct(e,t){if(t===void 0&&(t=We),!e)return;let{top:n,left:r,bottom:i,right:a}=t(e);Xe(e)&&(i<=0||a<=0||n>=window.innerHeight||r>=window.innerWidth)&&e.scrollIntoView({block:`center`,inline:`center`})}var I=[[`x`,[`left`,`right`],st],[`y`,[`top`,`bottom`],F]],lt=class{constructor(e,t){this.rect=void 0,this.width=void 0,this.height=void 0,this.top=void 0,this.bottom=void 0,this.right=void 0,this.left=void 0;let n=Ye(t),r=ot(n);this.rect={...e},this.width=e.width,this.height=e.height;for(let[e,t,i]of I)for(let a of t)Object.defineProperty(this,a,{get:()=>{let t=i(n),o=r[e]-t;return this.rect[a]+o},enumerable:!0});Object.defineProperty(this,`rect`,{enumerable:!1})}},L=class{constructor(e){this.target=void 0,this.listeners=[],this.removeAll=()=>{this.listeners.forEach(e=>this.target?.removeEventListener(...e))},this.target=e}add(e,t,n){var r;(r=this.target)==null||r.addEventListener(e,t,n),this.listeners.push([e,t,n])}};function ut(e){let{EventTarget:t}=w(e);return e instanceof t?e:E(e)}function dt(e,t){let n=Math.abs(e.x),r=Math.abs(e.y);return typeof t==`number`?Math.sqrt(n**2+r**2)>t:`x`in t&&`y`in t?n>t.x&&r>t.y:`x`in t?n>t.x:`y`in t?r>t.y:!1}var ft;(function(e){e.Click=`click`,e.DragStart=`dragstart`,e.Keydown=`keydown`,e.ContextMenu=`contextmenu`,e.Resize=`resize`,e.SelectionChange=`selectionchange`,e.VisibilityChange=`visibilitychange`})(ft||={});function pt(e){e.preventDefault()}function mt(e){e.stopPropagation()}var R;(function(e){e.Space=`Space`,e.Down=`ArrowDown`,e.Right=`ArrowRight`,e.Left=`ArrowLeft`,e.Up=`ArrowUp`,e.Esc=`Escape`,e.Enter=`Enter`,e.Tab=`Tab`})(R||={});var ht={start:[R.Space,R.Enter],cancel:[R.Esc],end:[R.Space,R.Enter,R.Tab]},gt=(e,t)=>{let{currentCoordinates:n}=t;switch(e.code){case R.Right:return{...n,x:n.x+25};case R.Left:return{...n,x:n.x-25};case R.Down:return{...n,y:n.y+25};case R.Up:return{...n,y:n.y-25}}},_t=class{constructor(e){this.props=void 0,this.autoScrollEnabled=!1,this.referenceCoordinates=void 0,this.listeners=void 0,this.windowListeners=void 0,this.props=e;let{event:{target:t}}=e;this.props=e,this.listeners=new L(E(t)),this.windowListeners=new L(w(t)),this.handleKeyDown=this.handleKeyDown.bind(this),this.handleCancel=this.handleCancel.bind(this),this.attach()}attach(){this.handleStart(),this.windowListeners.add(ft.Resize,this.handleCancel),this.windowListeners.add(ft.VisibilityChange,this.handleCancel),setTimeout(()=>this.listeners.add(ft.Keydown,this.handleKeyDown))}handleStart(){let{activeNode:e,onStart:t}=this.props,n=e.node.current;n&&ct(n),t(Oe)}handleKeyDown(e){if(A(e)){let{active:t,context:n,options:r}=this.props,{keyboardCodes:i=ht,coordinateGetter:a=gt,scrollBehavior:o=`smooth`}=r,{code:s}=e;if(i.end.includes(s)){this.handleEnd(e);return}if(i.cancel.includes(s)){this.handleCancel(e);return}let{collisionRect:c}=n.current,l=c?{x:c.left,y:c.top}:Oe;this.referenceCoordinates||=l;let u=a(e,{active:t,context:n.current,currentCoordinates:l});if(u){let t=ue(u,l),r={x:0,y:0},{scrollableAncestors:i}=n.current;for(let n of i){let i=e.code,{isTop:a,isRight:s,isLeft:c,isBottom:l,maxScroll:d,minScroll:f}=nt(n),p=at(n),m={x:Math.min(i===R.Right?p.right-p.width/2:p.right,Math.max(i===R.Right?p.left:p.left+p.width/2,u.x)),y:Math.min(i===R.Down?p.bottom-p.height/2:p.bottom,Math.max(i===R.Down?p.top:p.top+p.height/2,u.y))},h=i===R.Right&&!s||i===R.Left&&!c,g=i===R.Down&&!l||i===R.Up&&!a;if(h&&m.x!==u.x){let e=n.scrollLeft+t.x,a=i===R.Right&&e<=d.x||i===R.Left&&e>=f.x;if(a&&!t.y){n.scrollTo({left:e,behavior:o});return}a?r.x=n.scrollLeft-e:r.x=i===R.Right?n.scrollLeft-d.x:n.scrollLeft-f.x,r.x&&n.scrollBy({left:-r.x,behavior:o});break}else if(g&&m.y!==u.y){let e=n.scrollTop+t.y,a=i===R.Down&&e<=d.y||i===R.Up&&e>=f.y;if(a&&!t.x){n.scrollTo({top:e,behavior:o});return}a?r.y=n.scrollTop-e:r.y=i===R.Down?n.scrollTop-d.y:n.scrollTop-f.y,r.y&&n.scrollBy({top:-r.y,behavior:o});break}}this.handleMove(e,le(ue(u,this.referenceCoordinates),r))}}}handleMove(e,t){let{onMove:n}=this.props;e.preventDefault(),n(t)}handleEnd(e){let{onEnd:t}=this.props;e.preventDefault(),this.detach(),t()}handleCancel(e){let{onCancel:t}=this.props;e.preventDefault(),this.detach(),t()}detach(){this.listeners.removeAll(),this.windowListeners.removeAll()}};_t.activators=[{eventName:`onKeyDown`,handler:(e,t,n)=>{let{keyboardCodes:r=ht,onActivation:i}=t,{active:a}=n,{code:o}=e.nativeEvent;if(r.start.includes(o)){let t=a.activatorNode.current;return t&&e.target!==t?!1:(e.preventDefault(),i?.({event:e.nativeEvent}),!0)}return!1}}];function vt(e){return!!(e&&`distance`in e)}function yt(e){return!!(e&&`delay`in e)}var bt=class{constructor(e,t,n){n===void 0&&(n=ut(e.event.target)),this.props=void 0,this.events=void 0,this.autoScrollEnabled=!0,this.document=void 0,this.activated=!1,this.initialCoordinates=void 0,this.timeoutId=null,this.listeners=void 0,this.documentListeners=void 0,this.windowListeners=void 0,this.props=e,this.events=t;let{event:r}=e,{target:i}=r;this.props=e,this.events=t,this.document=E(i),this.documentListeners=new L(this.document),this.listeners=new L(n),this.windowListeners=new L(w(i)),this.initialCoordinates=fe(r)??Oe,this.handleStart=this.handleStart.bind(this),this.handleMove=this.handleMove.bind(this),this.handleEnd=this.handleEnd.bind(this),this.handleCancel=this.handleCancel.bind(this),this.handleKeydown=this.handleKeydown.bind(this),this.removeTextSelection=this.removeTextSelection.bind(this),this.attach()}attach(){let{events:e,props:{options:{activationConstraint:t,bypassActivationConstraint:n}}}=this;if(this.listeners.add(e.move.name,this.handleMove,{passive:!1}),this.listeners.add(e.end.name,this.handleEnd),e.cancel&&this.listeners.add(e.cancel.name,this.handleCancel),this.windowListeners.add(ft.Resize,this.handleCancel),this.windowListeners.add(ft.DragStart,pt),this.windowListeners.add(ft.VisibilityChange,this.handleCancel),this.windowListeners.add(ft.ContextMenu,pt),this.documentListeners.add(ft.Keydown,this.handleKeydown),t){if(n!=null&&n({event:this.props.event,activeNode:this.props.activeNode,options:this.props.options}))return this.handleStart();if(yt(t)){this.timeoutId=setTimeout(this.handleStart,t.delay),this.handlePending(t);return}if(vt(t)){this.handlePending(t);return}}this.handleStart()}detach(){this.listeners.removeAll(),this.windowListeners.removeAll(),setTimeout(this.documentListeners.removeAll,50),this.timeoutId!==null&&(clearTimeout(this.timeoutId),this.timeoutId=null)}handlePending(e,t){let{active:n,onPending:r}=this.props;r(n,e,this.initialCoordinates,t)}handleStart(){let{initialCoordinates:e}=this,{onStart:t}=this.props;e&&(this.activated=!0,this.documentListeners.add(ft.Click,mt,{capture:!0}),this.removeTextSelection(),this.documentListeners.add(ft.SelectionChange,this.removeTextSelection),t(e))}handleMove(e){let{activated:t,initialCoordinates:n,props:r}=this,{onMove:i,options:{activationConstraint:a}}=r;if(!n)return;let o=fe(e)??Oe,s=ue(n,o);if(!t&&a){if(vt(a)){if(a.tolerance!=null&&dt(s,a.tolerance))return this.handleCancel();if(dt(s,a.distance))return this.handleStart()}if(yt(a)&&dt(s,a.tolerance))return this.handleCancel();this.handlePending(a,s);return}e.cancelable&&e.preventDefault(),i(o)}handleEnd(){let{onAbort:e,onEnd:t}=this.props;this.detach(),this.activated||e(this.props.active),t()}handleCancel(){let{onAbort:e,onCancel:t}=this.props;this.detach(),this.activated||e(this.props.active),t()}handleKeydown(e){e.code===R.Esc&&this.handleCancel()}removeTextSelection(){var e;(e=this.document.getSelection())==null||e.removeAllRanges()}},xt={cancel:{name:`pointercancel`},move:{name:`pointermove`},end:{name:`pointerup`}},St=class extends bt{constructor(e){let{event:t}=e,n=E(t.target);super(e,xt,n)}};St.activators=[{eventName:`onPointerDown`,handler:(e,t)=>{let{nativeEvent:n}=e,{onActivation:r}=t;return!n.isPrimary||n.button!==0?!1:(r?.({event:n}),!0)}}];var Ct={move:{name:`mousemove`},end:{name:`mouseup`}},wt;(function(e){e[e.RightClick=2]=`RightClick`})(wt||={});var Tt=class extends bt{constructor(e){super(e,Ct,E(e.event.target))}};Tt.activators=[{eventName:`onMouseDown`,handler:(e,t)=>{let{nativeEvent:n}=e,{onActivation:r}=t;return n.button===wt.RightClick?!1:(r?.({event:n}),!0)}}];var Et={cancel:{name:`touchcancel`},move:{name:`touchmove`},end:{name:`touchend`}},Dt=class extends bt{constructor(e){super(e,Et)}static setup(){return window.addEventListener(Et.move.name,e,{capture:!1,passive:!1}),function(){window.removeEventListener(Et.move.name,e)};function e(){}}};Dt.activators=[{eventName:`onTouchStart`,handler:(e,t)=>{let{nativeEvent:n}=e,{onActivation:r}=t,{touches:i}=n;return i.length>1?!1:(r?.({event:n}),!0)}}];var Ot;(function(e){e[e.Pointer=0]=`Pointer`,e[e.DraggableRect=1]=`DraggableRect`})(Ot||={});var kt;(function(e){e[e.TreeOrder=0]=`TreeOrder`,e[e.ReversedTreeOrder=1]=`ReversedTreeOrder`})(kt||={});function At(e){let{acceleration:t,activator:n=Ot.Pointer,canScroll:r,draggingRect:i,enabled:a,interval:o=5,order:s=kt.TreeOrder,pointerCoordinates:c,scrollableAncestors:l,scrollableAncestorRects:u,delta:d,threshold:f}=e,p=Mt({delta:d,disabled:!a}),[m,h]=ie(),g=(0,y.useRef)({x:0,y:0}),_=(0,y.useRef)({x:0,y:0}),v=(0,y.useMemo)(()=>{switch(n){case Ot.Pointer:return c?{top:c.y,bottom:c.y,left:c.x,right:c.x}:null;case Ot.DraggableRect:return i}},[n,i,c]),b=(0,y.useRef)(null),x=(0,y.useCallback)(()=>{let e=b.current;if(!e)return;let t=g.current.x*_.current.x,n=g.current.y*_.current.y;e.scrollBy(t,n)},[]),S=(0,y.useMemo)(()=>s===kt.TreeOrder?[...l].reverse():l,[s,l]);(0,y.useEffect)(()=>{if(!a||!l.length||!v){h();return}for(let e of S){if(r?.(e)===!1)continue;let n=u[l.indexOf(e)];if(!n)continue;let{direction:i,speed:a}=it(e,n,v,t,f);for(let e of[`x`,`y`])p[e][i[e]]||(a[e]=0,i[e]=0);if(a.x>0||a.y>0){h(),b.current=e,m(x,o),g.current=a,_.current=i;return}}g.current={x:0,y:0},_.current={x:0,y:0},h()},[t,x,r,h,a,o,JSON.stringify(v),JSON.stringify(p),m,l,S,u,JSON.stringify(f)])}var jt={x:{[P.Backward]:!1,[P.Forward]:!1},y:{[P.Backward]:!1,[P.Forward]:!1}};function Mt(e){let{delta:t,disabled:n}=e,r=se(t);return D(e=>{if(n||!r||!e)return jt;let i={x:Math.sign(t.x-r.x),y:Math.sign(t.y-r.y)};return{x:{[P.Backward]:e.x[P.Backward]||i.x===-1,[P.Forward]:e.x[P.Forward]||i.x===1},y:{[P.Backward]:e.y[P.Backward]||i.y===-1,[P.Forward]:e.y[P.Forward]||i.y===1}}},[n,t,r])}function Nt(e,t){let n=t==null?void 0:e.get(t),r=n?n.node.current:null;return D(e=>t==null?null:r??e??null,[r,t])}function Pt(e,t){return(0,y.useMemo)(()=>e.reduce((e,n)=>{let{sensor:r}=n,i=r.activators.map(e=>({eventName:e.eventName,handler:t(e.handler,n)}));return[...e,...i]},[]),[e,t])}var Ft;(function(e){e[e.Always=0]=`Always`,e[e.BeforeDragging=1]=`BeforeDragging`,e[e.WhileDragging=2]=`WhileDragging`})(Ft||={});var It;(function(e){e.Optimized=`optimized`})(It||={});var Lt=new Map;function Rt(e,t){let{dragging:n,dependencies:r,config:i}=t,[a,o]=(0,y.useState)(null),{frequency:s,measure:c,strategy:l}=i,u=(0,y.useRef)(e),d=g(),f=ae(d),p=(0,y.useCallback)(function(e){e===void 0&&(e=[]),!f.current&&o(t=>t===null?e:t.concat(e.filter(e=>!t.includes(e))))},[f]),m=(0,y.useRef)(null),h=D(t=>{if(d&&!n)return Lt;if(!t||t===Lt||u.current!==e||a!=null){let t=new Map;for(let n of e){if(!n)continue;if(a&&a.length>0&&!a.includes(n.id)&&n.rect.current){t.set(n.id,n.rect.current);continue}let e=n.node.current,r=e?new lt(c(e),e):null;n.rect.current=r,r&&t.set(n.id,r)}return t}return t},[e,a,n,d,c]);return(0,y.useEffect)(()=>{u.current=e},[e]),(0,y.useEffect)(()=>{d||p()},[n,d]),(0,y.useEffect)(()=>{a&&a.length>0&&o(null)},[JSON.stringify(a)]),(0,y.useEffect)(()=>{d||typeof s!=`number`||m.current!==null||(m.current=setTimeout(()=>{p(),m.current=null},s))},[s,d,p,...r]),{droppableRects:h,measureDroppableContainers:p,measuringScheduled:a!=null};function g(){switch(l){case Ft.Always:return!1;case Ft.BeforeDragging:return n;default:return!n}}}function zt(e,t){return D(n=>e?n||(typeof t==`function`?t(e):e):null,[t,e])}function Bt(e,t){return zt(e,t)}function Vt(e){let{callback:t,disabled:n}=e,r=re(t),i=(0,y.useMemo)(()=>{if(n||typeof window>`u`||window.MutationObserver===void 0)return;let{MutationObserver:e}=window;return new e(r)},[r,n]);return(0,y.useEffect)(()=>()=>i?.disconnect(),[i]),i}function Ht(e){let{callback:t,disabled:n}=e,r=re(t),i=(0,y.useMemo)(()=>{if(n||typeof window>`u`||window.ResizeObserver===void 0)return;let{ResizeObserver:e}=window;return new e(r)},[n]);return(0,y.useEffect)(()=>()=>i?.disconnect(),[i]),i}function Ut(e){return new lt(We(e),e)}function Wt(e,t,n){t===void 0&&(t=Ut);let[r,i]=(0,y.useState)(null);function a(){i(r=>{if(!e)return null;if(e.isConnected===!1)return r??n??null;let i=t(e);return JSON.stringify(r)===JSON.stringify(i)?r:i})}let o=Vt({callback(t){if(e)for(let n of t){let{type:t,target:r}=n;if(t===`childList`&&r instanceof HTMLElement&&r.contains(e)){a();break}}}}),s=Ht({callback:a});return ne(()=>{a(),e?(s?.observe(e),o?.observe(document.body,{childList:!0,subtree:!0})):(s?.disconnect(),o?.disconnect())},[e]),r}function Gt(e){return Re(e,zt(e))}var Kt=[];function qt(e){let t=(0,y.useRef)(e),n=D(n=>e?n&&n!==Kt&&e&&t.current&&e.parentNode===t.current.parentNode?n:Ye(e):Kt,[e]);return(0,y.useEffect)(()=>{t.current=e},[e]),n}function Jt(e){let[t,n]=(0,y.useState)(null),r=(0,y.useRef)(e),i=(0,y.useCallback)(e=>{let t=Ze(e.target);t&&n(e=>e?(e.set(t,et(t)),new Map(e)):null)},[]);return(0,y.useEffect)(()=>{let t=r.current;if(e!==t){a(t);let o=e.map(e=>{let t=Ze(e);return t?(t.addEventListener(`scroll`,i,{passive:!0}),[t,et(t)]):null}).filter(e=>e!=null);n(o.length?new Map(o):null),r.current=e}return()=>{a(e),a(t)};function a(e){e.forEach(e=>{Ze(e)?.removeEventListener(`scroll`,i)})}},[i,e]),(0,y.useMemo)(()=>e.length?t?Array.from(t.values()).reduce((e,t)=>le(e,t),Oe):ot(e):Oe,[e,t])}function Yt(e,t){t===void 0&&(t=[]);let n=(0,y.useRef)(null);return(0,y.useEffect)(()=>{n.current=null},t),(0,y.useEffect)(()=>{let t=e!==Oe;t&&!n.current&&(n.current=e),!t&&n.current&&(n.current=null)},[e]),n.current?ue(e,n.current):Oe}function Xt(e){(0,y.useEffect)(()=>{if(!x)return;let t=e.map(e=>{let{sensor:t}=e;return t.setup==null?void 0:t.setup()});return()=>{for(let e of t)e?.()}},e.map(e=>{let{sensor:t}=e;return t}))}function Zt(e,t){return(0,y.useMemo)(()=>e.reduce((e,n)=>{let{eventName:r,handler:i}=n;return e[r]=e=>{i(e,t)},e},{}),[e,t])}function Qt(e){return(0,y.useMemo)(()=>e?Ke(e):null,[e])}var $t=[];function en(e,t){t===void 0&&(t=We);let[n]=e,r=Qt(n?w(n):null),[i,a]=(0,y.useState)($t);function o(){a(()=>e.length?e.map(e=>tt(e)?r:new lt(t(e),e)):$t)}let s=Ht({callback:o});return ne(()=>{s?.disconnect(),o(),e.forEach(e=>s?.observe(e))},[e]),i}function tn(e){if(!e)return null;if(e.children.length>1)return e;let t=e.children[0];return T(t)?t:e}function nn(e){let{measure:t}=e,[n,r]=(0,y.useState)(null),i=Ht({callback:(0,y.useCallback)(e=>{for(let{target:n}of e)if(T(n)){r(e=>{let r=t(n);return e?{...e,width:r.width,height:r.height}:r});break}},[t])}),[a,o]=oe((0,y.useCallback)(e=>{let n=tn(e);i?.disconnect(),n&&i?.observe(n),r(n?t(n):null)},[t,i]));return(0,y.useMemo)(()=>({nodeRef:a,rect:n,setRef:o}),[n,a,o])}var rn=[{sensor:St,options:{}},{sensor:_t,options:{}}],an={current:{}},on={draggable:{measure:Ge},droppable:{measure:Ge,strategy:Ft.WhileDragging,frequency:It.Optimized},dragOverlay:{measure:We}},sn=class extends Map{get(e){return e==null?void 0:super.get(e)??void 0}toArray(){return Array.from(this.values())}getEnabled(){return this.toArray().filter(e=>{let{disabled:t}=e;return!t})}getNodeFor(e){return this.get(e)?.node.current??void 0}},cn={activatorEvent:null,active:null,activeNode:null,activeNodeRect:null,collisions:null,containerNodeRect:null,draggableNodes:new Map,droppableRects:new Map,droppableContainers:new sn,over:null,dragOverlay:{nodeRef:{current:null},rect:null,setRef:Te},scrollableAncestors:[],scrollableAncestorRects:[],measuringConfiguration:on,measureDroppableContainers:Te,windowRect:null,measuringScheduled:!1},ln={activatorEvent:null,activators:[],active:null,activeNodeRect:null,ariaDescribedById:{draggable:``},dispatch:Te,draggableNodes:new Map,over:null,measureDroppableContainers:Te},un=(0,y.createContext)(ln),dn=(0,y.createContext)(cn);function fn(){return{draggable:{active:null,initialCoordinates:{x:0,y:0},nodes:new Map,translate:{x:0,y:0}},droppable:{containers:new sn}}}function pn(e,t){switch(t.type){case N.DragStart:return{...e,draggable:{...e.draggable,initialCoordinates:t.initialCoordinates,active:t.active}};case N.DragMove:return e.draggable.active==null?e:{...e,draggable:{...e.draggable,translate:{x:t.coordinates.x-e.draggable.initialCoordinates.x,y:t.coordinates.y-e.draggable.initialCoordinates.y}}};case N.DragEnd:case N.DragCancel:return{...e,draggable:{...e.draggable,active:null,initialCoordinates:{x:0,y:0},translate:{x:0,y:0}}};case N.RegisterDroppable:{let{element:n}=t,{id:r}=n,i=new sn(e.droppable.containers);return i.set(r,n),{...e,droppable:{...e.droppable,containers:i}}}case N.SetDroppableDisabled:{let{id:n,key:r,disabled:i}=t,a=e.droppable.containers.get(n);if(!a||r!==a.key)return e;let o=new sn(e.droppable.containers);return o.set(n,{...a,disabled:i}),{...e,droppable:{...e.droppable,containers:o}}}case N.UnregisterDroppable:{let{id:n,key:r}=t,i=e.droppable.containers.get(n);if(!i||r!==i.key)return e;let a=new sn(e.droppable.containers);return a.delete(n),{...e,droppable:{...e.droppable,containers:a}}}default:return e}}function mn(e){let{disabled:t}=e,{active:n,activatorEvent:r,draggableNodes:i}=(0,y.useContext)(un),a=se(r),o=se(n?.id);return(0,y.useEffect)(()=>{if(!t&&!r&&a&&o!=null){if(!A(a)||document.activeElement===a.target)return;let e=i.get(o);if(!e)return;let{activatorNode:t,node:n}=e;if(!t.current&&!n.current)return;requestAnimationFrame(()=>{for(let e of[t.current,n.current]){if(!e)continue;let t=he(e);if(t){t.focus();break}}})}},[r,t,i,o,a]),null}function hn(e,t){let{transform:n,...r}=t;return e!=null&&e.length?e.reduce((e,t)=>t({transform:e,...r}),n):n}function gn(e){return(0,y.useMemo)(()=>({draggable:{...on.draggable,...e?.draggable},droppable:{...on.droppable,...e?.droppable},dragOverlay:{...on.dragOverlay,...e?.dragOverlay}}),[e?.draggable,e?.droppable,e?.dragOverlay])}function _n(e){let{activeNode:t,measure:n,initialRect:r,config:i=!0}=e,a=(0,y.useRef)(!1),{x:o,y:s}=typeof i==`boolean`?{x:i,y:i}:i;ne(()=>{if(!o&&!s||!t){a.current=!1;return}if(a.current||!r)return;let e=t?.node.current;if(!e||e.isConnected===!1)return;let i=Re(n(e),r);if(o||(i.x=0),s||(i.y=0),a.current=!0,Math.abs(i.x)>0||Math.abs(i.y)>0){let t=Xe(e);t&&t.scrollBy({top:i.y,left:i.x})}},[t,o,s,r,n])}var vn=(0,y.createContext)({...Oe,scaleX:1,scaleY:1}),yn;(function(e){e[e.Uninitialized=0]=`Uninitialized`,e[e.Initializing=1]=`Initializing`,e[e.Initialized=2]=`Initialized`})(yn||={});var bn=(0,y.memo)(function(e){let{id:t,accessibility:n,autoScroll:r=!0,children:i,sensors:a=rn,collisionDetection:o=Ie,measuring:s,modifiers:c,...l}=e,[u,d]=(0,y.useReducer)(pn,void 0,fn),[f,p]=xe(),[m,h]=(0,y.useState)(yn.Uninitialized),g=m===yn.Initialized,{draggable:{active:v,nodes:b,translate:x},droppable:{containers:S}}=u,C=v==null?null:b.get(v),ee=(0,y.useRef)({initial:null,translated:null}),T=(0,y.useMemo)(()=>v==null?null:{id:v,data:C?.data??an,rect:ee},[v,C]),te=(0,y.useRef)(null),[E,re]=(0,y.useState)(null),[ie,D]=(0,y.useState)(null),oe=ae(l,Object.values(l)),se=k(`DndDescribedBy`,t),O=(0,y.useMemo)(()=>S.getEnabled(),[S]),ce=gn(s),{droppableRects:ue,measureDroppableContainers:de,measuringScheduled:A}=Rt(O,{dragging:g,dependencies:[x.x,x.y],config:ce.droppable}),j=Nt(b,v),pe=(0,y.useMemo)(()=>ie?fe(ie):null,[ie]),me=Ze(),he=Bt(j,ce.draggable.measure);_n({activeNode:v==null?null:b.get(v),config:me.layoutShiftCompensation,initialRect:he,measure:ce.draggable.measure});let M=Wt(j,ce.draggable.measure,he),ge=Wt(j?j.parentElement:null),_e=(0,y.useRef)({activatorEvent:null,active:null,activeNode:j,collisionRect:null,collisions:null,droppableRects:ue,draggableNodes:b,draggingNode:null,draggingNodeRect:null,droppableContainers:S,over:null,scrollableAncestors:[],scrollAdjustedTranslate:null}),ve=S.getNodeFor(_e.current.over?.id),be=nn({measure:ce.dragOverlay.measure}),Se=be.nodeRef.current??j,Ce=g?be.rect??M:null,Te=!!(be.nodeRef.current&&be.rect),Ee=Gt(Te?null:M),De=Qt(Se?w(Se):null),Oe=qt(g?ve??j:null),ke=en(Oe),Ae=hn(c,{transform:{x:x.x-Ee.x,y:x.y-Ee.y,scaleX:1,scaleY:1},activatorEvent:ie,active:T,activeNodeRect:M,containerNodeRect:ge,draggingNodeRect:Ce,over:_e.current.over,overlayNodeRect:be.rect,scrollableAncestors:Oe,scrollableAncestorRects:ke,windowRect:De}),je=pe?le(pe,x):null,Ne=Jt(Oe),Pe=Yt(Ne),Fe=Yt(Ne,[M]),Re=le(Ae,Pe),ze=Ce?Be(Ce,Ae):null,Ve=T&&ze?o({active:T,collisionRect:ze,droppableRects:ue,droppableContainers:O,pointerCoordinates:je}):null,He=Me(Ve,`id`),[Ue,We]=(0,y.useState)(null),Ge=Le(Te?Ae:le(Ae,Fe),Ue?.rect??null,M),Ke=(0,y.useRef)(null),qe=(0,y.useCallback)((e,t)=>{let{sensor:n,options:r}=t;if(te.current==null)return;let i=b.get(te.current);if(!i)return;let a=e.nativeEvent;Ke.current=new n({active:te.current,activeNode:i,event:a,options:r,context:_e,onAbort(e){if(!b.get(e))return;let{onDragAbort:t}=oe.current,n={id:e};t?.(n),f({type:`onDragAbort`,event:n})},onPending(e,t,n,r){if(!b.get(e))return;let{onDragPending:i}=oe.current,a={id:e,constraint:t,initialCoordinates:n,offset:r};i?.(a),f({type:`onDragPending`,event:a})},onStart(e){let t=te.current;if(t==null)return;let n=b.get(t);if(!n)return;let{onDragStart:r}=oe.current,i={activatorEvent:a,active:{id:t,data:n.data,rect:ee}};(0,_.unstable_batchedUpdates)(()=>{r?.(i),h(yn.Initializing),d({type:N.DragStart,initialCoordinates:e,active:t}),f({type:`onDragStart`,event:i}),re(Ke.current),D(a)})},onMove(e){d({type:N.DragMove,coordinates:e})},onEnd:o(N.DragEnd),onCancel:o(N.DragCancel)});function o(e){return async function(){let{active:t,collisions:n,over:r,scrollAdjustedTranslate:i}=_e.current,o=null;if(t&&i){let{cancelDrop:s}=oe.current;o={activatorEvent:a,active:t,collisions:n,delta:i,over:r},e===N.DragEnd&&typeof s==`function`&&await Promise.resolve(s(o))&&(e=N.DragCancel)}te.current=null,(0,_.unstable_batchedUpdates)(()=>{d({type:e}),h(yn.Uninitialized),We(null),re(null),D(null),Ke.current=null;let t=e===N.DragEnd?`onDragEnd`:`onDragCancel`;if(o){let e=oe.current[t];e?.(o),f({type:t,event:o})}})}}},[b]),Je=Pt(a,(0,y.useCallback)((e,t)=>(n,r)=>{let i=n.nativeEvent,a=b.get(r);if(te.current!==null||!a||i.dndKit||i.defaultPrevented)return;let o={active:a};e(n,t.options,o)===!0&&(i.dndKit={capturedBy:t.sensor},te.current=r,qe(n,t))},[b,qe]));Xt(a),ne(()=>{M&&m===yn.Initializing&&h(yn.Initialized)},[M,m]),(0,y.useEffect)(()=>{let{onDragMove:e}=oe.current,{active:t,activatorEvent:n,collisions:r,over:i}=_e.current;if(!t||!n)return;let a={active:t,activatorEvent:n,collisions:r,delta:{x:Re.x,y:Re.y},over:i};(0,_.unstable_batchedUpdates)(()=>{e?.(a),f({type:`onDragMove`,event:a})})},[Re.x,Re.y]),(0,y.useEffect)(()=>{let{active:e,activatorEvent:t,collisions:n,droppableContainers:r,scrollAdjustedTranslate:i}=_e.current;if(!e||te.current==null||!t||!i)return;let{onDragOver:a}=oe.current,o=r.get(He),s=o&&o.rect.current?{id:o.id,rect:o.rect.current,data:o.data,disabled:o.disabled}:null,c={active:e,activatorEvent:t,collisions:n,delta:{x:i.x,y:i.y},over:s};(0,_.unstable_batchedUpdates)(()=>{We(s),a?.(c),f({type:`onDragOver`,event:c})})},[He]),ne(()=>{_e.current={activatorEvent:ie,active:T,activeNode:j,collisionRect:ze,collisions:Ve,droppableRects:ue,draggableNodes:b,draggingNode:Se,draggingNodeRect:Ce,droppableContainers:S,over:Ue,scrollableAncestors:Oe,scrollAdjustedTranslate:Re},ee.current={initial:Ce,translated:ze}},[T,j,Ve,ze,b,Se,Ce,ue,S,Ue,Oe,Re]),At({...me,delta:x,draggingRect:ze,pointerCoordinates:je,scrollableAncestors:Oe,scrollableAncestorRects:ke});let Ye=(0,y.useMemo)(()=>({active:T,activeNode:j,activeNodeRect:M,activatorEvent:ie,collisions:Ve,containerNodeRect:ge,dragOverlay:be,draggableNodes:b,droppableContainers:S,droppableRects:ue,over:Ue,measureDroppableContainers:de,scrollableAncestors:Oe,scrollableAncestorRects:ke,measuringConfiguration:ce,measuringScheduled:A,windowRect:De}),[T,j,M,ie,Ve,ge,be,b,S,ue,Ue,de,Oe,ke,ce,A,De]),Xe=(0,y.useMemo)(()=>({activatorEvent:ie,activators:Je,active:T,activeNodeRect:M,ariaDescribedById:{draggable:se},dispatch:d,draggableNodes:b,over:Ue,measureDroppableContainers:de}),[ie,Je,T,M,d,se,b,Ue,de]);return y.createElement(ye.Provider,{value:p},y.createElement(un.Provider,{value:Xe},y.createElement(dn.Provider,{value:Ye},y.createElement(vn.Provider,{value:Ge},i)),y.createElement(mn,{disabled:n?.restoreFocus===!1})),y.createElement(we,{...n,hiddenTextDescribedById:se}));function Ze(){let e=E?.autoScrollEnabled===!1,t=typeof r==`object`?r.enabled===!1:r===!1,n=g&&!e&&!t;return typeof r==`object`?{...r,enabled:n}:{enabled:n}}}),xn=(0,y.createContext)(null),Sn=`button`,Cn=`Draggable`;function wn(e){let{id:t,data:n,disabled:r=!1,attributes:i}=e,a=k(Cn),{activators:o,activatorEvent:s,active:c,activeNodeRect:l,ariaDescribedById:u,draggableNodes:d,over:f}=(0,y.useContext)(un),{role:p=Sn,roleDescription:m=`draggable`,tabIndex:h=0}=i??{},g=c?.id===t,_=(0,y.useContext)(g?vn:xn),[v,b]=oe(),[x,S]=oe(),C=Zt(o,t),w=ae(n);return ne(()=>(d.set(t,{id:t,key:a,node:v,activatorNode:x,data:w}),()=>{let e=d.get(t);e&&e.key===a&&d.delete(t)}),[d,t]),{active:c,activatorEvent:s,activeNodeRect:l,attributes:(0,y.useMemo)(()=>({role:p,tabIndex:h,"aria-disabled":r,"aria-pressed":g&&p===Sn?!0:void 0,"aria-roledescription":m,"aria-describedby":u.draggable}),[r,p,h,g,m,u.draggable]),isDragging:g,listeners:r?void 0:C,node:v,over:f,setNodeRef:b,setActivatorNodeRef:S,transform:_}}function Tn(){return(0,y.useContext)(dn)}var En=`Droppable`,Dn={timeout:25};function On(e){let{data:t,disabled:n=!1,id:r,resizeObserverConfig:i}=e,a=k(En),{active:o,dispatch:s,over:c,measureDroppableContainers:l}=(0,y.useContext)(un),u=(0,y.useRef)({disabled:n}),d=(0,y.useRef)(!1),f=(0,y.useRef)(null),p=(0,y.useRef)(null),{disabled:m,updateMeasurementsFor:h,timeout:g}={...Dn,...i},_=ae(h??r),v=Ht({callback:(0,y.useCallback)(()=>{if(!d.current){d.current=!0;return}p.current!=null&&clearTimeout(p.current),p.current=setTimeout(()=>{l(Array.isArray(_.current)?_.current:[_.current]),p.current=null},g)},[g]),disabled:m||!o}),[b,x]=oe((0,y.useCallback)((e,t)=>{v&&(t&&(v.unobserve(t),d.current=!1),e&&v.observe(e))},[v])),S=ae(t);return(0,y.useEffect)(()=>{!v||!b.current||(v.disconnect(),d.current=!1,v.observe(b.current))},[b,v]),(0,y.useEffect)(()=>(s({type:N.RegisterDroppable,element:{id:r,key:a,disabled:n,node:b,rect:f,data:S}}),()=>s({type:N.UnregisterDroppable,key:a,id:r})),[r]),(0,y.useEffect)(()=>{n!==u.current.disabled&&(s({type:N.SetDroppableDisabled,id:r,key:a,disabled:n}),u.current.disabled=n)},[r,a,n,s]),{active:o,rect:f,isOver:c?.id===r,node:b,over:c,setNodeRef:x}}function kn(e,t,n){let r=e.slice();return r.splice(n<0?r.length+n:n,0,r.splice(t,1)[0]),r}function An(e,t){return e.reduce((e,n,r)=>{let i=t.get(n);return i&&(e[r]=i),e},Array(e.length))}function jn(e){return e!==null&&e>=0}function Mn(e,t){if(e===t)return!0;if(e.length!==t.length)return!1;for(let n=0;n<e.length;n++)if(e[n]!==t[n])return!1;return!0}function Nn(e){return typeof e==`boolean`?{draggable:e,droppable:e}:e}var Pn=e=>{let{rects:t,activeIndex:n,overIndex:r,index:i}=e,a=kn(t,r,n),o=t[i],s=a[i];return!s||!o?null:{x:s.left-o.left,y:s.top-o.top,scaleX:s.width/o.width,scaleY:s.height/o.height}},Fn={scaleX:1,scaleY:1},In=e=>{let{activeIndex:t,activeNodeRect:n,index:r,rects:i,overIndex:a}=e,o=i[t]??n;if(!o)return null;if(r===t){let e=i[a];return e?{x:0,y:t<a?e.top+e.height-(o.top+o.height):e.top-o.top,...Fn}:null}let s=Ln(i,r,t);return r>t&&r<=a?{x:0,y:-o.height-s,...Fn}:r<t&&r>=a?{x:0,y:o.height+s,...Fn}:{x:0,y:0,...Fn}};function Ln(e,t,n){let r=e[t],i=e[t-1],a=e[t+1];return r?n<t?i?r.top-(i.top+i.height):a?a.top-(r.top+r.height):0:a?a.top-(r.top+r.height):i?r.top-(i.top+i.height):0:0}var Rn=`Sortable`,zn=y.createContext({activeIndex:-1,containerId:Rn,disableTransforms:!1,items:[],overIndex:-1,useDragOverlay:!1,sortedRects:[],strategy:Pn,disabled:{draggable:!1,droppable:!1}});function Bn(e){let{children:t,id:n,items:r,strategy:i=Pn,disabled:a=!1}=e,{active:o,dragOverlay:s,droppableRects:c,over:l,measureDroppableContainers:u}=Tn(),d=k(Rn,n),f=s.rect!==null,p=(0,y.useMemo)(()=>r.map(e=>typeof e==`object`&&`id`in e?e.id:e),[r]),m=o!=null,h=o?p.indexOf(o.id):-1,g=l?p.indexOf(l.id):-1,_=(0,y.useRef)(p),v=!Mn(p,_.current),b=g!==-1&&h===-1||v,x=Nn(a);ne(()=>{v&&m&&u(p)},[v,p,m,u]),(0,y.useEffect)(()=>{_.current=p},[p]);let S=(0,y.useMemo)(()=>({activeIndex:h,containerId:d,disabled:x,disableTransforms:b,items:p,overIndex:g,useDragOverlay:f,sortedRects:An(p,c),strategy:i}),[h,d,x.draggable,x.droppable,b,p,g,c,f,i]);return y.createElement(zn.Provider,{value:S},t)}var Vn=e=>{let{id:t,items:n,activeIndex:r,overIndex:i}=e;return kn(n,r,i).indexOf(t)},Hn=e=>{let{containerId:t,isSorting:n,wasDragging:r,index:i,items:a,newIndex:o,previousItems:s,previousContainerId:c,transition:l}=e;return!l||!r||s!==a&&i===o?!1:n?!0:o!==i&&t===c},Un={duration:200,easing:`ease`},Wn=`transform`,Gn=pe.Transition.toString({property:Wn,duration:0,easing:`linear`}),Kn={roleDescription:`sortable`};function qn(e){let{disabled:t,index:n,node:r,rect:i}=e,[a,o]=(0,y.useState)(null),s=(0,y.useRef)(n);return ne(()=>{if(!t&&n!==s.current&&r.current){let e=i.current;if(e){let t=We(r.current,{ignoreTransform:!0}),n={x:e.left-t.left,y:e.top-t.top,scaleX:e.width/t.width,scaleY:e.height/t.height};(n.x||n.y)&&o(n)}}n!==s.current&&(s.current=n)},[t,n,r,i]),(0,y.useEffect)(()=>{a&&o(null)},[a]),a}function Jn(e){let{animateLayoutChanges:t=Hn,attributes:n,disabled:r,data:i,getNewIndex:a=Vn,id:o,strategy:s,resizeObserverConfig:c,transition:l=Un}=e,{items:u,containerId:d,activeIndex:f,disabled:p,disableTransforms:m,sortedRects:h,overIndex:g,useDragOverlay:_,strategy:v}=(0,y.useContext)(zn),x=Yn(r,p),S=u.indexOf(o),C=(0,y.useMemo)(()=>({sortable:{containerId:d,index:S,items:u},...i}),[d,i,S,u]),w=(0,y.useMemo)(()=>u.slice(u.indexOf(o)),[u,o]),{rect:ee,node:T,isOver:te,setNodeRef:E}=On({id:o,data:C,disabled:x.droppable,resizeObserverConfig:{updateMeasurementsFor:w,...c}}),{active:ne,activatorEvent:re,activeNodeRect:ie,attributes:ae,setNodeRef:D,listeners:oe,isDragging:se,over:O,setActivatorNodeRef:k,transform:ce}=wn({id:o,data:C,attributes:{...Kn,...n},disabled:x.draggable}),le=b(E,D),ue=!!ne,de=ue&&!m&&jn(f)&&jn(g),j=!_&&se,fe=de?(j&&de?ce:null)??(s??v)({rects:h,activeNodeRect:ie,activeIndex:f,overIndex:g,index:S}):null,me=jn(f)&&jn(g)?a({id:o,items:u,activeIndex:f,overIndex:g}):S,he=ne?.id,M=(0,y.useRef)({activeId:he,items:u,newIndex:me,containerId:d}),ge=u!==M.current.items,_e=t({active:ne,containerId:d,isDragging:se,isSorting:ue,id:o,index:S,items:u,newIndex:M.current.newIndex,previousItems:M.current.items,previousContainerId:M.current.containerId,transition:l,wasDragging:M.current.activeId!=null}),ve=qn({disabled:!_e,index:S,node:T,rect:ee});return(0,y.useEffect)(()=>{ue&&M.current.newIndex!==me&&(M.current.newIndex=me),d!==M.current.containerId&&(M.current.containerId=d),u!==M.current.items&&(M.current.items=u)},[ue,me,d,u]),(0,y.useEffect)(()=>{if(he===M.current.activeId)return;if(he!=null&&M.current.activeId==null){M.current.activeId=he;return}let e=setTimeout(()=>{M.current.activeId=he},50);return()=>clearTimeout(e)},[he]),{active:ne,activeIndex:f,attributes:ae,data:C,rect:ee,index:S,newIndex:me,items:u,isOver:te,isSorting:ue,isDragging:se,listeners:oe,node:T,overIndex:g,over:O,setNodeRef:le,setActivatorNodeRef:k,setDroppableNodeRef:E,setDraggableNodeRef:D,transform:ve??fe,transition:ye()};function ye(){if(ve||ge&&M.current.newIndex===S)return Gn;if(!(j&&!A(re)||!l)&&(ue||_e))return pe.Transition.toString({...l,property:Wn})}}function Yn(e,t){return typeof e==`boolean`?{draggable:e,droppable:!1}:{draggable:e?.draggable??t.draggable,droppable:e?.droppable??t.droppable}}R.Down,R.Right,R.Up,R.Left;var Xn=`/Koenigliche-Mafia/`,z=e=>`${Xn}${e}`,Zn=[{id:1,title:`Intro - Motte, hast du eigentlich einen Plan?`,artist:`Erdbeerenfresser`,album:`Schedule I: The Mottemaker Files`,albumCover:z(`covers/Mottemaker-Files-Album.jpg`),albumTrackNumber:1,duration:`00:59`,releaseDate:`2026-03-27`,cover:z(`covers/Intro-Motte-hast-du-eigentlich-einen-Plan.jpeg`),file:z(`songs/Intro-Motte-hast-du-eigentlich-einen-Plan.mp3`),isSingle:!1},{id:2,title:`Skateboard Chemistry`,artist:`Erdbeerenfresser`,album:`Schedule I: The Mottemaker Files`,albumCover:z(`covers/Mottemaker-Files-Album.jpg`),albumTrackNumber:2,duration:`03:04`,releaseDate:`2026-03-27`,cover:z(`covers/Skateboard-Chemistry.png`),file:z(`songs/Skateboard-Chemistry.mp3`),isSingle:!1},{id:3,title:`Crystal Moth`,artist:`Erdbeerenfresser`,album:`Schedule I: The Mottemaker Files`,albumCover:z(`covers/Mottemaker-Files-Album.jpg`),albumTrackNumber:3,duration:`01:48`,releaseDate:`2026-03-27`,cover:z(`covers/Crystal-Moth.png`),file:z(`songs/Crystal-Moth.mp3`),isSingle:!1},{id:4,title:`Competitive Advantage`,artist:`Erdbeerenfresser`,album:`Schedule I: The Mottemaker Files`,albumCover:z(`covers/Mottemaker-Files-Album.jpg`),albumTrackNumber:4,duration:`02:28`,releaseDate:`2026-03-27`,cover:z(`covers/Competitive-Advantage.png`),file:z(`songs/Competitive-Advantage.mp3`),isSingle:!1},{id:5,title:`Crystal Moth Supreme`,artist:`Erdbeerenfresser`,album:`Schedule I: The Mottemaker Files`,albumCover:z(`covers/Mottemaker-Files-Album.jpg`),albumTrackNumber:5,duration:`03:17`,releaseDate:`2026-03-27`,cover:z(`covers/Crystal-Moth-Supreme.jpg`),file:z(`songs/Crystal-Moth-Supreme.mp3`),isSingle:!1},{id:6,title:`Operation Mottemaker`,artist:`Erdbeerenfresser`,album:`Schedule I: The Mottemaker Files`,albumCover:z(`covers/Mottemaker-Files-Album.jpg`),albumTrackNumber:6,duration:`02:04`,releaseDate:`2026-03-27`,cover:z(`covers/Operation-Mottemaker.png`),file:z(`songs/Operation-Mottemaker.mp3`),isSingle:!1},{id:7,title:`Escape Velocity`,artist:`Erdbeerenfresser`,album:`Schedule I: The Mottemaker Files`,albumCover:z(`covers/Mottemaker-Files-Album.jpg`),albumTrackNumber:7,duration:`03:47`,releaseDate:`2026-03-27`,cover:z(`covers/Escape-Velocity.png`),file:z(`songs/Escape-Velocity.mp3`),isSingle:!1},{id:8,title:`Mottemaker Industries`,artist:`Erdbeerenfresser`,album:`Schedule I: The Mottemaker Files`,albumCover:z(`covers/Mottemaker-Files-Album.jpg`),albumTrackNumber:8,duration:`02:30`,releaseDate:`2026-03-27`,cover:z(`covers/Mottemaker-Industries.jpg`),file:z(`songs/Mottemaker-Industries.mp3`),isSingle:!1},{id:9,title:`Empire on Fire`,artist:`Erdbeerenfresser`,album:`Schedule I: The Mottemaker Files`,albumCover:z(`covers/Mottemaker-Files-Album.jpg`),albumTrackNumber:9,duration:`02:51`,releaseDate:`2026-03-27`,cover:z(`covers/Empire-on-Fire.jpg`),file:z(`songs/Empire-on-Fire.mp3`),isSingle:!1},{id:10,title:`Schedule II`,artist:`Erdbeerenfresser`,album:`Schedule I: The Mottemaker Files`,albumCover:z(`covers/Mottemaker-Files-Album.jpg`),albumTrackNumber:10,duration:`02:57`,releaseDate:`2026-03-27`,cover:z(`covers/Schedule-II.jpg`),file:z(`songs/Schedule-II.mp3`),isSingle:!1},{id:11,title:`Alexis, Mi Hermano`,artist:`Motte`,duration:`03:41`,releaseDate:`2026-03-16`,cover:z(`covers/Alexis-Mi-Hermano.png`),file:z(`songs/Alexis-Mi-Hermano.mp3`),isSingle:!0},{id:12,title:`Alexis Brother`,artist:`Motte`,duration:`03:36`,releaseDate:`2026-03-16`,cover:z(`covers/Alexis_Brother.png`),file:z(`songs/Alexis_Brother.mp3`),isSingle:!0},{id:13,title:`Il Ritorno del Don Motte`,artist:`Erdbeerenfresser`,album:`Il Ritorno del Don Motte - Single`,albumTrackNumber:1,duration:`03:37`,releaseDate:`2026-04-10`,cover:z(`covers/il-ritorno-del-don-motte.jpg`),file:z(`songs/il-ritorno-del-don-motte.mp3`),isSingle:!0},{id:14,title:`Rückfahrt Zwei Stunden`,artist:`Erdbeerenfresser`,duration:`02:44`,releaseDate:`2026-04-12`,cover:z(`covers/Rückfahrt_Zwei_Stunden.png`),file:z(`songs/Rückfahrt_Zwei_Stunden.mp3`),isSingle:!0},{id:`jascha1`,title:`Jascha Winter und der Freizeitparkzauber`,artist:`Motte`,duration:`04:44`,releaseDate:`2026-03-05`,cover:z(`covers/Jascha-Winter-und-der-Freizeitparkzauber.jpg`),file:z(`songs/Jascha-Winter-und-der-Freizeitparkzauber.mp3`),isSingle:!0,hidden:!0,hiddenTag:`jascha`},{id:15,title:`Hymne an Alexis (remasterd)`,artist:`Motte`,duration:`03:25`,releaseDate:`2025-09-12`,cover:z(`covers/Hymne_an_Alexis_(remasterd).jpg`),file:z(`songs/Hymne_an_Alexis_(remasterd).mp3`),isSingle:!0},{id:16,title:`Die Bußhymne an Alexis`,artist:`Motte`,duration:`03:23`,releaseDate:`2026-03-16`,cover:z(`covers/Die-Bußhymne-an-Alexis.png`),file:z(`songs/Die-Bußhymne-an-Alexis.mp3`),isSingle:!0},{id:17,title:`Ben, das geht auf mich`,artist:`Motte`,duration:`03:20`,releaseDate:`2026-01-29`,cover:z(`covers/Ben_das_geht_auf_mich.png`),file:z(`songs/Ben_das_geht_auf_mich.mp3`),isSingle:!0},{id:18,title:`Ik ben gleich soweit!`,artist:`Merlin`,duration:`02:23`,releaseDate:`2026-02-27`,cover:z(`covers/Ik-ben-gleich-soweit!.jpg`),file:z(`songs/Ik-ben-gleich-soweit!.mp3`),isSingle:!0},{id:19,title:`PrinzMotte, unser Held`,artist:`Erdbeerenfresser`,duration:`03:48`,releaseDate:`2026-01-30`,cover:z(`covers/PrinzMotte,_unser_Held.jpg`),file:z(`songs/PrinzMotte,_unser_Held.mp3`),isSingle:!0},{id:20,title:`Kochstream Ambience`,artist:`Merlin`,duration:`01:49`,releaseDate:`2026-02-27`,cover:z(`covers/Kochstream-Ambience.jpg`),file:z(`songs/Kochstream-Ambience.mp3`),isSingle:!0},{id:21,title:`Fleischwurst`,artist:`Merlin`,duration:`04:24`,releaseDate:`2026-01-23`,cover:z(`covers/Fleischwurst.jpg`),file:z(`songs/Fleischwurst.mp3`),isSingle:!0},{id:22,title:`Erdbeerenfresser`,artist:`Merlin`,duration:`02:29`,releaseDate:`2026-01-17`,cover:z(`covers/Erdbeerenfresser.jpg`),file:z(`songs/Erdbeerenfresser.mp3`),isSingle:!0},{id:23,title:`There are heroes`,artist:`Erdbeerenfresser`,duration:`04:14`,releaseDate:`2026-03-20`,cover:z(`covers/There are heroes.jpg`),file:z(`songs/There are heroes.mp3`),isSingle:!0},{id:24,title:`Mack`,artist:`Erdbeerenfresser`,duration:`05:37`,releaseDate:`2026-03-17`,cover:z(`covers/Mack.jpg`),file:z(`songs/Mack.mp3`),isSingle:!0},{id:`jascha2`,title:`Party`,artist:`Erdbeerenfresser X Coaster_Liam`,duration:`02:09`,releaseDate:`2026-03-16`,cover:z(`covers/Party.jpg`),file:z(`songs/Party.mp3`),isSingle:!0,hidden:!0,hiddenTag:`jascha`},{id:25,title:`Der Deal (Europa-Park Musical Duett - Alexis X Roland Mack)`,artist:`Erdbeerenfresser`,duration:`04:32`,releaseDate:`2026-03-16`,cover:z(`covers/Der Deal (Europa-Park Musical Duett - Alexis X Roland Mack)).png`),file:z(`songs/Der Deal (Europa-Park Musical Duett - Alexis X Roland Mack)).mp3`),isSingle:!0},{id:26,title:`Nu hör ma zu…`,artist:`Erdbeerenfresser`,duration:`03:13`,releaseDate:`2026-03-16`,cover:z(`covers/Nu hör ma zu….jpg`),file:z(`songs/Nu hör ma zu….mp3`),isSingle:!0},{id:27,title:`Yeah yeah`,artist:`Erdbeerenfresser`,duration:`01:41`,releaseDate:`2026-03-16`,cover:z(`covers/Yeah yeah.jpg`),file:z(`songs/Yeah yeah.mp3`),isSingle:!0},{id:28,title:`Motte Cooking Stream`,artist:`Erdbeerenfresser`,duration:`03:09`,releaseDate:`2026-03-16`,cover:z(`covers/Motte Cooking Stream.jpg`),file:z(`songs/Motte Cooking Stream.mp3`),isSingle:!0},{id:29,title:`Printer läuft die ganze Nacht`,artist:`Erdbeerenfresser`,duration:`04:09`,releaseDate:`2026-03-15`,cover:z(`covers/Printer läuft die ganze Nacht.jpg`),file:z(`songs/Printer läuft die ganze Nacht.mp3`),isSingle:!0},{id:`jascha3`,title:`Hippo sagt böse Sachen`,artist:`Erdbeerenfresser`,duration:`02:55`,releaseDate:`2026-03-14`,cover:z(`covers/Hippo sagt böse Sachen.jpg`),file:z(`songs/Hippo sagt böse Sachen.mp3`),isSingle:!0,hidden:!0,hiddenTag:`jascha`},{id:30,title:`MR MONEYMÄKER – HEUDE ISS DEIN GEBORDSDOOCH`,artist:`Motte`,duration:`03:40`,releaseDate:`2026-03-25`,cover:z(`covers/MR MONEYMÄKER – HEUDE ISS DEIN GEBORDSDOOCH.jpg`),file:z(`songs/MR MONEYMÄKER – HEUDE ISS DEIN GEBORDSDOOCH.mp3`),isSingle:!0},{id:`jascha4`,title:`Zwischen Rauch und Achterbahn`,artist:`Erdbeerenfresser`,duration:`03:02`,releaseDate:`2026-04-14`,cover:z(`covers/Zwischen Rauch und Achterbahn.jpg`),file:z(`songs/Zwischen Rauch und Achterbahn.mp3`),isSingle:!0,hidden:!0,hiddenTag:`jascha`},{id:31,title:`Ois für’n Alexis`,artist:`Erdbeerenfresser`,duration:`03:01`,releaseDate:`2026-04-15`,cover:z(`covers/Ois für’n Alexis.jpg`),file:z(`songs/Ois für’n Alexis.mp3`),isSingle:!0},{id:32,title:`Mr. Moneymaker`,artist:`Erdbeerenfresser`,duration:`03:42`,releaseDate:`2026-04-15`,cover:z(`covers/Mr. Moneymaker.jpg`),file:z(`songs/Mr. Moneymaker.mp3`),isSingle:!0},{id:33,title:`Indian coding berry`,artist:`Motte`,duration:`05:19`,releaseDate:`2026-04-15`,cover:z(`covers/Indian coding berry.jpg`),file:z(`songs/Indian coding berry.mp3`),isSingle:!0},{id:34,title:`Pauli foahrt durch Barcelona (Meddl Edition)`,artist:`Motte`,duration:`05:19`,releaseDate:`2026-04-15`,cover:z(`covers/Pauli foahrt durch Barcelona (Meddl Edition).jpg`),file:z(`songs/Pauli foahrt durch Barcelona (Meddl Edition).mp3`),isSingle:!0},{id:35,title:`Marco… hörst du mich?`,artist:`Erdbeerenfresser`,duration:`04:34`,releaseDate:`2026-04-16`,cover:z(`covers/Marco… hörst du mich.jpg`),file:z(`songs/Marco… hörst du mich.mp3`),isSingle:!0},{id:36,title:`EPMC – The Park Awaits`,artist:`Motte`,duration:`03:47`,releaseDate:`2026-04-16`,cover:z(`covers/EPMC – The Park Awaits.jpg`),file:z(`songs/EPMC – The Park Awaits.mp3`),isSingle:!0},{id:37,title:`Mottemod (König vom Server)`,artist:`Erdbeerenfresser`,duration:`04:27`,releaseDate:`2026-04-17`,cover:z(`covers/Mottemod (König vom Server).jpg`),file:z(`songs/Mottemod (König vom Server).mp3`),isSingle:!0},{id:`jascha5`,title:`Wundertüten-Freitag (Queen Claudia)`,artist:`Erdbeerenfresser`,duration:`03:29`,releaseDate:`2026-04-17`,cover:z(`covers/Wundertüten-Freitag (Queen Claudia).png`),file:z(`songs/Wundertüten-Freitag (Queen Claudia).mp3`),isSingle:!0,hidden:!0,hiddenTag:`jascha`},{id:38,title:`Erdbeere Mine Session`,artist:`Erdbeerenfresser`,album:`Erdbeere Underground`,albumCover:z(`covers/Erdbeere Underground.jpg`),albumTrackNumber:1,duration:`02:11`,releaseDate:`2026-04-17`,cover:z(`covers/Erdbeere Mine Session.png`),file:z(`songs/Erdbeere Mine Session.mp3`),isSingle:!1},{id:39,title:`Auf der Suche nach Diamanten`,artist:`Erdbeerenfresser`,album:`Erdbeere Underground`,albumCover:z(`covers/Erdbeere Underground.jpg`),albumTrackNumber:2,duration:`02:28`,releaseDate:`2026-04-17`,cover:z(`covers/Auf der Suche nach Diamanten.png`),file:z(`songs/Auf der Suche nach Diamanten.mp3`),isSingle:!1},{id:40,title:`Noch tiefer`,artist:`Erdbeerenfresser`,album:`Erdbeere Underground`,albumCover:z(`covers/Erdbeere Underground.jpg`),albumTrackNumber:3,duration:`02:42`,releaseDate:`2026-04-17`,cover:z(`covers/Noch tiefer.png`),file:z(`songs/Noch tiefer.mp3`),isSingle:!1},{id:41,title:`Auch Eisen ist wichtig`,artist:`Erdbeerenfresser`,album:`Erdbeere Underground`,albumCover:z(`covers/Erdbeere Underground.jpg`),albumTrackNumber:4,duration:`02:16`,releaseDate:`2026-04-17`,cover:z(`covers/Auch Eisen ist wichtig.png`),file:z(`songs/Auch Eisen ist wichtig.mp3`),isSingle:!1},{id:42,title:`Diamanten in meiner Hand`,artist:`Erdbeerenfresser`,album:`Erdbeere Underground`,albumCover:z(`covers/Erdbeere Underground.jpg`),albumTrackNumber:5,duration:`02:38`,releaseDate:`2026-04-17`,cover:z(`covers/Diamanten in meiner Hand.png`),file:z(`songs/Diamanten in meiner Hand.mp3`),isSingle:!1},{id:`jascha6`,title:`E-Scooter im Müllmodus`,artist:`Motte`,duration:`02:03`,releaseDate:`2026-04-18`,cover:z(`covers/E-Scooter im Müllmodus.png`),file:z(`songs/E-Scooter im Müllmodus.mp3`),isSingle:!0,hidden:!0,hiddenTag:`jascha`},{id:`jascha7`,title:`WAS...?`,artist:`Erdbeerenfresser`,duration:`03:08`,releaseDate:`2026-04-18`,cover:z(`covers/WAS....png`),file:z(`songs/WAS....mp3`),isSingle:!0,hidden:!0,hiddenTag:`jascha`},{id:43,title:`EPMC – Lay Low Nights`,artist:`Motte`,duration:`03:54`,releaseDate:`2026-04-19`,cover:z(`covers/EPMC – Lay Low Nights.png`),file:z(`songs/EPMC – Lay Low Nights.mp3`),isSingle:!0},{id:44,title:`Mr. Moneymaker Land`,artist:`Erdbeerenfresser`,duration:`02:46`,releaseDate:`2026-04-19`,cover:z(`covers/Mr. Moneymaker Land.png`),file:z(`songs/Mr. Moneymaker Land.mp3`),isSingle:!0},{id:`jascha8`,title:`Jascha Full Throttle`,artist:`Motte`,duration:`04:13`,releaseDate:`2026-04-23`,cover:z(`covers/JASCHA_FULL_THROTTLE.png`),file:z(`songs/JASCHA_FULL_THROTTLE.mp3`),isSingle:!0,hidden:!0,hiddenTag:`jascha`},{id:45,title:`Es war ein Abend wie jeder andere`,artist:`Erdbeerenfresser`,duration:`03:37`,releaseDate:`2026-03-15`,cover:z(`covers/Es war ein Abend wie jeder andere.jpeg`),file:z(`songs/Es war ein Abend wie jeder andere.mp3`),isSingle:!0},{id:46,title:`Rückkehr des Königs`,artist:`Erdbeerenfresser`,duration:`03:19`,releaseDate:`2026-04-25`,cover:z(`covers/Rückkehr des Königs.jpeg`),file:z(`songs/Rückkehr des Königs.mp3`),isSingle:!0},{id:47,title:`Motte Nicht Da`,artist:`Erdbeerenfresser`,duration:`01:56`,releaseDate:`2026-04-27`,cover:z(`covers/Motte Nicht Da.jpeg`),file:z(`songs/Motte Nicht Da.mp3`),isSingle:!0},{id:48,title:`Motte, komm bitte bald zurück`,artist:`Erdbeerenfresser`,duration:`03:14`,releaseDate:`2026-04-29`,cover:z(`covers/Motte, komm bitte bald zurück.png`),file:z(`songs/Motte, komm bitte bald zurück.mp3`),isSingle:!0},{id:49,title:`Alexis of the Emerald Isle`,artist:`Motte`,duration:`06:00`,releaseDate:`2026-05-18`,cover:z(`covers/Alexis of the Emerald Isle.png`),file:z(`songs/Alexis of the Emerald Isle.mp3`),isSingle:!0},{id:50,title:`Königliche A.I. Songs`,artist:`Erdbeerenfresser`,duration:`03:59`,releaseDate:`2026-05-19`,cover:z(`covers/Königliche A.I. Songs.png`),file:z(`songs/Königliche A.I. Songs.mp3`),isSingle:!0},{id:51,title:`Ein wunderschönes Haus`,artist:`Erdbeerenfresser`,album:`Mottenmann`,albumCover:z(`covers/Mottenmann.png`),albumTrackNumber:1,duration:`02:02`,releaseDate:`2026-05-12`,cover:z(`covers/Ein wunderschönes Haus.png`),file:z(`songs/Ein wunderschönes Haus.mp3`),isSingle:!1},{id:52,title:`Verreck, du blöder Mottenmann`,artist:`Erdbeerenfresser`,album:`Mottenmann`,albumCover:z(`covers/Mottenmann.png`),albumTrackNumber:2,duration:`02:44`,releaseDate:`2026-05-12`,cover:z(`covers/Verreck, du blöder Mottenmann.png`),file:z(`songs/Verreck, du blöder Mottenmann.mp3`),isSingle:!1},{id:53,title:`Motte… warum tust du mir das an`,artist:`Erdbeerenfresser`,album:`Mottenmann`,albumCover:z(`covers/Mottenmann.png`),albumTrackNumber:3,duration:`02:51`,releaseDate:`2026-05-12`,cover:z(`covers/Motte… warum tust du mir das an.png`),file:z(`songs/Motte… warum tust du mir das an.mp3`),isSingle:!1},{id:54,title:`Die Flucht des Mottenmanns`,artist:`Erdbeerenfresser`,album:`Mottenmann`,albumCover:z(`covers/Mottenmann.png`),albumTrackNumber:4,duration:`03:34`,releaseDate:`2026-05-12`,cover:z(`covers/Die Flucht des Mottenmanns.png`),file:z(`songs/Die Flucht des Mottenmanns.mp3`),isSingle:!1},{id:55,title:`Die Ruhe des Mottenmanns`,artist:`Erdbeerenfresser`,album:`Mottenmann`,albumCover:z(`covers/Mottenmann.png`),albumTrackNumber:5,duration:`04:38`,releaseDate:`2026-05-12`,cover:z(`covers/Die Ruhe des Mottenmanns.png`),file:z(`songs/Die Ruhe des Mottenmanns.mp3`),isSingle:!1},{id:56,title:`Città di Marmo`,artist:`Motte`,duration:`04:32`,releaseDate:`2026-05-12`,cover:z(`covers/Citta di Marmo.png`),file:z(`songs/Citta di Marmo.mp3`),isSingle:!0},{id:`eatw-teaser`,title:`Erdbeere Around the World – Teaser`,artist:`Motte`,album:`Erdbeere Around the World`,albumCover:z(`covers/EATW.png`),albumTrackNumber:0,duration:`01:24`,releaseDate:`2026-05-24`,cover:z(`covers/EATW.png`),file:z(`songs/EATWT.mp3`),isSingle:!1},{id:57,title:`Track 1`,albumTrackNumber:1,artist:`Motte`,album:`Erdbeere Around the World`,albumCover:z(`covers/EATW.png`),duration:`XX:XX`,releaseDate:`2020-05-25`,cover:z(`covers/geheim.png`),file:z(`songs/???.mp3`),isSingle:!1},{id:58,title:`Track 2`,albumTrackNumber:2,artist:`Motte`,album:`Erdbeere Around the World`,albumCover:z(`covers/EATW.png`),duration:`XX:XX`,releaseDate:`2020-05-25`,cover:z(`covers/geheim.png`),file:z(`songs/???.mp3`),isSingle:!1},{id:59,title:`Track 3`,albumTrackNumber:3,artist:`Motte`,album:`Erdbeere Around the World`,albumCover:z(`covers/EATW.png`),duration:`XX:XX`,releaseDate:`2020-05-25`,cover:z(`covers/geheim.png`),file:z(`songs/???.mp3`),isSingle:!1},{id:60,title:`Track 4`,albumTrackNumber:4,artist:`Motte`,album:`Erdbeere Around the World`,albumCover:z(`covers/EATW.png`),duration:`XX:XX`,releaseDate:`2020-05-25`,cover:z(`covers/geheim.png`),file:z(`songs/???.mp3`),isSingle:!1},{id:61,title:`Track 5`,albumTrackNumber:5,artist:`Motte`,album:`Erdbeere Around the World`,albumCover:z(`covers/EATW.png`),duration:`XX:XX`,releaseDate:`2020-05-25`,cover:z(`covers/geheim.png`),file:z(`songs/???.mp3`),isSingle:!1},{id:62,title:`Track 6`,albumTrackNumber:6,artist:`Motte`,album:`Erdbeere Around the World`,albumCover:z(`covers/EATW.png`),duration:`XX:XX`,releaseDate:`2020-05-25`,cover:z(`covers/geheim.png`),file:z(`songs/???.mp3`),isSingle:!1},{id:63,title:`Track 7`,albumTrackNumber:7,artist:`Motte`,album:`Erdbeere Around the World`,albumCover:z(`covers/EATW.png`),duration:`XX:XX`,releaseDate:`2020-05-25`,cover:z(`covers/geheim.png`),file:z(`songs/???.mp3`),isSingle:!1},{id:64,title:`Track 8`,albumTrackNumber:8,artist:`Motte`,album:`Erdbeere Around the World`,albumCover:z(`covers/EATW.png`),duration:`XX:XX`,releaseDate:`2020-05-25`,cover:z(`covers/geheim.png`),file:z(`songs/???.mp3`),isSingle:!1},{id:65,title:`Track 9`,albumTrackNumber:9,artist:`Motte`,album:`Erdbeere Around the World`,albumCover:z(`covers/EATW.png`),duration:`XX:XX`,releaseDate:`2020-05-25`,cover:z(`covers/geheim.png`),file:z(`songs/???.mp3`),isSingle:!1},{id:66,title:`Track 10`,albumTrackNumber:10,artist:`Motte`,album:`Erdbeere Around the World`,albumCover:z(`covers/EATW.png`),duration:`XX:XX`,releaseDate:`2020-05-25`,cover:z(`covers/geheim.png`),file:z(`songs/???.mp3`),isSingle:!1},{id:67,title:`Track 11`,albumTrackNumber:11,artist:`Motte`,album:`Erdbeere Around the World`,albumCover:z(`covers/EATW.png`),duration:`XX:XX`,releaseDate:`2020-05-25`,cover:z(`covers/geheim.png`),file:z(`songs/???.mp3`),isSingle:!1},{id:68,title:`Track 12`,albumTrackNumber:12,artist:`Motte`,album:`Erdbeere Around the World`,albumCover:z(`covers/EATW.png`),duration:`XX:XX`,releaseDate:`2020-05-25`,cover:z(`covers/geheim.png`),file:z(`songs/???.mp3`),isSingle:!1},{id:`jascha9`,title:`JOA IST HALT PHYSIK!`,artist:`Erdbeerenfresser`,duration:`02:52`,releaseDate:`2026-05-21`,cover:z(`covers/Ganz Hessen Kennt Jetzt Paul.png`),file:z(`songs/Ganz Hessen Kennt Jetzt Paul.mp3`),isSingle:!0,hidden:!0,hiddenTag:`jascha`},{id:`BD1`,title:`Midnight Login`,artist:`BerryDeadly`,duration:`02:57`,releaseDate:`2099-05-21`,cover:z(`covers/Midnight Login.png`),file:z(`songs/Midnight Login.mp3`),isSingle:!1,hidden:!0,hiddenTag:`berrydeadly`,album:`Neon City Lights — Erdbeere Time`,albumCover:z(`covers/BD.png`)},{id:`BD2`,title:`Strawberry Nights`,artist:`BerryDeadly`,duration:`04:12`,releaseDate:`2099-05-21`,cover:z(`covers/Strawberry Nights.png`),file:z(`songs/Strawberry Nights.mp3`),isSingle:!1,hidden:!0,hiddenTag:`berrydeadly`,album:`Neon City Lights — Erdbeere Time`,albumCover:z(`covers/BD.png`)},{id:`BD3`,title:`Main Character`,artist:`BerryDeadly`,duration:`03:12`,releaseDate:`2099-05-21`,cover:z(`covers/Main Character.png`),file:z(`songs/Main Character.mp3`),isSingle:!1,hidden:!0,hiddenTag:`berrydeadly`,album:`Neon City Lights — Erdbeere Time`,albumCover:z(`covers/BD.png`)},{id:`BD4`,title:`After 3AM`,artist:`BerryDeadly`,duration:`03:54`,releaseDate:`2099-05-21`,cover:z(`covers/After 3AM.png`),file:z(`songs/After 3AM.mp3`),isSingle:!1,hidden:!0,hiddenTag:`berrydeadly`,album:`Neon City Lights — Erdbeere Time`,albumCover:z(`covers/BD.png`)},{id:`BD5`,title:`Coffee Overload`,artist:`BerryDeadly`,duration:`03:30`,releaseDate:`2099-05-21`,cover:z(`covers/Coffee Overload.png`),file:z(`songs/Coffee Overload.mp3`),isSingle:!1,hidden:!0,hiddenTag:`berrydeadly`,album:`Neon City Lights — Erdbeere Time`,albumCover:z(`covers/BD.png`)},{id:`BD6`,title:`404 <3`,artist:`BerryDeadly`,duration:`03:17`,releaseDate:`2099-05-21`,cover:z(`covers/404 _3.png`),file:z(`songs/404 _3.mp3`),isSingle:!1,hidden:!0,hiddenTag:`berrydeadly`,album:`Neon City Lights — Erdbeere Time`,albumCover:z(`covers/BD.png`)},{id:`BD7`,title:`SECRET CODE`,artist:`BerryDeadly`,duration:`03:24`,releaseDate:`2099-05-21`,cover:z(`covers/SECRET CODE.png`),file:z(`songs/SECRET CODE.mp3`),isSingle:!1,hidden:!0,hiddenTag:`berrydeadly`,album:`Neon City Lights — Erdbeere Time`,albumCover:z(`covers/BD.png`)},{id:`BD8`,title:`LOW BATTERY`,artist:`BerryDeadly`,duration:`02:33`,releaseDate:`2099-05-21`,cover:z(`covers/LOW BATTERY.png`),file:z(`songs/LOW BATTERY.mp3`),isSingle:!1,hidden:!0,hiddenTag:`berrydeadly`,album:`Neon City Lights — Erdbeere Time`,albumCover:z(`covers/BD.png`)},{id:`BD9`,title:`LEVEL UP`,artist:`BerryDeadly`,duration:`03:41`,releaseDate:`2099-05-21`,cover:z(`covers/LEVEL UP.png`),file:z(`songs/LEVEL UP.mp3`),isSingle:!1,hidden:!0,hiddenTag:`berrydeadly`,album:`Neon City Lights — Erdbeere Time`,albumCover:z(`covers/BD.png`)},{id:`BD10`,title:`NO SIGNAL`,artist:`BerryDeadly`,duration:`03:45`,releaseDate:`2099-05-21`,cover:z(`covers/NO SIGNAL.png`),file:z(`songs/NO SIGNAL.mp3`),isSingle:!1,hidden:!0,hiddenTag:`berrydeadly`,album:`Neon City Lights — Erdbeere Time`,albumCover:z(`covers/BD.png`)},{id:`BD11`,title:`RELOAD`,artist:`BerryDeadly`,duration:`06:03`,releaseDate:`2099-05-21`,cover:z(`covers/RELOAD.png`),file:z(`songs/RELOAD.mp3`),isSingle:!1,hidden:!0,hiddenTag:`berrydeadly`,album:`Neon City Lights — Erdbeere Time`,albumCover:z(`covers/BD.png`)}],Qn=[{version:`1.3.0`,label:`2026-05-19 01:30`,changes:`🎭 Neuer 'Extra'-Bereich eingeführt(→ Monatlich ausgewählte Cover und Mashups erhalten jetzt einen eigenen Bereich innerhalb der Bibliothek(🧩 Cover- und Mashup-System vollständig integriert(→ Nutzer können jetzt direkt über die Webseite Cover- und Mashup-Anfragen erstellen(📝 Mehrstufige Anfrage-Dialoge hinzugefügt(→ Schritt-für-Schritt-System für Song-Auswahl, Stil-Prompts und automatische Anfrage-Texte(🎵 Dynamische Song-Auswahl implementiert(→ Dropdowns greifen jetzt direkt auf die bestehende Songbibliothek zu(🕵️ Versteckte Songs werden automatisch herausgefiltert(→ Geheime Inhalte erscheinen nicht mehr in öffentlichen Anfrage-Systemen(📋 Automatische Textgenerierung für Google-Formulare(→ Anfrage-Texte für Cover und Mashups werden jetzt automatisch vorbereitet(🎚️ Neues Extra-Datensystem eingeführt(→ Covers und Mashups können jetzt separat über extras.js verwaltet werden(🎤 Lyrics-System erweitert(→ Covers unterstützen jetzt automatische Lyrics-Weiterleitung über lyricsKey(🔗 'Original anzeigen'-Funktion hinzugefügt(→ Covers und Mashups können jetzt direkt ihre Ursprungssongs anzeigen(🪄 Mashup-Originalsystem erweitert(→ Mashups öffnen jetzt ein Auswahlfenster für mehrere Originalsongs(📦 Extra-Titel vollständig mit Playlist-System kompatibel gemacht(→ Covers und Mashups können jetzt wie normale Songs gespeichert werden(🖥️ Dropdown-Menüs visuell komplett überarbeitet(→ Einheitliches Styling, bessere Hover-Effekte und saubere Button-Struktur(📱 Zusätzliche Spacer-Logik für Dropdowns eingebaut(→ Menüs werden nicht mehr vom unteren Player abgeschnitten(✨ Extra-Seite optisch erweitert(→ Neues Hinweis-System und verbesserte Empty-State-Darstellung(🧠 Diverse interne Verbesserungen und Strukturvorbereitungen(→ Grundlage für zukünftige Community-Features und Extra-Releases geschaffen`.split(`(`)},{version:`1.2.2`,label:`2026-04-20 20:00`,changes:[`🔀 Shuffle für Playlists hinzugefügt`,`→ Zufällige Wiedergabe jetzt auch für deine eigenen Sammlungen verfügbar`,`❄️ Ein Hauch von Kälte liegt in der Bibliothek…`,`→ Manche Songs zeigen sich nur denen, die wissen, wann es Winter wird`,`🗝️ Neue verborgene Inhalte im System verteilt`,`→ Nicht alles ist sichtbar… manchmal muss man genauer hinschauen um unseren Platz zu finden`,`🧠 Kleine Verbesserungen an Navigation & Player-Logik`,`→ Weiter-Button arbeitet jetzt zuverlässiger im Hintergrund`]},{version:`1.2.1`,label:`2026-04-20 12:00`,changes:[`Ein weiterer Zugang wurde implementiert – nicht jeder wird ihn finden`,`Einige Inhalte reagieren jetzt anders auf bestimmte Interaktionen`,`Neue Zustände wurden ergänzt, bleiben aber im Verborgenen`,`Die Bibliothek kennt mehr als sie zeigt`,`Ein Pfad öffnet sich nur für diejenigen, die wissen, was sie tun`,`Import- und Wiedergabesystem im Hintergrund erweitert`,`Grundlagen für zukünftige versteckte Inhalte geschaffen`,`Kleinere Verbesserungen an Stabilität und interner Logik`]},{version:`1.2.0`,label:`2026-04-16 20:37`,changes:[`Playlist-System vollständig überarbeitet und erweitert`,`Songs können jetzt mehrfach in Playlists und Warteschlange hinzugefügt werden (keine Limitierung mehr)`,`Entfernen aus Playlist löscht jetzt nur noch eine Instanz statt alle gleichen Songs`,`Playlist-Übersicht mit dynamischer Cover-Collage (bis zu 4 Cover + '+X' Anzeige)`,`Playlist-Detailseite überarbeitet und besser strukturiert`,`Playlist-Menü erweitert: 'Aus Playlist entfernen' jetzt direkt im 3-Punkte-Menü integriert`,`Playlist-UI für Mobile deutlich verbessert (Layout, Buttons, Handling)`,`Playlist-Änderungen werden sofort live aktualisiert (kein Neuladen mehr nötig)`,`Import/Export-System für Playlists stabilisiert und verbessert`,`SongRow-System erweitert (Playlist-Kontext integriert für bessere Funktionalität)`,`Queue-System verbessert: Drag & Drop bleibt kompatibel mit doppelten Songs`,`React-Key-System angepasst, um doppelte Songs korrekt darzustellen`,`Allgemeine Stabilitäts- und UI-Fixes im Playlist-Bereich`]},{version:`1.1.0`,label:`2026-04-15 23:50`,changes:[`Fullscreen-Player eingeführt (Spotify-ähnlicher Modus mit großem Cover und dynamischem Hintergrund)`,`Animierter Songwechsel im Fullscreen (Slide- und Fade-Übergang)`,`Fullscreen-Controls blenden sich automatisch bei Inaktivität aus und bei Bewegung wieder ein`,`Eigener Player im Fullscreen integriert (Play, Skip, Repeat, Progress, Volume)`,`Liedtext-System erweitert: Lyrics jetzt auch im Fullscreen verfügbar`,`Lyrics aktualisieren sich automatisch beim Songwechsel (auch außerhalb des Fullscreens)`,`Separate Steuerung für Lyrics im normalen Player und im Fullscreen`,`Mobile UI komplett überarbeitet (Floating Player, bessere Abstände, saubere Touch-Bedienung)`,`Album-Header und Songlisten vollständig responsive gemacht`,`Progress-Bar visuell und technisch überarbeitet (bessere Synchronisation mit Slider)`,`Überlappungsfehler zwischen Progress-Bar und Zeitanzeige behoben`,`Player-Layout optimiert (Spacing, Alignment und Lesbarkeit verbessert)`,`Lautstärkeregler weiter verbessert (visuelles Feedback und Positionierung)`,`Stabilitätsverbesserungen im Playback-System (Queue, History und Repeat Verhalten optimiert)`]},{version:`1.0.3`,label:`2026-04-15 01:05`,changes:[`Song-Einreichungsformular integriert (Google Forms Anbindung)`,`Neuer Menüpunkt 'Song einreichen' im Drawer hinzugefügt`,`Popup-System für externe Aktionen erweitert (inkl. Overlay und Close-Funktion)`,`Saubere Weiterleitung zum Formular in neuem Tab implementiert`,`UI für Community-Interaktionen vorbereitet und erweitert`,`Grundlage für zukünftige Moderation / Song-Review-System geschaffen`]},{version:`1.0.2`,label:`2026-04-14 19:40`,changes:[`Repeat-System eingeführt (Off / Repeat All / Repeat One)`,`Repeat One (R1) sorgt dafür, dass der aktuelle Track dauerhaft geloopt wird`,`Repeat All (R) wiederholt die gesamte aktuelle Hör-Session (History + Queue)`,`History-System vollständig implementiert (Zurückspringen zu vorherigen Tracks möglich)`,`Vorher-/Zurück-Button nutzt jetzt echte Track-History statt nur Neustart`,`Weiter-Button und Tastatursteuerung funktionieren jetzt auch am Ende der Queue bei aktivem Repeat`,`Neue Wiedergaben (z. B. einzelner Song oder Albumstart) setzen History korrekt zurück`,`Verbesserte Player-Logik für konsistentes Verhalten zwischen Queue, History und Repeat`]},{version:`1.0.1`,label:`2026-04-14 00:05`,changes:[`Lautstärkeregler überarbeitet und visuell dynamisch gemacht (gefüllter Bereich = grün, Rest = grau)`,`Mute-/Unmute-Funktion über Lautsprecher-Icon hinzugefügt (merkt sich letzte Lautstärke)`,`Media Session API integriert (Metadaten werden im System angezeigt)`,`Playersteuerung über Tastatur möglich (Play/Pause, Weiter, Zurück)`,`Liedtext-System eingeführt und in externe Datei (Texte.js) ausgelagert`,`Lyrics-Popup im Player eingebaut (inkl. Overlay und Close-Funktion)`,`Lyrics-UI verbessert und Titel im Popup zentriert`,`Player-Architektur für zukünftige Features erweitert`]},{version:`1.0.0`,label:`2026-04-13 20:25`,changes:[`Die erste Vollversion ist draußen. Jetzt mit allen aktuellen AI-Songs die es zum heutigem Stand gibt`,`Volume-Regler wurde eingeführt`,`Texte wurden da wo möglich hinzugefügt`,`Viel Spaß mit den Königlichen AI Songs. VG Erdbeere`]},{version:`0.8.1`,label:`2026-04-12 15:00`,changes:[`Patchnotes-System eingeführt`,`Song-System eingeführt`]},{version:`0.8.0`,label:`2026-04-12 13:00`,changes:[`Custom Player mit eigener Progressbar eingebaut`,`Play- und Pause-Logik im Player überarbeitet`,`Queue-System hinzugefügt`,`Drag & Drop für die Warteschlange eingebaut`,`Warteschlange direkt im Menü integriert`,`Queue-Löschen-Funktion ergänzt`,`Songlisten so umgebaut, dass ganze Zeilen abspielbar sind`,`Album-Klick in der Songliste führt direkt zur Albumseite`,`Album Play und Shuffle eingebaut`,`Songs-Ansicht mit Play- und Shuffle-Buttons ergänzt`,`Startseite mit Hero-Bereich aufgebaut`,`Bereiche für Neueste Releases und Aktuelle Alben ergänzt`,`Hover-Effekte auf Releases, Alben und Songzeilen eingebaut`,`Impressum-Seite hinzugefügt`,`Patchnotes-Seite hinzugefügt`,`Klick auf „Königliche AI Songs“ führt zurück zur Startseite`]}],$n={"Midnight Login":`[Intro]
+  `},Ce={onDragStart(e){let{active:t}=e;return`Picked up draggable item `+t.id+`.`},onDragOver(e){let{active:t,over:n}=e;return n?`Draggable item `+t.id+` was moved over droppable area `+n.id+`.`:`Draggable item `+t.id+` is no longer over a droppable area.`},onDragEnd(e){let{active:t,over:n}=e;return n?`Draggable item `+t.id+` was dropped over droppable area `+n.id:`Draggable item `+t.id+` was dropped.`},onDragCancel(e){let{active:t}=e;return`Dragging was cancelled. Draggable item `+t.id+` was dropped.`}};function we(e){let{announcements:t=Ce,container:n,hiddenTextDescribedById:r,screenReaderInstructions:i=Se}=e,{announce:a,announcement:o}=ve(),s=k(`DndLiveRegion`),[c,l]=(0,y.useState)(!1);if((0,y.useEffect)(()=>{l(!0)},[]),be((0,y.useMemo)(()=>({onDragStart(e){let{active:n}=e;a(t.onDragStart({active:n}))},onDragMove(e){let{active:n,over:r}=e;t.onDragMove&&a(t.onDragMove({active:n,over:r}))},onDragOver(e){let{active:n,over:r}=e;a(t.onDragOver({active:n,over:r}))},onDragEnd(e){let{active:n,over:r}=e;a(t.onDragEnd({active:n,over:r}))},onDragCancel(e){let{active:n,over:r}=e;a(t.onDragCancel({active:n,over:r}))}}),[a,t])),!c)return null;let u=y.createElement(y.Fragment,null,y.createElement(ge,{id:r,value:i.draggable}),y.createElement(_e,{id:s,announcement:o}));return n?(0,_.createPortal)(u,n):u}var N;(function(e){e.DragStart=`dragStart`,e.DragMove=`dragMove`,e.DragEnd=`dragEnd`,e.DragCancel=`dragCancel`,e.DragOver=`dragOver`,e.RegisterDroppable=`registerDroppable`,e.SetDroppableDisabled=`setDroppableDisabled`,e.UnregisterDroppable=`unregisterDroppable`})(N||={});function Te(){}function Ee(e,t){return(0,y.useMemo)(()=>({sensor:e,options:t??{}}),[e,t])}function De(){var e=[...arguments];return(0,y.useMemo)(()=>[...e].filter(e=>e!=null),[...e])}var Oe=Object.freeze({x:0,y:0});function ke(e,t){return Math.sqrt((e.x-t.x)**2+(e.y-t.y)**2)}function Ae(e,t){let{data:{value:n}}=e,{data:{value:r}}=t;return n-r}function je(e,t){let{data:{value:n}}=e,{data:{value:r}}=t;return r-n}function Me(e,t){if(!e||e.length===0)return null;let[n]=e;return t?n[t]:n}function Ne(e,t,n){return t===void 0&&(t=e.left),n===void 0&&(n=e.top),{x:t+e.width*.5,y:n+e.height*.5}}var Pe=e=>{let{collisionRect:t,droppableRects:n,droppableContainers:r}=e,i=Ne(t,t.left,t.top),a=[];for(let e of r){let{id:t}=e,r=n.get(t);if(r){let n=ke(Ne(r),i);a.push({id:t,data:{droppableContainer:e,value:n}})}}return a.sort(Ae)};function Fe(e,t){let n=Math.max(t.top,e.top),r=Math.max(t.left,e.left),i=Math.min(t.left+t.width,e.left+e.width),a=Math.min(t.top+t.height,e.top+e.height),o=i-r,s=a-n;if(r<i&&n<a){let n=t.width*t.height,r=e.width*e.height,i=o*s,a=i/(n+r-i);return Number(a.toFixed(4))}return 0}var Ie=e=>{let{collisionRect:t,droppableRects:n,droppableContainers:r}=e,i=[];for(let e of r){let{id:r}=e,a=n.get(r);if(a){let n=Fe(a,t);n>0&&i.push({id:r,data:{droppableContainer:e,value:n}})}}return i.sort(je)};function Le(e,t,n){return{...e,scaleX:t&&n?t.width/n.width:1,scaleY:t&&n?t.height/n.height:1}}function Re(e,t){return e&&t?{x:e.left-t.left,y:e.top-t.top}:Oe}function ze(e){return function(t){return[...arguments].slice(1).reduce((t,n)=>({...t,top:t.top+e*n.y,bottom:t.bottom+e*n.y,left:t.left+e*n.x,right:t.right+e*n.x}),{...t})}}var Be=ze(1);function Ve(e){if(e.startsWith(`matrix3d(`)){let t=e.slice(9,-1).split(/, /);return{x:+t[12],y:+t[13],scaleX:+t[0],scaleY:+t[5]}}else if(e.startsWith(`matrix(`)){let t=e.slice(7,-1).split(/, /);return{x:+t[4],y:+t[5],scaleX:+t[0],scaleY:+t[3]}}return null}function He(e,t,n){let r=Ve(t);if(!r)return e;let{scaleX:i,scaleY:a,x:o,y:s}=r,c=e.left-o-(1-i)*parseFloat(n),l=e.top-s-(1-a)*parseFloat(n.slice(n.indexOf(` `)+1)),u=i?e.width/i:e.width,d=a?e.height/a:e.height;return{width:u,height:d,top:l,right:c+u,bottom:l+d,left:c}}var Ue={ignoreTransform:!1};function We(e,t){t===void 0&&(t=Ue);let n=e.getBoundingClientRect();if(t.ignoreTransform){let{transform:t,transformOrigin:r}=w(e).getComputedStyle(e);t&&(n=He(n,t,r))}let{top:r,left:i,width:a,height:o,bottom:s,right:c}=n;return{top:r,left:i,width:a,height:o,bottom:s,right:c}}function Ge(e){return We(e,{ignoreTransform:!0})}function Ke(e){let t=e.innerWidth,n=e.innerHeight;return{top:0,left:0,right:t,bottom:n,width:t,height:n}}function qe(e,t){return t===void 0&&(t=w(e).getComputedStyle(e)),t.position===`fixed`}function Je(e,t){t===void 0&&(t=w(e).getComputedStyle(e));let n=/(auto|scroll|overlay)/;return[`overflow`,`overflowX`,`overflowY`].some(e=>{let r=t[e];return typeof r==`string`?n.test(r):!1})}function Ye(e,t){let n=[];function r(i){if(t!=null&&n.length>=t||!i)return n;if(ee(i)&&i.scrollingElement!=null&&!n.includes(i.scrollingElement))return n.push(i.scrollingElement),n;if(!T(i)||te(i)||n.includes(i))return n;let a=w(e).getComputedStyle(i);return i!==e&&Je(i,a)&&n.push(i),qe(i,a)?n:r(i.parentNode)}return e?r(e):n}function Xe(e){let[t]=Ye(e,1);return t??null}function Ze(e){return!x||!e?null:S(e)?e:C(e)?ee(e)||e===E(e).scrollingElement?window:T(e)?e:null:null}function Qe(e){return S(e)?e.scrollX:e.scrollLeft}function $e(e){return S(e)?e.scrollY:e.scrollTop}function et(e){return{x:Qe(e),y:$e(e)}}var P;(function(e){e[e.Forward=1]=`Forward`,e[e.Backward=-1]=`Backward`})(P||={});function tt(e){return!x||!e?!1:e===document.scrollingElement}function nt(e){let t={x:0,y:0},n=tt(e)?{height:window.innerHeight,width:window.innerWidth}:{height:e.clientHeight,width:e.clientWidth},r={x:e.scrollWidth-n.width,y:e.scrollHeight-n.height};return{isTop:e.scrollTop<=t.y,isLeft:e.scrollLeft<=t.x,isBottom:e.scrollTop>=r.y,isRight:e.scrollLeft>=r.x,maxScroll:r,minScroll:t}}var rt={x:.2,y:.2};function it(e,t,n,r,i){let{top:a,left:o,right:s,bottom:c}=n;r===void 0&&(r=10),i===void 0&&(i=rt);let{isTop:l,isBottom:u,isLeft:d,isRight:f}=nt(e),p={x:0,y:0},m={x:0,y:0},h={height:t.height*i.y,width:t.width*i.x};return!l&&a<=t.top+h.height?(p.y=P.Backward,m.y=r*Math.abs((t.top+h.height-a)/h.height)):!u&&c>=t.bottom-h.height&&(p.y=P.Forward,m.y=r*Math.abs((t.bottom-h.height-c)/h.height)),!f&&s>=t.right-h.width?(p.x=P.Forward,m.x=r*Math.abs((t.right-h.width-s)/h.width)):!d&&o<=t.left+h.width&&(p.x=P.Backward,m.x=r*Math.abs((t.left+h.width-o)/h.width)),{direction:p,speed:m}}function at(e){if(e===document.scrollingElement){let{innerWidth:e,innerHeight:t}=window;return{top:0,left:0,right:e,bottom:t,width:e,height:t}}let{top:t,left:n,right:r,bottom:i}=e.getBoundingClientRect();return{top:t,left:n,right:r,bottom:i,width:e.clientWidth,height:e.clientHeight}}function ot(e){return e.reduce((e,t)=>le(e,et(t)),Oe)}function st(e){return e.reduce((e,t)=>e+Qe(t),0)}function F(e){return e.reduce((e,t)=>e+$e(t),0)}function ct(e,t){if(t===void 0&&(t=We),!e)return;let{top:n,left:r,bottom:i,right:a}=t(e);Xe(e)&&(i<=0||a<=0||n>=window.innerHeight||r>=window.innerWidth)&&e.scrollIntoView({block:`center`,inline:`center`})}var I=[[`x`,[`left`,`right`],st],[`y`,[`top`,`bottom`],F]],lt=class{constructor(e,t){this.rect=void 0,this.width=void 0,this.height=void 0,this.top=void 0,this.bottom=void 0,this.right=void 0,this.left=void 0;let n=Ye(t),r=ot(n);this.rect={...e},this.width=e.width,this.height=e.height;for(let[e,t,i]of I)for(let a of t)Object.defineProperty(this,a,{get:()=>{let t=i(n),o=r[e]-t;return this.rect[a]+o},enumerable:!0});Object.defineProperty(this,`rect`,{enumerable:!1})}},L=class{constructor(e){this.target=void 0,this.listeners=[],this.removeAll=()=>{this.listeners.forEach(e=>this.target?.removeEventListener(...e))},this.target=e}add(e,t,n){var r;(r=this.target)==null||r.addEventListener(e,t,n),this.listeners.push([e,t,n])}};function ut(e){let{EventTarget:t}=w(e);return e instanceof t?e:E(e)}function dt(e,t){let n=Math.abs(e.x),r=Math.abs(e.y);return typeof t==`number`?Math.sqrt(n**2+r**2)>t:`x`in t&&`y`in t?n>t.x&&r>t.y:`x`in t?n>t.x:`y`in t?r>t.y:!1}var ft;(function(e){e.Click=`click`,e.DragStart=`dragstart`,e.Keydown=`keydown`,e.ContextMenu=`contextmenu`,e.Resize=`resize`,e.SelectionChange=`selectionchange`,e.VisibilityChange=`visibilitychange`})(ft||={});function pt(e){e.preventDefault()}function mt(e){e.stopPropagation()}var R;(function(e){e.Space=`Space`,e.Down=`ArrowDown`,e.Right=`ArrowRight`,e.Left=`ArrowLeft`,e.Up=`ArrowUp`,e.Esc=`Escape`,e.Enter=`Enter`,e.Tab=`Tab`})(R||={});var ht={start:[R.Space,R.Enter],cancel:[R.Esc],end:[R.Space,R.Enter,R.Tab]},gt=(e,t)=>{let{currentCoordinates:n}=t;switch(e.code){case R.Right:return{...n,x:n.x+25};case R.Left:return{...n,x:n.x-25};case R.Down:return{...n,y:n.y+25};case R.Up:return{...n,y:n.y-25}}},_t=class{constructor(e){this.props=void 0,this.autoScrollEnabled=!1,this.referenceCoordinates=void 0,this.listeners=void 0,this.windowListeners=void 0,this.props=e;let{event:{target:t}}=e;this.props=e,this.listeners=new L(E(t)),this.windowListeners=new L(w(t)),this.handleKeyDown=this.handleKeyDown.bind(this),this.handleCancel=this.handleCancel.bind(this),this.attach()}attach(){this.handleStart(),this.windowListeners.add(ft.Resize,this.handleCancel),this.windowListeners.add(ft.VisibilityChange,this.handleCancel),setTimeout(()=>this.listeners.add(ft.Keydown,this.handleKeyDown))}handleStart(){let{activeNode:e,onStart:t}=this.props,n=e.node.current;n&&ct(n),t(Oe)}handleKeyDown(e){if(A(e)){let{active:t,context:n,options:r}=this.props,{keyboardCodes:i=ht,coordinateGetter:a=gt,scrollBehavior:o=`smooth`}=r,{code:s}=e;if(i.end.includes(s)){this.handleEnd(e);return}if(i.cancel.includes(s)){this.handleCancel(e);return}let{collisionRect:c}=n.current,l=c?{x:c.left,y:c.top}:Oe;this.referenceCoordinates||=l;let u=a(e,{active:t,context:n.current,currentCoordinates:l});if(u){let t=ue(u,l),r={x:0,y:0},{scrollableAncestors:i}=n.current;for(let n of i){let i=e.code,{isTop:a,isRight:s,isLeft:c,isBottom:l,maxScroll:d,minScroll:f}=nt(n),p=at(n),m={x:Math.min(i===R.Right?p.right-p.width/2:p.right,Math.max(i===R.Right?p.left:p.left+p.width/2,u.x)),y:Math.min(i===R.Down?p.bottom-p.height/2:p.bottom,Math.max(i===R.Down?p.top:p.top+p.height/2,u.y))},h=i===R.Right&&!s||i===R.Left&&!c,g=i===R.Down&&!l||i===R.Up&&!a;if(h&&m.x!==u.x){let e=n.scrollLeft+t.x,a=i===R.Right&&e<=d.x||i===R.Left&&e>=f.x;if(a&&!t.y){n.scrollTo({left:e,behavior:o});return}a?r.x=n.scrollLeft-e:r.x=i===R.Right?n.scrollLeft-d.x:n.scrollLeft-f.x,r.x&&n.scrollBy({left:-r.x,behavior:o});break}else if(g&&m.y!==u.y){let e=n.scrollTop+t.y,a=i===R.Down&&e<=d.y||i===R.Up&&e>=f.y;if(a&&!t.x){n.scrollTo({top:e,behavior:o});return}a?r.y=n.scrollTop-e:r.y=i===R.Down?n.scrollTop-d.y:n.scrollTop-f.y,r.y&&n.scrollBy({top:-r.y,behavior:o});break}}this.handleMove(e,le(ue(u,this.referenceCoordinates),r))}}}handleMove(e,t){let{onMove:n}=this.props;e.preventDefault(),n(t)}handleEnd(e){let{onEnd:t}=this.props;e.preventDefault(),this.detach(),t()}handleCancel(e){let{onCancel:t}=this.props;e.preventDefault(),this.detach(),t()}detach(){this.listeners.removeAll(),this.windowListeners.removeAll()}};_t.activators=[{eventName:`onKeyDown`,handler:(e,t,n)=>{let{keyboardCodes:r=ht,onActivation:i}=t,{active:a}=n,{code:o}=e.nativeEvent;if(r.start.includes(o)){let t=a.activatorNode.current;return t&&e.target!==t?!1:(e.preventDefault(),i?.({event:e.nativeEvent}),!0)}return!1}}];function vt(e){return!!(e&&`distance`in e)}function yt(e){return!!(e&&`delay`in e)}var bt=class{constructor(e,t,n){n===void 0&&(n=ut(e.event.target)),this.props=void 0,this.events=void 0,this.autoScrollEnabled=!0,this.document=void 0,this.activated=!1,this.initialCoordinates=void 0,this.timeoutId=null,this.listeners=void 0,this.documentListeners=void 0,this.windowListeners=void 0,this.props=e,this.events=t;let{event:r}=e,{target:i}=r;this.props=e,this.events=t,this.document=E(i),this.documentListeners=new L(this.document),this.listeners=new L(n),this.windowListeners=new L(w(i)),this.initialCoordinates=fe(r)??Oe,this.handleStart=this.handleStart.bind(this),this.handleMove=this.handleMove.bind(this),this.handleEnd=this.handleEnd.bind(this),this.handleCancel=this.handleCancel.bind(this),this.handleKeydown=this.handleKeydown.bind(this),this.removeTextSelection=this.removeTextSelection.bind(this),this.attach()}attach(){let{events:e,props:{options:{activationConstraint:t,bypassActivationConstraint:n}}}=this;if(this.listeners.add(e.move.name,this.handleMove,{passive:!1}),this.listeners.add(e.end.name,this.handleEnd),e.cancel&&this.listeners.add(e.cancel.name,this.handleCancel),this.windowListeners.add(ft.Resize,this.handleCancel),this.windowListeners.add(ft.DragStart,pt),this.windowListeners.add(ft.VisibilityChange,this.handleCancel),this.windowListeners.add(ft.ContextMenu,pt),this.documentListeners.add(ft.Keydown,this.handleKeydown),t){if(n!=null&&n({event:this.props.event,activeNode:this.props.activeNode,options:this.props.options}))return this.handleStart();if(yt(t)){this.timeoutId=setTimeout(this.handleStart,t.delay),this.handlePending(t);return}if(vt(t)){this.handlePending(t);return}}this.handleStart()}detach(){this.listeners.removeAll(),this.windowListeners.removeAll(),setTimeout(this.documentListeners.removeAll,50),this.timeoutId!==null&&(clearTimeout(this.timeoutId),this.timeoutId=null)}handlePending(e,t){let{active:n,onPending:r}=this.props;r(n,e,this.initialCoordinates,t)}handleStart(){let{initialCoordinates:e}=this,{onStart:t}=this.props;e&&(this.activated=!0,this.documentListeners.add(ft.Click,mt,{capture:!0}),this.removeTextSelection(),this.documentListeners.add(ft.SelectionChange,this.removeTextSelection),t(e))}handleMove(e){let{activated:t,initialCoordinates:n,props:r}=this,{onMove:i,options:{activationConstraint:a}}=r;if(!n)return;let o=fe(e)??Oe,s=ue(n,o);if(!t&&a){if(vt(a)){if(a.tolerance!=null&&dt(s,a.tolerance))return this.handleCancel();if(dt(s,a.distance))return this.handleStart()}if(yt(a)&&dt(s,a.tolerance))return this.handleCancel();this.handlePending(a,s);return}e.cancelable&&e.preventDefault(),i(o)}handleEnd(){let{onAbort:e,onEnd:t}=this.props;this.detach(),this.activated||e(this.props.active),t()}handleCancel(){let{onAbort:e,onCancel:t}=this.props;this.detach(),this.activated||e(this.props.active),t()}handleKeydown(e){e.code===R.Esc&&this.handleCancel()}removeTextSelection(){var e;(e=this.document.getSelection())==null||e.removeAllRanges()}},xt={cancel:{name:`pointercancel`},move:{name:`pointermove`},end:{name:`pointerup`}},St=class extends bt{constructor(e){let{event:t}=e,n=E(t.target);super(e,xt,n)}};St.activators=[{eventName:`onPointerDown`,handler:(e,t)=>{let{nativeEvent:n}=e,{onActivation:r}=t;return!n.isPrimary||n.button!==0?!1:(r?.({event:n}),!0)}}];var Ct={move:{name:`mousemove`},end:{name:`mouseup`}},wt;(function(e){e[e.RightClick=2]=`RightClick`})(wt||={});var Tt=class extends bt{constructor(e){super(e,Ct,E(e.event.target))}};Tt.activators=[{eventName:`onMouseDown`,handler:(e,t)=>{let{nativeEvent:n}=e,{onActivation:r}=t;return n.button===wt.RightClick?!1:(r?.({event:n}),!0)}}];var Et={cancel:{name:`touchcancel`},move:{name:`touchmove`},end:{name:`touchend`}},Dt=class extends bt{constructor(e){super(e,Et)}static setup(){return window.addEventListener(Et.move.name,e,{capture:!1,passive:!1}),function(){window.removeEventListener(Et.move.name,e)};function e(){}}};Dt.activators=[{eventName:`onTouchStart`,handler:(e,t)=>{let{nativeEvent:n}=e,{onActivation:r}=t,{touches:i}=n;return i.length>1?!1:(r?.({event:n}),!0)}}];var Ot;(function(e){e[e.Pointer=0]=`Pointer`,e[e.DraggableRect=1]=`DraggableRect`})(Ot||={});var kt;(function(e){e[e.TreeOrder=0]=`TreeOrder`,e[e.ReversedTreeOrder=1]=`ReversedTreeOrder`})(kt||={});function At(e){let{acceleration:t,activator:n=Ot.Pointer,canScroll:r,draggingRect:i,enabled:a,interval:o=5,order:s=kt.TreeOrder,pointerCoordinates:c,scrollableAncestors:l,scrollableAncestorRects:u,delta:d,threshold:f}=e,p=Mt({delta:d,disabled:!a}),[m,h]=ie(),g=(0,y.useRef)({x:0,y:0}),_=(0,y.useRef)({x:0,y:0}),v=(0,y.useMemo)(()=>{switch(n){case Ot.Pointer:return c?{top:c.y,bottom:c.y,left:c.x,right:c.x}:null;case Ot.DraggableRect:return i}},[n,i,c]),b=(0,y.useRef)(null),x=(0,y.useCallback)(()=>{let e=b.current;if(!e)return;let t=g.current.x*_.current.x,n=g.current.y*_.current.y;e.scrollBy(t,n)},[]),S=(0,y.useMemo)(()=>s===kt.TreeOrder?[...l].reverse():l,[s,l]);(0,y.useEffect)(()=>{if(!a||!l.length||!v){h();return}for(let e of S){if(r?.(e)===!1)continue;let n=u[l.indexOf(e)];if(!n)continue;let{direction:i,speed:a}=it(e,n,v,t,f);for(let e of[`x`,`y`])p[e][i[e]]||(a[e]=0,i[e]=0);if(a.x>0||a.y>0){h(),b.current=e,m(x,o),g.current=a,_.current=i;return}}g.current={x:0,y:0},_.current={x:0,y:0},h()},[t,x,r,h,a,o,JSON.stringify(v),JSON.stringify(p),m,l,S,u,JSON.stringify(f)])}var jt={x:{[P.Backward]:!1,[P.Forward]:!1},y:{[P.Backward]:!1,[P.Forward]:!1}};function Mt(e){let{delta:t,disabled:n}=e,r=se(t);return D(e=>{if(n||!r||!e)return jt;let i={x:Math.sign(t.x-r.x),y:Math.sign(t.y-r.y)};return{x:{[P.Backward]:e.x[P.Backward]||i.x===-1,[P.Forward]:e.x[P.Forward]||i.x===1},y:{[P.Backward]:e.y[P.Backward]||i.y===-1,[P.Forward]:e.y[P.Forward]||i.y===1}}},[n,t,r])}function Nt(e,t){let n=t==null?void 0:e.get(t),r=n?n.node.current:null;return D(e=>t==null?null:r??e??null,[r,t])}function Pt(e,t){return(0,y.useMemo)(()=>e.reduce((e,n)=>{let{sensor:r}=n,i=r.activators.map(e=>({eventName:e.eventName,handler:t(e.handler,n)}));return[...e,...i]},[]),[e,t])}var Ft;(function(e){e[e.Always=0]=`Always`,e[e.BeforeDragging=1]=`BeforeDragging`,e[e.WhileDragging=2]=`WhileDragging`})(Ft||={});var It;(function(e){e.Optimized=`optimized`})(It||={});var Lt=new Map;function Rt(e,t){let{dragging:n,dependencies:r,config:i}=t,[a,o]=(0,y.useState)(null),{frequency:s,measure:c,strategy:l}=i,u=(0,y.useRef)(e),d=g(),f=ae(d),p=(0,y.useCallback)(function(e){e===void 0&&(e=[]),!f.current&&o(t=>t===null?e:t.concat(e.filter(e=>!t.includes(e))))},[f]),m=(0,y.useRef)(null),h=D(t=>{if(d&&!n)return Lt;if(!t||t===Lt||u.current!==e||a!=null){let t=new Map;for(let n of e){if(!n)continue;if(a&&a.length>0&&!a.includes(n.id)&&n.rect.current){t.set(n.id,n.rect.current);continue}let e=n.node.current,r=e?new lt(c(e),e):null;n.rect.current=r,r&&t.set(n.id,r)}return t}return t},[e,a,n,d,c]);return(0,y.useEffect)(()=>{u.current=e},[e]),(0,y.useEffect)(()=>{d||p()},[n,d]),(0,y.useEffect)(()=>{a&&a.length>0&&o(null)},[JSON.stringify(a)]),(0,y.useEffect)(()=>{d||typeof s!=`number`||m.current!==null||(m.current=setTimeout(()=>{p(),m.current=null},s))},[s,d,p,...r]),{droppableRects:h,measureDroppableContainers:p,measuringScheduled:a!=null};function g(){switch(l){case Ft.Always:return!1;case Ft.BeforeDragging:return n;default:return!n}}}function zt(e,t){return D(n=>e?n||(typeof t==`function`?t(e):e):null,[t,e])}function Bt(e,t){return zt(e,t)}function Vt(e){let{callback:t,disabled:n}=e,r=re(t),i=(0,y.useMemo)(()=>{if(n||typeof window>`u`||window.MutationObserver===void 0)return;let{MutationObserver:e}=window;return new e(r)},[r,n]);return(0,y.useEffect)(()=>()=>i?.disconnect(),[i]),i}function Ht(e){let{callback:t,disabled:n}=e,r=re(t),i=(0,y.useMemo)(()=>{if(n||typeof window>`u`||window.ResizeObserver===void 0)return;let{ResizeObserver:e}=window;return new e(r)},[n]);return(0,y.useEffect)(()=>()=>i?.disconnect(),[i]),i}function Ut(e){return new lt(We(e),e)}function Wt(e,t,n){t===void 0&&(t=Ut);let[r,i]=(0,y.useState)(null);function a(){i(r=>{if(!e)return null;if(e.isConnected===!1)return r??n??null;let i=t(e);return JSON.stringify(r)===JSON.stringify(i)?r:i})}let o=Vt({callback(t){if(e)for(let n of t){let{type:t,target:r}=n;if(t===`childList`&&r instanceof HTMLElement&&r.contains(e)){a();break}}}}),s=Ht({callback:a});return ne(()=>{a(),e?(s?.observe(e),o?.observe(document.body,{childList:!0,subtree:!0})):(s?.disconnect(),o?.disconnect())},[e]),r}function Gt(e){return Re(e,zt(e))}var Kt=[];function qt(e){let t=(0,y.useRef)(e),n=D(n=>e?n&&n!==Kt&&e&&t.current&&e.parentNode===t.current.parentNode?n:Ye(e):Kt,[e]);return(0,y.useEffect)(()=>{t.current=e},[e]),n}function Jt(e){let[t,n]=(0,y.useState)(null),r=(0,y.useRef)(e),i=(0,y.useCallback)(e=>{let t=Ze(e.target);t&&n(e=>e?(e.set(t,et(t)),new Map(e)):null)},[]);return(0,y.useEffect)(()=>{let t=r.current;if(e!==t){a(t);let o=e.map(e=>{let t=Ze(e);return t?(t.addEventListener(`scroll`,i,{passive:!0}),[t,et(t)]):null}).filter(e=>e!=null);n(o.length?new Map(o):null),r.current=e}return()=>{a(e),a(t)};function a(e){e.forEach(e=>{Ze(e)?.removeEventListener(`scroll`,i)})}},[i,e]),(0,y.useMemo)(()=>e.length?t?Array.from(t.values()).reduce((e,t)=>le(e,t),Oe):ot(e):Oe,[e,t])}function Yt(e,t){t===void 0&&(t=[]);let n=(0,y.useRef)(null);return(0,y.useEffect)(()=>{n.current=null},t),(0,y.useEffect)(()=>{let t=e!==Oe;t&&!n.current&&(n.current=e),!t&&n.current&&(n.current=null)},[e]),n.current?ue(e,n.current):Oe}function Xt(e){(0,y.useEffect)(()=>{if(!x)return;let t=e.map(e=>{let{sensor:t}=e;return t.setup==null?void 0:t.setup()});return()=>{for(let e of t)e?.()}},e.map(e=>{let{sensor:t}=e;return t}))}function Zt(e,t){return(0,y.useMemo)(()=>e.reduce((e,n)=>{let{eventName:r,handler:i}=n;return e[r]=e=>{i(e,t)},e},{}),[e,t])}function Qt(e){return(0,y.useMemo)(()=>e?Ke(e):null,[e])}var $t=[];function en(e,t){t===void 0&&(t=We);let[n]=e,r=Qt(n?w(n):null),[i,a]=(0,y.useState)($t);function o(){a(()=>e.length?e.map(e=>tt(e)?r:new lt(t(e),e)):$t)}let s=Ht({callback:o});return ne(()=>{s?.disconnect(),o(),e.forEach(e=>s?.observe(e))},[e]),i}function tn(e){if(!e)return null;if(e.children.length>1)return e;let t=e.children[0];return T(t)?t:e}function nn(e){let{measure:t}=e,[n,r]=(0,y.useState)(null),i=Ht({callback:(0,y.useCallback)(e=>{for(let{target:n}of e)if(T(n)){r(e=>{let r=t(n);return e?{...e,width:r.width,height:r.height}:r});break}},[t])}),[a,o]=oe((0,y.useCallback)(e=>{let n=tn(e);i?.disconnect(),n&&i?.observe(n),r(n?t(n):null)},[t,i]));return(0,y.useMemo)(()=>({nodeRef:a,rect:n,setRef:o}),[n,a,o])}var rn=[{sensor:St,options:{}},{sensor:_t,options:{}}],an={current:{}},on={draggable:{measure:Ge},droppable:{measure:Ge,strategy:Ft.WhileDragging,frequency:It.Optimized},dragOverlay:{measure:We}},sn=class extends Map{get(e){return e==null?void 0:super.get(e)??void 0}toArray(){return Array.from(this.values())}getEnabled(){return this.toArray().filter(e=>{let{disabled:t}=e;return!t})}getNodeFor(e){return this.get(e)?.node.current??void 0}},cn={activatorEvent:null,active:null,activeNode:null,activeNodeRect:null,collisions:null,containerNodeRect:null,draggableNodes:new Map,droppableRects:new Map,droppableContainers:new sn,over:null,dragOverlay:{nodeRef:{current:null},rect:null,setRef:Te},scrollableAncestors:[],scrollableAncestorRects:[],measuringConfiguration:on,measureDroppableContainers:Te,windowRect:null,measuringScheduled:!1},ln={activatorEvent:null,activators:[],active:null,activeNodeRect:null,ariaDescribedById:{draggable:``},dispatch:Te,draggableNodes:new Map,over:null,measureDroppableContainers:Te},un=(0,y.createContext)(ln),dn=(0,y.createContext)(cn);function fn(){return{draggable:{active:null,initialCoordinates:{x:0,y:0},nodes:new Map,translate:{x:0,y:0}},droppable:{containers:new sn}}}function pn(e,t){switch(t.type){case N.DragStart:return{...e,draggable:{...e.draggable,initialCoordinates:t.initialCoordinates,active:t.active}};case N.DragMove:return e.draggable.active==null?e:{...e,draggable:{...e.draggable,translate:{x:t.coordinates.x-e.draggable.initialCoordinates.x,y:t.coordinates.y-e.draggable.initialCoordinates.y}}};case N.DragEnd:case N.DragCancel:return{...e,draggable:{...e.draggable,active:null,initialCoordinates:{x:0,y:0},translate:{x:0,y:0}}};case N.RegisterDroppable:{let{element:n}=t,{id:r}=n,i=new sn(e.droppable.containers);return i.set(r,n),{...e,droppable:{...e.droppable,containers:i}}}case N.SetDroppableDisabled:{let{id:n,key:r,disabled:i}=t,a=e.droppable.containers.get(n);if(!a||r!==a.key)return e;let o=new sn(e.droppable.containers);return o.set(n,{...a,disabled:i}),{...e,droppable:{...e.droppable,containers:o}}}case N.UnregisterDroppable:{let{id:n,key:r}=t,i=e.droppable.containers.get(n);if(!i||r!==i.key)return e;let a=new sn(e.droppable.containers);return a.delete(n),{...e,droppable:{...e.droppable,containers:a}}}default:return e}}function mn(e){let{disabled:t}=e,{active:n,activatorEvent:r,draggableNodes:i}=(0,y.useContext)(un),a=se(r),o=se(n?.id);return(0,y.useEffect)(()=>{if(!t&&!r&&a&&o!=null){if(!A(a)||document.activeElement===a.target)return;let e=i.get(o);if(!e)return;let{activatorNode:t,node:n}=e;if(!t.current&&!n.current)return;requestAnimationFrame(()=>{for(let e of[t.current,n.current]){if(!e)continue;let t=he(e);if(t){t.focus();break}}})}},[r,t,i,o,a]),null}function hn(e,t){let{transform:n,...r}=t;return e!=null&&e.length?e.reduce((e,t)=>t({transform:e,...r}),n):n}function gn(e){return(0,y.useMemo)(()=>({draggable:{...on.draggable,...e?.draggable},droppable:{...on.droppable,...e?.droppable},dragOverlay:{...on.dragOverlay,...e?.dragOverlay}}),[e?.draggable,e?.droppable,e?.dragOverlay])}function _n(e){let{activeNode:t,measure:n,initialRect:r,config:i=!0}=e,a=(0,y.useRef)(!1),{x:o,y:s}=typeof i==`boolean`?{x:i,y:i}:i;ne(()=>{if(!o&&!s||!t){a.current=!1;return}if(a.current||!r)return;let e=t?.node.current;if(!e||e.isConnected===!1)return;let i=Re(n(e),r);if(o||(i.x=0),s||(i.y=0),a.current=!0,Math.abs(i.x)>0||Math.abs(i.y)>0){let t=Xe(e);t&&t.scrollBy({top:i.y,left:i.x})}},[t,o,s,r,n])}var vn=(0,y.createContext)({...Oe,scaleX:1,scaleY:1}),yn;(function(e){e[e.Uninitialized=0]=`Uninitialized`,e[e.Initializing=1]=`Initializing`,e[e.Initialized=2]=`Initialized`})(yn||={});var bn=(0,y.memo)(function(e){let{id:t,accessibility:n,autoScroll:r=!0,children:i,sensors:a=rn,collisionDetection:o=Ie,measuring:s,modifiers:c,...l}=e,[u,d]=(0,y.useReducer)(pn,void 0,fn),[f,p]=xe(),[m,h]=(0,y.useState)(yn.Uninitialized),g=m===yn.Initialized,{draggable:{active:v,nodes:b,translate:x},droppable:{containers:S}}=u,C=v==null?null:b.get(v),ee=(0,y.useRef)({initial:null,translated:null}),T=(0,y.useMemo)(()=>v==null?null:{id:v,data:C?.data??an,rect:ee},[v,C]),te=(0,y.useRef)(null),[E,re]=(0,y.useState)(null),[ie,D]=(0,y.useState)(null),oe=ae(l,Object.values(l)),se=k(`DndDescribedBy`,t),O=(0,y.useMemo)(()=>S.getEnabled(),[S]),ce=gn(s),{droppableRects:ue,measureDroppableContainers:de,measuringScheduled:A}=Rt(O,{dragging:g,dependencies:[x.x,x.y],config:ce.droppable}),j=Nt(b,v),pe=(0,y.useMemo)(()=>ie?fe(ie):null,[ie]),me=Ze(),he=Bt(j,ce.draggable.measure);_n({activeNode:v==null?null:b.get(v),config:me.layoutShiftCompensation,initialRect:he,measure:ce.draggable.measure});let M=Wt(j,ce.draggable.measure,he),ge=Wt(j?j.parentElement:null),_e=(0,y.useRef)({activatorEvent:null,active:null,activeNode:j,collisionRect:null,collisions:null,droppableRects:ue,draggableNodes:b,draggingNode:null,draggingNodeRect:null,droppableContainers:S,over:null,scrollableAncestors:[],scrollAdjustedTranslate:null}),ve=S.getNodeFor(_e.current.over?.id),be=nn({measure:ce.dragOverlay.measure}),Se=be.nodeRef.current??j,Ce=g?be.rect??M:null,Te=!!(be.nodeRef.current&&be.rect),Ee=Gt(Te?null:M),De=Qt(Se?w(Se):null),Oe=qt(g?ve??j:null),ke=en(Oe),Ae=hn(c,{transform:{x:x.x-Ee.x,y:x.y-Ee.y,scaleX:1,scaleY:1},activatorEvent:ie,active:T,activeNodeRect:M,containerNodeRect:ge,draggingNodeRect:Ce,over:_e.current.over,overlayNodeRect:be.rect,scrollableAncestors:Oe,scrollableAncestorRects:ke,windowRect:De}),je=pe?le(pe,x):null,Ne=Jt(Oe),Pe=Yt(Ne),Fe=Yt(Ne,[M]),Re=le(Ae,Pe),ze=Ce?Be(Ce,Ae):null,Ve=T&&ze?o({active:T,collisionRect:ze,droppableRects:ue,droppableContainers:O,pointerCoordinates:je}):null,He=Me(Ve,`id`),[Ue,We]=(0,y.useState)(null),Ge=Le(Te?Ae:le(Ae,Fe),Ue?.rect??null,M),Ke=(0,y.useRef)(null),qe=(0,y.useCallback)((e,t)=>{let{sensor:n,options:r}=t;if(te.current==null)return;let i=b.get(te.current);if(!i)return;let a=e.nativeEvent;Ke.current=new n({active:te.current,activeNode:i,event:a,options:r,context:_e,onAbort(e){if(!b.get(e))return;let{onDragAbort:t}=oe.current,n={id:e};t?.(n),f({type:`onDragAbort`,event:n})},onPending(e,t,n,r){if(!b.get(e))return;let{onDragPending:i}=oe.current,a={id:e,constraint:t,initialCoordinates:n,offset:r};i?.(a),f({type:`onDragPending`,event:a})},onStart(e){let t=te.current;if(t==null)return;let n=b.get(t);if(!n)return;let{onDragStart:r}=oe.current,i={activatorEvent:a,active:{id:t,data:n.data,rect:ee}};(0,_.unstable_batchedUpdates)(()=>{r?.(i),h(yn.Initializing),d({type:N.DragStart,initialCoordinates:e,active:t}),f({type:`onDragStart`,event:i}),re(Ke.current),D(a)})},onMove(e){d({type:N.DragMove,coordinates:e})},onEnd:o(N.DragEnd),onCancel:o(N.DragCancel)});function o(e){return async function(){let{active:t,collisions:n,over:r,scrollAdjustedTranslate:i}=_e.current,o=null;if(t&&i){let{cancelDrop:s}=oe.current;o={activatorEvent:a,active:t,collisions:n,delta:i,over:r},e===N.DragEnd&&typeof s==`function`&&await Promise.resolve(s(o))&&(e=N.DragCancel)}te.current=null,(0,_.unstable_batchedUpdates)(()=>{d({type:e}),h(yn.Uninitialized),We(null),re(null),D(null),Ke.current=null;let t=e===N.DragEnd?`onDragEnd`:`onDragCancel`;if(o){let e=oe.current[t];e?.(o),f({type:t,event:o})}})}}},[b]),Je=Pt(a,(0,y.useCallback)((e,t)=>(n,r)=>{let i=n.nativeEvent,a=b.get(r);if(te.current!==null||!a||i.dndKit||i.defaultPrevented)return;let o={active:a};e(n,t.options,o)===!0&&(i.dndKit={capturedBy:t.sensor},te.current=r,qe(n,t))},[b,qe]));Xt(a),ne(()=>{M&&m===yn.Initializing&&h(yn.Initialized)},[M,m]),(0,y.useEffect)(()=>{let{onDragMove:e}=oe.current,{active:t,activatorEvent:n,collisions:r,over:i}=_e.current;if(!t||!n)return;let a={active:t,activatorEvent:n,collisions:r,delta:{x:Re.x,y:Re.y},over:i};(0,_.unstable_batchedUpdates)(()=>{e?.(a),f({type:`onDragMove`,event:a})})},[Re.x,Re.y]),(0,y.useEffect)(()=>{let{active:e,activatorEvent:t,collisions:n,droppableContainers:r,scrollAdjustedTranslate:i}=_e.current;if(!e||te.current==null||!t||!i)return;let{onDragOver:a}=oe.current,o=r.get(He),s=o&&o.rect.current?{id:o.id,rect:o.rect.current,data:o.data,disabled:o.disabled}:null,c={active:e,activatorEvent:t,collisions:n,delta:{x:i.x,y:i.y},over:s};(0,_.unstable_batchedUpdates)(()=>{We(s),a?.(c),f({type:`onDragOver`,event:c})})},[He]),ne(()=>{_e.current={activatorEvent:ie,active:T,activeNode:j,collisionRect:ze,collisions:Ve,droppableRects:ue,draggableNodes:b,draggingNode:Se,draggingNodeRect:Ce,droppableContainers:S,over:Ue,scrollableAncestors:Oe,scrollAdjustedTranslate:Re},ee.current={initial:Ce,translated:ze}},[T,j,Ve,ze,b,Se,Ce,ue,S,Ue,Oe,Re]),At({...me,delta:x,draggingRect:ze,pointerCoordinates:je,scrollableAncestors:Oe,scrollableAncestorRects:ke});let Ye=(0,y.useMemo)(()=>({active:T,activeNode:j,activeNodeRect:M,activatorEvent:ie,collisions:Ve,containerNodeRect:ge,dragOverlay:be,draggableNodes:b,droppableContainers:S,droppableRects:ue,over:Ue,measureDroppableContainers:de,scrollableAncestors:Oe,scrollableAncestorRects:ke,measuringConfiguration:ce,measuringScheduled:A,windowRect:De}),[T,j,M,ie,Ve,ge,be,b,S,ue,Ue,de,Oe,ke,ce,A,De]),Xe=(0,y.useMemo)(()=>({activatorEvent:ie,activators:Je,active:T,activeNodeRect:M,ariaDescribedById:{draggable:se},dispatch:d,draggableNodes:b,over:Ue,measureDroppableContainers:de}),[ie,Je,T,M,d,se,b,Ue,de]);return y.createElement(ye.Provider,{value:p},y.createElement(un.Provider,{value:Xe},y.createElement(dn.Provider,{value:Ye},y.createElement(vn.Provider,{value:Ge},i)),y.createElement(mn,{disabled:n?.restoreFocus===!1})),y.createElement(we,{...n,hiddenTextDescribedById:se}));function Ze(){let e=E?.autoScrollEnabled===!1,t=typeof r==`object`?r.enabled===!1:r===!1,n=g&&!e&&!t;return typeof r==`object`?{...r,enabled:n}:{enabled:n}}}),xn=(0,y.createContext)(null),Sn=`button`,Cn=`Draggable`;function wn(e){let{id:t,data:n,disabled:r=!1,attributes:i}=e,a=k(Cn),{activators:o,activatorEvent:s,active:c,activeNodeRect:l,ariaDescribedById:u,draggableNodes:d,over:f}=(0,y.useContext)(un),{role:p=Sn,roleDescription:m=`draggable`,tabIndex:h=0}=i??{},g=c?.id===t,_=(0,y.useContext)(g?vn:xn),[v,b]=oe(),[x,S]=oe(),C=Zt(o,t),w=ae(n);return ne(()=>(d.set(t,{id:t,key:a,node:v,activatorNode:x,data:w}),()=>{let e=d.get(t);e&&e.key===a&&d.delete(t)}),[d,t]),{active:c,activatorEvent:s,activeNodeRect:l,attributes:(0,y.useMemo)(()=>({role:p,tabIndex:h,"aria-disabled":r,"aria-pressed":g&&p===Sn?!0:void 0,"aria-roledescription":m,"aria-describedby":u.draggable}),[r,p,h,g,m,u.draggable]),isDragging:g,listeners:r?void 0:C,node:v,over:f,setNodeRef:b,setActivatorNodeRef:S,transform:_}}function Tn(){return(0,y.useContext)(dn)}var En=`Droppable`,Dn={timeout:25};function On(e){let{data:t,disabled:n=!1,id:r,resizeObserverConfig:i}=e,a=k(En),{active:o,dispatch:s,over:c,measureDroppableContainers:l}=(0,y.useContext)(un),u=(0,y.useRef)({disabled:n}),d=(0,y.useRef)(!1),f=(0,y.useRef)(null),p=(0,y.useRef)(null),{disabled:m,updateMeasurementsFor:h,timeout:g}={...Dn,...i},_=ae(h??r),v=Ht({callback:(0,y.useCallback)(()=>{if(!d.current){d.current=!0;return}p.current!=null&&clearTimeout(p.current),p.current=setTimeout(()=>{l(Array.isArray(_.current)?_.current:[_.current]),p.current=null},g)},[g]),disabled:m||!o}),[b,x]=oe((0,y.useCallback)((e,t)=>{v&&(t&&(v.unobserve(t),d.current=!1),e&&v.observe(e))},[v])),S=ae(t);return(0,y.useEffect)(()=>{!v||!b.current||(v.disconnect(),d.current=!1,v.observe(b.current))},[b,v]),(0,y.useEffect)(()=>(s({type:N.RegisterDroppable,element:{id:r,key:a,disabled:n,node:b,rect:f,data:S}}),()=>s({type:N.UnregisterDroppable,key:a,id:r})),[r]),(0,y.useEffect)(()=>{n!==u.current.disabled&&(s({type:N.SetDroppableDisabled,id:r,key:a,disabled:n}),u.current.disabled=n)},[r,a,n,s]),{active:o,rect:f,isOver:c?.id===r,node:b,over:c,setNodeRef:x}}function kn(e,t,n){let r=e.slice();return r.splice(n<0?r.length+n:n,0,r.splice(t,1)[0]),r}function An(e,t){return e.reduce((e,n,r)=>{let i=t.get(n);return i&&(e[r]=i),e},Array(e.length))}function jn(e){return e!==null&&e>=0}function Mn(e,t){if(e===t)return!0;if(e.length!==t.length)return!1;for(let n=0;n<e.length;n++)if(e[n]!==t[n])return!1;return!0}function Nn(e){return typeof e==`boolean`?{draggable:e,droppable:e}:e}var Pn=e=>{let{rects:t,activeIndex:n,overIndex:r,index:i}=e,a=kn(t,r,n),o=t[i],s=a[i];return!s||!o?null:{x:s.left-o.left,y:s.top-o.top,scaleX:s.width/o.width,scaleY:s.height/o.height}},Fn={scaleX:1,scaleY:1},In=e=>{let{activeIndex:t,activeNodeRect:n,index:r,rects:i,overIndex:a}=e,o=i[t]??n;if(!o)return null;if(r===t){let e=i[a];return e?{x:0,y:t<a?e.top+e.height-(o.top+o.height):e.top-o.top,...Fn}:null}let s=Ln(i,r,t);return r>t&&r<=a?{x:0,y:-o.height-s,...Fn}:r<t&&r>=a?{x:0,y:o.height+s,...Fn}:{x:0,y:0,...Fn}};function Ln(e,t,n){let r=e[t],i=e[t-1],a=e[t+1];return r?n<t?i?r.top-(i.top+i.height):a?a.top-(r.top+r.height):0:a?a.top-(r.top+r.height):i?r.top-(i.top+i.height):0:0}var Rn=`Sortable`,zn=y.createContext({activeIndex:-1,containerId:Rn,disableTransforms:!1,items:[],overIndex:-1,useDragOverlay:!1,sortedRects:[],strategy:Pn,disabled:{draggable:!1,droppable:!1}});function Bn(e){let{children:t,id:n,items:r,strategy:i=Pn,disabled:a=!1}=e,{active:o,dragOverlay:s,droppableRects:c,over:l,measureDroppableContainers:u}=Tn(),d=k(Rn,n),f=s.rect!==null,p=(0,y.useMemo)(()=>r.map(e=>typeof e==`object`&&`id`in e?e.id:e),[r]),m=o!=null,h=o?p.indexOf(o.id):-1,g=l?p.indexOf(l.id):-1,_=(0,y.useRef)(p),v=!Mn(p,_.current),b=g!==-1&&h===-1||v,x=Nn(a);ne(()=>{v&&m&&u(p)},[v,p,m,u]),(0,y.useEffect)(()=>{_.current=p},[p]);let S=(0,y.useMemo)(()=>({activeIndex:h,containerId:d,disabled:x,disableTransforms:b,items:p,overIndex:g,useDragOverlay:f,sortedRects:An(p,c),strategy:i}),[h,d,x.draggable,x.droppable,b,p,g,c,f,i]);return y.createElement(zn.Provider,{value:S},t)}var Vn=e=>{let{id:t,items:n,activeIndex:r,overIndex:i}=e;return kn(n,r,i).indexOf(t)},Hn=e=>{let{containerId:t,isSorting:n,wasDragging:r,index:i,items:a,newIndex:o,previousItems:s,previousContainerId:c,transition:l}=e;return!l||!r||s!==a&&i===o?!1:n?!0:o!==i&&t===c},Un={duration:200,easing:`ease`},Wn=`transform`,Gn=pe.Transition.toString({property:Wn,duration:0,easing:`linear`}),Kn={roleDescription:`sortable`};function qn(e){let{disabled:t,index:n,node:r,rect:i}=e,[a,o]=(0,y.useState)(null),s=(0,y.useRef)(n);return ne(()=>{if(!t&&n!==s.current&&r.current){let e=i.current;if(e){let t=We(r.current,{ignoreTransform:!0}),n={x:e.left-t.left,y:e.top-t.top,scaleX:e.width/t.width,scaleY:e.height/t.height};(n.x||n.y)&&o(n)}}n!==s.current&&(s.current=n)},[t,n,r,i]),(0,y.useEffect)(()=>{a&&o(null)},[a]),a}function Jn(e){let{animateLayoutChanges:t=Hn,attributes:n,disabled:r,data:i,getNewIndex:a=Vn,id:o,strategy:s,resizeObserverConfig:c,transition:l=Un}=e,{items:u,containerId:d,activeIndex:f,disabled:p,disableTransforms:m,sortedRects:h,overIndex:g,useDragOverlay:_,strategy:v}=(0,y.useContext)(zn),x=Yn(r,p),S=u.indexOf(o),C=(0,y.useMemo)(()=>({sortable:{containerId:d,index:S,items:u},...i}),[d,i,S,u]),w=(0,y.useMemo)(()=>u.slice(u.indexOf(o)),[u,o]),{rect:ee,node:T,isOver:te,setNodeRef:E}=On({id:o,data:C,disabled:x.droppable,resizeObserverConfig:{updateMeasurementsFor:w,...c}}),{active:ne,activatorEvent:re,activeNodeRect:ie,attributes:ae,setNodeRef:D,listeners:oe,isDragging:se,over:O,setActivatorNodeRef:k,transform:ce}=wn({id:o,data:C,attributes:{...Kn,...n},disabled:x.draggable}),le=b(E,D),ue=!!ne,de=ue&&!m&&jn(f)&&jn(g),j=!_&&se,fe=de?(j&&de?ce:null)??(s??v)({rects:h,activeNodeRect:ie,activeIndex:f,overIndex:g,index:S}):null,me=jn(f)&&jn(g)?a({id:o,items:u,activeIndex:f,overIndex:g}):S,he=ne?.id,M=(0,y.useRef)({activeId:he,items:u,newIndex:me,containerId:d}),ge=u!==M.current.items,_e=t({active:ne,containerId:d,isDragging:se,isSorting:ue,id:o,index:S,items:u,newIndex:M.current.newIndex,previousItems:M.current.items,previousContainerId:M.current.containerId,transition:l,wasDragging:M.current.activeId!=null}),ve=qn({disabled:!_e,index:S,node:T,rect:ee});return(0,y.useEffect)(()=>{ue&&M.current.newIndex!==me&&(M.current.newIndex=me),d!==M.current.containerId&&(M.current.containerId=d),u!==M.current.items&&(M.current.items=u)},[ue,me,d,u]),(0,y.useEffect)(()=>{if(he===M.current.activeId)return;if(he!=null&&M.current.activeId==null){M.current.activeId=he;return}let e=setTimeout(()=>{M.current.activeId=he},50);return()=>clearTimeout(e)},[he]),{active:ne,activeIndex:f,attributes:ae,data:C,rect:ee,index:S,newIndex:me,items:u,isOver:te,isSorting:ue,isDragging:se,listeners:oe,node:T,overIndex:g,over:O,setNodeRef:le,setActivatorNodeRef:k,setDroppableNodeRef:E,setDraggableNodeRef:D,transform:ve??fe,transition:ye()};function ye(){if(ve||ge&&M.current.newIndex===S)return Gn;if(!(j&&!A(re)||!l)&&(ue||_e))return pe.Transition.toString({...l,property:Wn})}}function Yn(e,t){return typeof e==`boolean`?{draggable:e,droppable:!1}:{draggable:e?.draggable??t.draggable,droppable:e?.droppable??t.droppable}}R.Down,R.Right,R.Up,R.Left;var Xn=`/Koenigliche-Mafia/`,z=e=>`${Xn}${e}`,Zn=[{id:1,title:`Intro - Motte, hast du eigentlich einen Plan?`,artist:`Erdbeerenfresser`,album:`Schedule I: The Mottemaker Files`,albumCover:z(`covers/Mottemaker-Files-Album.jpg`),albumTrackNumber:1,duration:`00:59`,releaseDate:`2026-03-27`,cover:z(`covers/Intro-Motte-hast-du-eigentlich-einen-Plan.jpeg`),file:z(`songs/Intro-Motte-hast-du-eigentlich-einen-Plan.mp3`),isSingle:!1},{id:2,title:`Skateboard Chemistry`,artist:`Erdbeerenfresser`,album:`Schedule I: The Mottemaker Files`,albumCover:z(`covers/Mottemaker-Files-Album.jpg`),albumTrackNumber:2,duration:`03:04`,releaseDate:`2026-03-27`,cover:z(`covers/Skateboard-Chemistry.png`),file:z(`songs/Skateboard-Chemistry.mp3`),isSingle:!1},{id:3,title:`Crystal Moth`,artist:`Erdbeerenfresser`,album:`Schedule I: The Mottemaker Files`,albumCover:z(`covers/Mottemaker-Files-Album.jpg`),albumTrackNumber:3,duration:`01:48`,releaseDate:`2026-03-27`,cover:z(`covers/Crystal-Moth.png`),file:z(`songs/Crystal-Moth.mp3`),isSingle:!1},{id:4,title:`Competitive Advantage`,artist:`Erdbeerenfresser`,album:`Schedule I: The Mottemaker Files`,albumCover:z(`covers/Mottemaker-Files-Album.jpg`),albumTrackNumber:4,duration:`02:28`,releaseDate:`2026-03-27`,cover:z(`covers/Competitive-Advantage.png`),file:z(`songs/Competitive-Advantage.mp3`),isSingle:!1},{id:5,title:`Crystal Moth Supreme`,artist:`Erdbeerenfresser`,album:`Schedule I: The Mottemaker Files`,albumCover:z(`covers/Mottemaker-Files-Album.jpg`),albumTrackNumber:5,duration:`03:17`,releaseDate:`2026-03-27`,cover:z(`covers/Crystal-Moth-Supreme.jpg`),file:z(`songs/Crystal-Moth-Supreme.mp3`),isSingle:!1},{id:6,title:`Operation Mottemaker`,artist:`Erdbeerenfresser`,album:`Schedule I: The Mottemaker Files`,albumCover:z(`covers/Mottemaker-Files-Album.jpg`),albumTrackNumber:6,duration:`02:04`,releaseDate:`2026-03-27`,cover:z(`covers/Operation-Mottemaker.png`),file:z(`songs/Operation-Mottemaker.mp3`),isSingle:!1},{id:7,title:`Escape Velocity`,artist:`Erdbeerenfresser`,album:`Schedule I: The Mottemaker Files`,albumCover:z(`covers/Mottemaker-Files-Album.jpg`),albumTrackNumber:7,duration:`03:47`,releaseDate:`2026-03-27`,cover:z(`covers/Escape-Velocity.png`),file:z(`songs/Escape-Velocity.mp3`),isSingle:!1},{id:8,title:`Mottemaker Industries`,artist:`Erdbeerenfresser`,album:`Schedule I: The Mottemaker Files`,albumCover:z(`covers/Mottemaker-Files-Album.jpg`),albumTrackNumber:8,duration:`02:30`,releaseDate:`2026-03-27`,cover:z(`covers/Mottemaker-Industries.jpg`),file:z(`songs/Mottemaker-Industries.mp3`),isSingle:!1},{id:9,title:`Empire on Fire`,artist:`Erdbeerenfresser`,album:`Schedule I: The Mottemaker Files`,albumCover:z(`covers/Mottemaker-Files-Album.jpg`),albumTrackNumber:9,duration:`02:51`,releaseDate:`2026-03-27`,cover:z(`covers/Empire-on-Fire.jpg`),file:z(`songs/Empire-on-Fire.mp3`),isSingle:!1},{id:10,title:`Schedule II`,artist:`Erdbeerenfresser`,album:`Schedule I: The Mottemaker Files`,albumCover:z(`covers/Mottemaker-Files-Album.jpg`),albumTrackNumber:10,duration:`02:57`,releaseDate:`2026-03-27`,cover:z(`covers/Schedule-II.jpg`),file:z(`songs/Schedule-II.mp3`),isSingle:!1},{id:11,title:`Alexis, Mi Hermano`,artist:`Motte`,duration:`03:41`,releaseDate:`2026-03-16`,cover:z(`covers/Alexis-Mi-Hermano.png`),file:z(`songs/Alexis-Mi-Hermano.mp3`),isSingle:!0},{id:12,title:`Alexis Brother`,artist:`Motte`,duration:`03:36`,releaseDate:`2026-03-16`,cover:z(`covers/Alexis_Brother.png`),file:z(`songs/Alexis_Brother.mp3`),isSingle:!0},{id:13,title:`Il Ritorno del Don Motte`,artist:`Erdbeerenfresser`,album:`Il Ritorno del Don Motte - Single`,albumTrackNumber:1,duration:`03:37`,releaseDate:`2026-04-10`,cover:z(`covers/il-ritorno-del-don-motte.jpg`),file:z(`songs/il-ritorno-del-don-motte.mp3`),isSingle:!0},{id:14,title:`Rückfahrt Zwei Stunden`,artist:`Erdbeerenfresser`,duration:`02:44`,releaseDate:`2026-04-12`,cover:z(`covers/Rückfahrt_Zwei_Stunden.png`),file:z(`songs/Rückfahrt_Zwei_Stunden.mp3`),isSingle:!0},{id:`jascha1`,title:`Jascha Winter und der Freizeitparkzauber`,artist:`Motte`,duration:`04:44`,releaseDate:`2026-03-05`,cover:z(`covers/Jascha-Winter-und-der-Freizeitparkzauber.jpg`),file:z(`songs/Jascha-Winter-und-der-Freizeitparkzauber.mp3`),isSingle:!0,hidden:!0,hiddenTag:`jascha`},{id:15,title:`Hymne an Alexis (remasterd)`,artist:`Motte`,duration:`03:25`,releaseDate:`2025-09-12`,cover:z(`covers/Hymne_an_Alexis_(remasterd).jpg`),file:z(`songs/Hymne_an_Alexis_(remasterd).mp3`),isSingle:!0},{id:16,title:`Die Bußhymne an Alexis`,artist:`Motte`,duration:`03:23`,releaseDate:`2026-03-16`,cover:z(`covers/Die-Bußhymne-an-Alexis.png`),file:z(`songs/Die-Bußhymne-an-Alexis.mp3`),isSingle:!0},{id:17,title:`Ben, das geht auf mich`,artist:`Motte`,duration:`03:20`,releaseDate:`2026-01-29`,cover:z(`covers/Ben_das_geht_auf_mich.png`),file:z(`songs/Ben_das_geht_auf_mich.mp3`),isSingle:!0},{id:18,title:`Ik ben gleich soweit!`,artist:`Merlin`,duration:`02:23`,releaseDate:`2026-02-27`,cover:z(`covers/Ik-ben-gleich-soweit!.jpg`),file:z(`songs/Ik-ben-gleich-soweit!.mp3`),isSingle:!0},{id:19,title:`PrinzMotte, unser Held`,artist:`Erdbeerenfresser`,duration:`03:48`,releaseDate:`2026-01-30`,cover:z(`covers/PrinzMotte,_unser_Held.jpg`),file:z(`songs/PrinzMotte,_unser_Held.mp3`),isSingle:!0},{id:20,title:`Kochstream Ambience`,artist:`Merlin`,duration:`01:49`,releaseDate:`2026-02-27`,cover:z(`covers/Kochstream-Ambience.jpg`),file:z(`songs/Kochstream-Ambience.mp3`),isSingle:!0},{id:21,title:`Fleischwurst`,artist:`Merlin`,duration:`04:24`,releaseDate:`2026-01-23`,cover:z(`covers/Fleischwurst.jpg`),file:z(`songs/Fleischwurst.mp3`),isSingle:!0},{id:22,title:`Erdbeerenfresser`,artist:`Merlin`,duration:`02:29`,releaseDate:`2026-01-17`,cover:z(`covers/Erdbeerenfresser.jpg`),file:z(`songs/Erdbeerenfresser.mp3`),isSingle:!0},{id:23,title:`There are heroes`,artist:`Erdbeerenfresser`,duration:`04:14`,releaseDate:`2026-03-20`,cover:z(`covers/There are heroes.jpg`),file:z(`songs/There are heroes.mp3`),isSingle:!0},{id:24,title:`Mack`,artist:`Erdbeerenfresser`,duration:`05:37`,releaseDate:`2026-03-17`,cover:z(`covers/Mack.jpg`),file:z(`songs/Mack.mp3`),isSingle:!0},{id:`jascha2`,title:`Party`,artist:`Erdbeerenfresser X Coaster_Liam`,duration:`02:09`,releaseDate:`2026-03-16`,cover:z(`covers/Party.jpg`),file:z(`songs/Party.mp3`),isSingle:!0,hidden:!0,hiddenTag:`jascha`},{id:25,title:`Der Deal (Europa-Park Musical Duett - Alexis X Roland Mack)`,artist:`Erdbeerenfresser`,duration:`04:32`,releaseDate:`2026-03-16`,cover:z(`covers/Der Deal (Europa-Park Musical Duett - Alexis X Roland Mack)).png`),file:z(`songs/Der Deal (Europa-Park Musical Duett - Alexis X Roland Mack)).mp3`),isSingle:!0},{id:26,title:`Nu hör ma zu…`,artist:`Erdbeerenfresser`,duration:`03:13`,releaseDate:`2026-03-16`,cover:z(`covers/Nu hör ma zu….jpg`),file:z(`songs/Nu hör ma zu….mp3`),isSingle:!0},{id:27,title:`Yeah yeah`,artist:`Erdbeerenfresser`,duration:`01:41`,releaseDate:`2026-03-16`,cover:z(`covers/Yeah yeah.jpg`),file:z(`songs/Yeah yeah.mp3`),isSingle:!0},{id:28,title:`Motte Cooking Stream`,artist:`Erdbeerenfresser`,duration:`03:09`,releaseDate:`2026-03-16`,cover:z(`covers/Motte Cooking Stream.jpg`),file:z(`songs/Motte Cooking Stream.mp3`),isSingle:!0},{id:29,title:`Printer läuft die ganze Nacht`,artist:`Erdbeerenfresser`,duration:`04:09`,releaseDate:`2026-03-15`,cover:z(`covers/Printer läuft die ganze Nacht.jpg`),file:z(`songs/Printer läuft die ganze Nacht.mp3`),isSingle:!0},{id:`jascha3`,title:`Hippo sagt böse Sachen`,artist:`Erdbeerenfresser`,duration:`02:55`,releaseDate:`2026-03-14`,cover:z(`covers/Hippo sagt böse Sachen.jpg`),file:z(`songs/Hippo sagt böse Sachen.mp3`),isSingle:!0,hidden:!0,hiddenTag:`jascha`},{id:30,title:`MR MONEYMÄKER – HEUDE ISS DEIN GEBORDSDOOCH`,artist:`Motte`,duration:`03:40`,releaseDate:`2026-03-25`,cover:z(`covers/MR MONEYMÄKER – HEUDE ISS DEIN GEBORDSDOOCH.jpg`),file:z(`songs/MR MONEYMÄKER – HEUDE ISS DEIN GEBORDSDOOCH.mp3`),isSingle:!0},{id:`jascha4`,title:`Zwischen Rauch und Achterbahn`,artist:`Erdbeerenfresser`,duration:`03:02`,releaseDate:`2026-04-14`,cover:z(`covers/Zwischen Rauch und Achterbahn.jpg`),file:z(`songs/Zwischen Rauch und Achterbahn.mp3`),isSingle:!0,hidden:!0,hiddenTag:`jascha`},{id:31,title:`Ois für’n Alexis`,artist:`Erdbeerenfresser`,duration:`03:01`,releaseDate:`2026-04-15`,cover:z(`covers/Ois für’n Alexis.jpg`),file:z(`songs/Ois für’n Alexis.mp3`),isSingle:!0},{id:32,title:`Mr. Moneymaker`,artist:`Erdbeerenfresser`,duration:`03:42`,releaseDate:`2026-04-15`,cover:z(`covers/Mr. Moneymaker.jpg`),file:z(`songs/Mr. Moneymaker.mp3`),isSingle:!0},{id:33,title:`Indian coding berry`,artist:`Motte`,duration:`05:19`,releaseDate:`2026-04-15`,cover:z(`covers/Indian coding berry.jpg`),file:z(`songs/Indian coding berry.mp3`),isSingle:!0},{id:34,title:`Pauli foahrt durch Barcelona (Meddl Edition)`,artist:`Motte`,duration:`05:19`,releaseDate:`2026-04-15`,cover:z(`covers/Pauli foahrt durch Barcelona (Meddl Edition).jpg`),file:z(`songs/Pauli foahrt durch Barcelona (Meddl Edition).mp3`),isSingle:!0},{id:35,title:`Marco… hörst du mich?`,artist:`Erdbeerenfresser`,duration:`04:34`,releaseDate:`2026-04-16`,cover:z(`covers/Marco… hörst du mich.jpg`),file:z(`songs/Marco… hörst du mich.mp3`),isSingle:!0},{id:36,title:`EPMC – The Park Awaits`,artist:`Motte`,duration:`03:47`,releaseDate:`2026-04-16`,cover:z(`covers/EPMC – The Park Awaits.jpg`),file:z(`songs/EPMC – The Park Awaits.mp3`),isSingle:!0},{id:37,title:`Mottemod (König vom Server)`,artist:`Erdbeerenfresser`,duration:`04:27`,releaseDate:`2026-04-17`,cover:z(`covers/Mottemod (König vom Server).jpg`),file:z(`songs/Mottemod (König vom Server).mp3`),isSingle:!0},{id:`jascha5`,title:`Wundertüten-Freitag (Queen Claudia)`,artist:`Erdbeerenfresser`,duration:`03:29`,releaseDate:`2026-04-17`,cover:z(`covers/Wundertüten-Freitag (Queen Claudia).png`),file:z(`songs/Wundertüten-Freitag (Queen Claudia).mp3`),isSingle:!0,hidden:!0,hiddenTag:`jascha`},{id:38,title:`Erdbeere Mine Session`,artist:`Erdbeerenfresser`,album:`Erdbeere Underground`,albumCover:z(`covers/Erdbeere Underground.jpg`),albumTrackNumber:1,duration:`02:11`,releaseDate:`2026-04-17`,cover:z(`covers/Erdbeere Mine Session.png`),file:z(`songs/Erdbeere Mine Session.mp3`),isSingle:!1},{id:39,title:`Auf der Suche nach Diamanten`,artist:`Erdbeerenfresser`,album:`Erdbeere Underground`,albumCover:z(`covers/Erdbeere Underground.jpg`),albumTrackNumber:2,duration:`02:28`,releaseDate:`2026-04-17`,cover:z(`covers/Auf der Suche nach Diamanten.png`),file:z(`songs/Auf der Suche nach Diamanten.mp3`),isSingle:!1},{id:40,title:`Noch tiefer`,artist:`Erdbeerenfresser`,album:`Erdbeere Underground`,albumCover:z(`covers/Erdbeere Underground.jpg`),albumTrackNumber:3,duration:`02:42`,releaseDate:`2026-04-17`,cover:z(`covers/Noch tiefer.png`),file:z(`songs/Noch tiefer.mp3`),isSingle:!1},{id:41,title:`Auch Eisen ist wichtig`,artist:`Erdbeerenfresser`,album:`Erdbeere Underground`,albumCover:z(`covers/Erdbeere Underground.jpg`),albumTrackNumber:4,duration:`02:16`,releaseDate:`2026-04-17`,cover:z(`covers/Auch Eisen ist wichtig.png`),file:z(`songs/Auch Eisen ist wichtig.mp3`),isSingle:!1},{id:42,title:`Diamanten in meiner Hand`,artist:`Erdbeerenfresser`,album:`Erdbeere Underground`,albumCover:z(`covers/Erdbeere Underground.jpg`),albumTrackNumber:5,duration:`02:38`,releaseDate:`2026-04-17`,cover:z(`covers/Diamanten in meiner Hand.png`),file:z(`songs/Diamanten in meiner Hand.mp3`),isSingle:!1},{id:`jascha6`,title:`E-Scooter im Müllmodus`,artist:`Motte`,duration:`02:03`,releaseDate:`2026-04-18`,cover:z(`covers/E-Scooter im Müllmodus.png`),file:z(`songs/E-Scooter im Müllmodus.mp3`),isSingle:!0,hidden:!0,hiddenTag:`jascha`},{id:`jascha7`,title:`WAS...?`,artist:`Erdbeerenfresser`,duration:`03:08`,releaseDate:`2026-04-18`,cover:z(`covers/WAS....png`),file:z(`songs/WAS....mp3`),isSingle:!0,hidden:!0,hiddenTag:`jascha`},{id:43,title:`EPMC – Lay Low Nights`,artist:`Motte`,duration:`03:54`,releaseDate:`2026-04-19`,cover:z(`covers/EPMC – Lay Low Nights.png`),file:z(`songs/EPMC – Lay Low Nights.mp3`),isSingle:!0},{id:44,title:`Mr. Moneymaker Land`,artist:`Erdbeerenfresser`,duration:`02:46`,releaseDate:`2026-04-19`,cover:z(`covers/Mr. Moneymaker Land.png`),file:z(`songs/Mr. Moneymaker Land.mp3`),isSingle:!0},{id:`jascha8`,title:`Jascha Full Throttle`,artist:`Motte`,duration:`04:13`,releaseDate:`2026-04-23`,cover:z(`covers/JASCHA_FULL_THROTTLE.png`),file:z(`songs/JASCHA_FULL_THROTTLE.mp3`),isSingle:!0,hidden:!0,hiddenTag:`jascha`},{id:45,title:`Es war ein Abend wie jeder andere`,artist:`Erdbeerenfresser`,duration:`03:37`,releaseDate:`2026-03-15`,cover:z(`covers/Es war ein Abend wie jeder andere.jpeg`),file:z(`songs/Es war ein Abend wie jeder andere.mp3`),isSingle:!0},{id:46,title:`Rückkehr des Königs`,artist:`Erdbeerenfresser`,duration:`03:19`,releaseDate:`2026-04-25`,cover:z(`covers/Rückkehr des Königs.jpeg`),file:z(`songs/Rückkehr des Königs.mp3`),isSingle:!0},{id:47,title:`Motte Nicht Da`,artist:`Erdbeerenfresser`,duration:`01:56`,releaseDate:`2026-04-27`,cover:z(`covers/Motte Nicht Da.jpeg`),file:z(`songs/Motte Nicht Da.mp3`),isSingle:!0},{id:48,title:`Motte, komm bitte bald zurück`,artist:`Erdbeerenfresser`,duration:`03:14`,releaseDate:`2026-04-29`,cover:z(`covers/Motte, komm bitte bald zurück.png`),file:z(`songs/Motte, komm bitte bald zurück.mp3`),isSingle:!0},{id:49,title:`Alexis of the Emerald Isle`,artist:`Motte`,duration:`06:00`,releaseDate:`2026-05-18`,cover:z(`covers/Alexis of the Emerald Isle.png`),file:z(`songs/Alexis of the Emerald Isle.mp3`),isSingle:!0},{id:50,title:`Königliche A.I. Songs`,artist:`Erdbeerenfresser`,duration:`03:59`,releaseDate:`2026-05-19`,cover:z(`covers/Königliche A.I. Songs.png`),file:z(`songs/Königliche A.I. Songs.mp3`),isSingle:!0},{id:51,title:`Ein wunderschönes Haus`,artist:`Erdbeerenfresser`,album:`Mottenmann`,albumCover:z(`covers/Mottenmann.png`),albumTrackNumber:1,duration:`02:02`,releaseDate:`2026-05-12`,cover:z(`covers/Ein wunderschönes Haus.png`),file:z(`songs/Ein wunderschönes Haus.mp3`),isSingle:!1},{id:52,title:`Verreck, du blöder Mottenmann`,artist:`Erdbeerenfresser`,album:`Mottenmann`,albumCover:z(`covers/Mottenmann.png`),albumTrackNumber:2,duration:`02:44`,releaseDate:`2026-05-12`,cover:z(`covers/Verreck, du blöder Mottenmann.png`),file:z(`songs/Verreck, du blöder Mottenmann.mp3`),isSingle:!1},{id:53,title:`Motte… warum tust du mir das an`,artist:`Erdbeerenfresser`,album:`Mottenmann`,albumCover:z(`covers/Mottenmann.png`),albumTrackNumber:3,duration:`02:51`,releaseDate:`2026-05-12`,cover:z(`covers/Motte… warum tust du mir das an.png`),file:z(`songs/Motte… warum tust du mir das an.mp3`),isSingle:!1},{id:54,title:`Die Flucht des Mottenmanns`,artist:`Erdbeerenfresser`,album:`Mottenmann`,albumCover:z(`covers/Mottenmann.png`),albumTrackNumber:4,duration:`03:34`,releaseDate:`2026-05-12`,cover:z(`covers/Die Flucht des Mottenmanns.png`),file:z(`songs/Die Flucht des Mottenmanns.mp3`),isSingle:!1},{id:55,title:`Die Ruhe des Mottenmanns`,artist:`Erdbeerenfresser`,album:`Mottenmann`,albumCover:z(`covers/Mottenmann.png`),albumTrackNumber:5,duration:`04:38`,releaseDate:`2026-05-12`,cover:z(`covers/Die Ruhe des Mottenmanns.png`),file:z(`songs/Die Ruhe des Mottenmanns.mp3`),isSingle:!1},{id:56,title:`Città di Marmo`,artist:`Motte`,duration:`04:32`,releaseDate:`2026-05-12`,cover:z(`covers/Citta di Marmo.png`),file:z(`songs/Citta di Marmo.mp3`),isSingle:!0},{id:`eatw-teaser`,title:`Erdbeere Around the World – Teaser`,artist:`Motte`,album:`Erdbeere Around the World`,albumCover:z(`covers/Erdbeere Around The World (Cover).png`),albumTrackNumber:0,duration:`01:24`,releaseDate:`2026-05-24`,cover:z(`covers/EATW.png`),file:z(`songs/EATWT.mp3`),isSingle:!1},{id:57,title:`Boarding Pass`,albumTrackNumber:1,artist:`Motte`,album:`Erdbeere Around the World`,albumCover:z(`covers/Erdbeere Around The World (Cover).png`),duration:`01:45`,releaseDate:`2026-05-25`,cover:z(`covers/Boarding Pass.png`),file:z(`songs/Boarding Pass.mp3`),isSingle:!1},{id:58,title:`Shanghai Dreams`,albumTrackNumber:2,artist:`Motte`,album:`Erdbeere Around the World`,albumCover:z(`covers/Erdbeere Around The World (Cover).png`),duration:`03:00`,releaseDate:`2026-05-25`,cover:z(`covers/Shanghai Dreams.png`),file:z(`songs/Shanghai Dreams.mp3`),isSingle:!1},{id:59,title:`Rio Nights`,albumTrackNumber:3,artist:`Motte`,album:`Erdbeere Around the World`,albumCover:z(`covers/Erdbeere Around The World (Cover).png`),duration:`03:37`,releaseDate:`2026-05-25`,cover:z(`covers/Rio Nights.png`),file:z(`songs/Rio Nights.mp3`),isSingle:!1},{id:60,title:`Dolce Vita`,albumTrackNumber:4,artist:`Motte`,album:`Erdbeere Around the World`,albumCover:z(`covers/Erdbeere Around The World (Cover).png`),duration:`03:21`,releaseDate:`2026-05-25`,cover:z(`covers/Dolce Vita.png`),file:z(`songs/Dolce Vita.mp3`),isSingle:!1},{id:61,title:`Amsterdam 3AM`,albumTrackNumber:5,artist:`Motte`,album:`Erdbeere Around the World`,albumCover:z(`covers/Erdbeere Around The World (Cover).png`),duration:`03:59`,releaseDate:`2026-05-25`,cover:z(`covers/Amsterdam 3AM.png`),file:z(`songs/Amsterdam 3AM.mp3`),isSingle:!1},{id:62,title:`Route 66`,albumTrackNumber:6,artist:`Motte`,album:`Erdbeere Around the World`,albumCover:z(`covers/Erdbeere Around The World (Cover).png`),duration:`03:25`,releaseDate:`2026-05-25`,cover:z(`covers/Route 66.png`),file:z(`songs/Route 66.mp3`),isSingle:!1},{id:63,title:`Sandstorm Eyes`,albumTrackNumber:7,artist:`Motte`,album:`Erdbeere Around the World`,albumCover:z(`covers/Erdbeere Around The World (Cover).png`),duration:`04:57`,releaseDate:`2026-05-25`,cover:z(`covers/Sandstorm Eyes.png`),file:z(`songs/Sandstorm Eyes.mp3`),isSingle:!1},{id:64,title:`Greek Summer`,albumTrackNumber:8,artist:`Motte`,album:`Erdbeere Around the World`,albumCover:z(`covers/Erdbeere Around The World (Cover).png`),duration:`03:49`,releaseDate:`2026-05-25`,cover:z(`covers/Greek Summer.png`),file:z(`songs/Greek Summer.mp3`),isSingle:!1},{id:65,title:`Kingston Sun`,albumTrackNumber:9,artist:`Motte`,album:`Erdbeere Around the World`,albumCover:z(`covers/Erdbeere Around The World (Cover).png`),duration:`02:09`,releaseDate:`2026-05-25`,cover:z(`covers/Kingston Sun.png`),file:z(`songs/Kingston Sun.mp3`),isSingle:!1},{id:66,title:`Corazón Caliente`,albumTrackNumber:10,artist:`Motte`,album:`Erdbeere Around the World`,albumCover:z(`covers/Erdbeere Around The World (Cover).png`),duration:`03:14`,releaseDate:`2026-05-25`,cover:z(`covers/Corazón Caliente.png`),file:z(`songs/Corazón Caliente.mp3`),isSingle:!1},{id:67,title:`Safari`,albumTrackNumber:11,artist:`Motte`,album:`Erdbeere Around the World`,albumCover:z(`covers/Erdbeere Around The World (Cover).png`),duration:`03:07`,releaseDate:`2026-05-25`,cover:z(`covers/Safari.png`),file:z(`songs/Safari.mp3`),isSingle:!1},{id:68,title:`Home Again`,albumTrackNumber:12,artist:`Motte`,album:`Erdbeere Around the World`,albumCover:z(`covers/Erdbeere Around The World (Cover).png`),duration:`02:56`,releaseDate:`2026-05-25`,cover:z(`covers/Home Again.png`),file:z(`songs/Home Again.mp3`),isSingle:!1},{id:`jascha9`,title:`JOA IST HALT PHYSIK!`,artist:`Erdbeerenfresser`,duration:`02:52`,releaseDate:`2026-05-21`,cover:z(`covers/Ganz Hessen Kennt Jetzt Paul.png`),file:z(`songs/Ganz Hessen Kennt Jetzt Paul.mp3`),isSingle:!0,hidden:!0,hiddenTag:`jascha`},{id:`BD1`,title:`Midnight Login`,artist:`BerryDeadly`,duration:`02:57`,releaseDate:`2099-05-21`,cover:z(`covers/Midnight Login.png`),file:z(`songs/Midnight Login.mp3`),isSingle:!1,hidden:!0,hiddenTag:`berrydeadly`,album:`Neon City Lights — Erdbeere Time`,albumCover:z(`covers/BD.png`)},{id:`BD2`,title:`Strawberry Nights`,artist:`BerryDeadly`,duration:`04:12`,releaseDate:`2099-05-21`,cover:z(`covers/Strawberry Nights.png`),file:z(`songs/Strawberry Nights.mp3`),isSingle:!1,hidden:!0,hiddenTag:`berrydeadly`,album:`Neon City Lights — Erdbeere Time`,albumCover:z(`covers/BD.png`)},{id:`BD3`,title:`Main Character`,artist:`BerryDeadly`,duration:`03:12`,releaseDate:`2099-05-21`,cover:z(`covers/Main Character.png`),file:z(`songs/Main Character.mp3`),isSingle:!1,hidden:!0,hiddenTag:`berrydeadly`,album:`Neon City Lights — Erdbeere Time`,albumCover:z(`covers/BD.png`)},{id:`BD4`,title:`After 3AM`,artist:`BerryDeadly`,duration:`03:54`,releaseDate:`2099-05-21`,cover:z(`covers/After 3AM.png`),file:z(`songs/After 3AM.mp3`),isSingle:!1,hidden:!0,hiddenTag:`berrydeadly`,album:`Neon City Lights — Erdbeere Time`,albumCover:z(`covers/BD.png`)},{id:`BD5`,title:`Coffee Overload`,artist:`BerryDeadly`,duration:`03:30`,releaseDate:`2099-05-21`,cover:z(`covers/Coffee Overload.png`),file:z(`songs/Coffee Overload.mp3`),isSingle:!1,hidden:!0,hiddenTag:`berrydeadly`,album:`Neon City Lights — Erdbeere Time`,albumCover:z(`covers/BD.png`)},{id:`BD6`,title:`404 <3`,artist:`BerryDeadly`,duration:`03:17`,releaseDate:`2099-05-21`,cover:z(`covers/404 _3.png`),file:z(`songs/404 _3.mp3`),isSingle:!1,hidden:!0,hiddenTag:`berrydeadly`,album:`Neon City Lights — Erdbeere Time`,albumCover:z(`covers/BD.png`)},{id:`BD7`,title:`SECRET CODE`,artist:`BerryDeadly`,duration:`03:24`,releaseDate:`2099-05-21`,cover:z(`covers/SECRET CODE.png`),file:z(`songs/SECRET CODE.mp3`),isSingle:!1,hidden:!0,hiddenTag:`berrydeadly`,album:`Neon City Lights — Erdbeere Time`,albumCover:z(`covers/BD.png`)},{id:`BD8`,title:`LOW BATTERY`,artist:`BerryDeadly`,duration:`02:33`,releaseDate:`2099-05-21`,cover:z(`covers/LOW BATTERY.png`),file:z(`songs/LOW BATTERY.mp3`),isSingle:!1,hidden:!0,hiddenTag:`berrydeadly`,album:`Neon City Lights — Erdbeere Time`,albumCover:z(`covers/BD.png`)},{id:`BD9`,title:`LEVEL UP`,artist:`BerryDeadly`,duration:`03:41`,releaseDate:`2099-05-21`,cover:z(`covers/LEVEL UP.png`),file:z(`songs/LEVEL UP.mp3`),isSingle:!1,hidden:!0,hiddenTag:`berrydeadly`,album:`Neon City Lights — Erdbeere Time`,albumCover:z(`covers/BD.png`)},{id:`BD10`,title:`NO SIGNAL`,artist:`BerryDeadly`,duration:`03:45`,releaseDate:`2099-05-21`,cover:z(`covers/NO SIGNAL.png`),file:z(`songs/NO SIGNAL.mp3`),isSingle:!1,hidden:!0,hiddenTag:`berrydeadly`,album:`Neon City Lights — Erdbeere Time`,albumCover:z(`covers/BD.png`)},{id:`BD11`,title:`RELOAD`,artist:`BerryDeadly`,duration:`06:03`,releaseDate:`2099-05-21`,cover:z(`covers/RELOAD.png`),file:z(`songs/RELOAD.mp3`),isSingle:!1,hidden:!0,hiddenTag:`berrydeadly`,album:`Neon City Lights — Erdbeere Time`,albumCover:z(`covers/BD.png`)}],Qn=[{version:`1.3.0`,label:`2026-05-19 01:30`,changes:`🎭 Neuer 'Extra'-Bereich eingeführt(→ Monatlich ausgewählte Cover und Mashups erhalten jetzt einen eigenen Bereich innerhalb der Bibliothek(🧩 Cover- und Mashup-System vollständig integriert(→ Nutzer können jetzt direkt über die Webseite Cover- und Mashup-Anfragen erstellen(📝 Mehrstufige Anfrage-Dialoge hinzugefügt(→ Schritt-für-Schritt-System für Song-Auswahl, Stil-Prompts und automatische Anfrage-Texte(🎵 Dynamische Song-Auswahl implementiert(→ Dropdowns greifen jetzt direkt auf die bestehende Songbibliothek zu(🕵️ Versteckte Songs werden automatisch herausgefiltert(→ Geheime Inhalte erscheinen nicht mehr in öffentlichen Anfrage-Systemen(📋 Automatische Textgenerierung für Google-Formulare(→ Anfrage-Texte für Cover und Mashups werden jetzt automatisch vorbereitet(🎚️ Neues Extra-Datensystem eingeführt(→ Covers und Mashups können jetzt separat über extras.js verwaltet werden(🎤 Lyrics-System erweitert(→ Covers unterstützen jetzt automatische Lyrics-Weiterleitung über lyricsKey(🔗 'Original anzeigen'-Funktion hinzugefügt(→ Covers und Mashups können jetzt direkt ihre Ursprungssongs anzeigen(🪄 Mashup-Originalsystem erweitert(→ Mashups öffnen jetzt ein Auswahlfenster für mehrere Originalsongs(📦 Extra-Titel vollständig mit Playlist-System kompatibel gemacht(→ Covers und Mashups können jetzt wie normale Songs gespeichert werden(🖥️ Dropdown-Menüs visuell komplett überarbeitet(→ Einheitliches Styling, bessere Hover-Effekte und saubere Button-Struktur(📱 Zusätzliche Spacer-Logik für Dropdowns eingebaut(→ Menüs werden nicht mehr vom unteren Player abgeschnitten(✨ Extra-Seite optisch erweitert(→ Neues Hinweis-System und verbesserte Empty-State-Darstellung(🧠 Diverse interne Verbesserungen und Strukturvorbereitungen(→ Grundlage für zukünftige Community-Features und Extra-Releases geschaffen`.split(`(`)},{version:`1.2.2`,label:`2026-04-20 20:00`,changes:[`🔀 Shuffle für Playlists hinzugefügt`,`→ Zufällige Wiedergabe jetzt auch für deine eigenen Sammlungen verfügbar`,`❄️ Ein Hauch von Kälte liegt in der Bibliothek…`,`→ Manche Songs zeigen sich nur denen, die wissen, wann es Winter wird`,`🗝️ Neue verborgene Inhalte im System verteilt`,`→ Nicht alles ist sichtbar… manchmal muss man genauer hinschauen um unseren Platz zu finden`,`🧠 Kleine Verbesserungen an Navigation & Player-Logik`,`→ Weiter-Button arbeitet jetzt zuverlässiger im Hintergrund`]},{version:`1.2.1`,label:`2026-04-20 12:00`,changes:[`Ein weiterer Zugang wurde implementiert – nicht jeder wird ihn finden`,`Einige Inhalte reagieren jetzt anders auf bestimmte Interaktionen`,`Neue Zustände wurden ergänzt, bleiben aber im Verborgenen`,`Die Bibliothek kennt mehr als sie zeigt`,`Ein Pfad öffnet sich nur für diejenigen, die wissen, was sie tun`,`Import- und Wiedergabesystem im Hintergrund erweitert`,`Grundlagen für zukünftige versteckte Inhalte geschaffen`,`Kleinere Verbesserungen an Stabilität und interner Logik`]},{version:`1.2.0`,label:`2026-04-16 20:37`,changes:[`Playlist-System vollständig überarbeitet und erweitert`,`Songs können jetzt mehrfach in Playlists und Warteschlange hinzugefügt werden (keine Limitierung mehr)`,`Entfernen aus Playlist löscht jetzt nur noch eine Instanz statt alle gleichen Songs`,`Playlist-Übersicht mit dynamischer Cover-Collage (bis zu 4 Cover + '+X' Anzeige)`,`Playlist-Detailseite überarbeitet und besser strukturiert`,`Playlist-Menü erweitert: 'Aus Playlist entfernen' jetzt direkt im 3-Punkte-Menü integriert`,`Playlist-UI für Mobile deutlich verbessert (Layout, Buttons, Handling)`,`Playlist-Änderungen werden sofort live aktualisiert (kein Neuladen mehr nötig)`,`Import/Export-System für Playlists stabilisiert und verbessert`,`SongRow-System erweitert (Playlist-Kontext integriert für bessere Funktionalität)`,`Queue-System verbessert: Drag & Drop bleibt kompatibel mit doppelten Songs`,`React-Key-System angepasst, um doppelte Songs korrekt darzustellen`,`Allgemeine Stabilitäts- und UI-Fixes im Playlist-Bereich`]},{version:`1.1.0`,label:`2026-04-15 23:50`,changes:[`Fullscreen-Player eingeführt (Spotify-ähnlicher Modus mit großem Cover und dynamischem Hintergrund)`,`Animierter Songwechsel im Fullscreen (Slide- und Fade-Übergang)`,`Fullscreen-Controls blenden sich automatisch bei Inaktivität aus und bei Bewegung wieder ein`,`Eigener Player im Fullscreen integriert (Play, Skip, Repeat, Progress, Volume)`,`Liedtext-System erweitert: Lyrics jetzt auch im Fullscreen verfügbar`,`Lyrics aktualisieren sich automatisch beim Songwechsel (auch außerhalb des Fullscreens)`,`Separate Steuerung für Lyrics im normalen Player und im Fullscreen`,`Mobile UI komplett überarbeitet (Floating Player, bessere Abstände, saubere Touch-Bedienung)`,`Album-Header und Songlisten vollständig responsive gemacht`,`Progress-Bar visuell und technisch überarbeitet (bessere Synchronisation mit Slider)`,`Überlappungsfehler zwischen Progress-Bar und Zeitanzeige behoben`,`Player-Layout optimiert (Spacing, Alignment und Lesbarkeit verbessert)`,`Lautstärkeregler weiter verbessert (visuelles Feedback und Positionierung)`,`Stabilitätsverbesserungen im Playback-System (Queue, History und Repeat Verhalten optimiert)`]},{version:`1.0.3`,label:`2026-04-15 01:05`,changes:[`Song-Einreichungsformular integriert (Google Forms Anbindung)`,`Neuer Menüpunkt 'Song einreichen' im Drawer hinzugefügt`,`Popup-System für externe Aktionen erweitert (inkl. Overlay und Close-Funktion)`,`Saubere Weiterleitung zum Formular in neuem Tab implementiert`,`UI für Community-Interaktionen vorbereitet und erweitert`,`Grundlage für zukünftige Moderation / Song-Review-System geschaffen`]},{version:`1.0.2`,label:`2026-04-14 19:40`,changes:[`Repeat-System eingeführt (Off / Repeat All / Repeat One)`,`Repeat One (R1) sorgt dafür, dass der aktuelle Track dauerhaft geloopt wird`,`Repeat All (R) wiederholt die gesamte aktuelle Hör-Session (History + Queue)`,`History-System vollständig implementiert (Zurückspringen zu vorherigen Tracks möglich)`,`Vorher-/Zurück-Button nutzt jetzt echte Track-History statt nur Neustart`,`Weiter-Button und Tastatursteuerung funktionieren jetzt auch am Ende der Queue bei aktivem Repeat`,`Neue Wiedergaben (z. B. einzelner Song oder Albumstart) setzen History korrekt zurück`,`Verbesserte Player-Logik für konsistentes Verhalten zwischen Queue, History und Repeat`]},{version:`1.0.1`,label:`2026-04-14 00:05`,changes:[`Lautstärkeregler überarbeitet und visuell dynamisch gemacht (gefüllter Bereich = grün, Rest = grau)`,`Mute-/Unmute-Funktion über Lautsprecher-Icon hinzugefügt (merkt sich letzte Lautstärke)`,`Media Session API integriert (Metadaten werden im System angezeigt)`,`Playersteuerung über Tastatur möglich (Play/Pause, Weiter, Zurück)`,`Liedtext-System eingeführt und in externe Datei (Texte.js) ausgelagert`,`Lyrics-Popup im Player eingebaut (inkl. Overlay und Close-Funktion)`,`Lyrics-UI verbessert und Titel im Popup zentriert`,`Player-Architektur für zukünftige Features erweitert`]},{version:`1.0.0`,label:`2026-04-13 20:25`,changes:[`Die erste Vollversion ist draußen. Jetzt mit allen aktuellen AI-Songs die es zum heutigem Stand gibt`,`Volume-Regler wurde eingeführt`,`Texte wurden da wo möglich hinzugefügt`,`Viel Spaß mit den Königlichen AI Songs. VG Erdbeere`]},{version:`0.8.1`,label:`2026-04-12 15:00`,changes:[`Patchnotes-System eingeführt`,`Song-System eingeführt`]},{version:`0.8.0`,label:`2026-04-12 13:00`,changes:[`Custom Player mit eigener Progressbar eingebaut`,`Play- und Pause-Logik im Player überarbeitet`,`Queue-System hinzugefügt`,`Drag & Drop für die Warteschlange eingebaut`,`Warteschlange direkt im Menü integriert`,`Queue-Löschen-Funktion ergänzt`,`Songlisten so umgebaut, dass ganze Zeilen abspielbar sind`,`Album-Klick in der Songliste führt direkt zur Albumseite`,`Album Play und Shuffle eingebaut`,`Songs-Ansicht mit Play- und Shuffle-Buttons ergänzt`,`Startseite mit Hero-Bereich aufgebaut`,`Bereiche für Neueste Releases und Aktuelle Alben ergänzt`,`Hover-Effekte auf Releases, Alben und Songzeilen eingebaut`,`Impressum-Seite hinzugefügt`,`Patchnotes-Seite hinzugefügt`,`Klick auf „Königliche AI Songs“ führt zurück zur Startseite`]}],$n={"Midnight Login":`[Intro]
 Oh my god~
 Welcome back tonight~
 Annyeong~
@@ -6975,59 +6975,63 @@ Und alle im Park schreien:
 „JOOOA IST HALT PHYSIK!“
 `,"Erdbeere Around the World – Teaser":`
 
-Person 1 (verwirrt):
+Person 1:
 Ey… hast du eigentlich irgendwas von Erdbeere gehört? 👀
 
 Person 2:
 Nee… warum?
 
 Person 1:
-Bro ist einfach verschwunden.
+Bro ist einfach weg 😭
 
 Person 2:
-Warte… was meinst du mit verschwunden? 😭
+Warte was? Weg weg?
 
 Person 1:
-Das Letzte, was er gesagt hat, war:
-
-Erdbeere (Rückblende):
-"Mir ist zuhause langweilig... ich will die Welt sehen." ✈️
+Ja man! Der meinte noch:
+"Mir ist zuhause langweilig… ich will die Welt sehen." ✈️
 
 Person 2:
-Ach komm… und dann?
+Ach komm, der wollte doch nur bisschen rausgehen 😭
 
 Person 1:
-Dann kamen plötzlich Bilder.
-
-Person 1:
-Shanghai
-
-Person 1:
-Rio
-
-Person 1:
-Rom
-
-Person 1:
-Amsterdam
+Dachte ich auch… aber dann wurde es komisch.
 
 Person 2:
-BROOOO 😭🌍
+Wie komisch? 👀
 
 Person 1:
-Amerika… Ägypten… Griechenland… Jamaika… 
+Erst schickt er plötzlich Bilder aus Shanghai 🇨🇳
 
 Person 2:
-Nahhh… der macht einfach komplette Weltreise.
-
-Person 1 (ruhiger):
-Aber eine Frage hab ich noch…
-
-Person 2:
-Welche? 👀
+WAS?!
 
 Person 1:
-Wo wird es ihn als Nächstes hintreiben...?
+Dann Rio
+Dann Rom
+Dann Amsterdam
+
+Person 2:
+BROOO 😭
+
+Person 1:
+Und danach Amerika
+Ägypten
+Griechenland
+Jamaika
+und zwei unbekannte Länder
+
+Person 2:
+Nahhh der macht einfach komplette Weltreise 😭🌍
+
+Person 1:
+Aber ich frag mich immer noch eine Sache…
+
+Person 2:
+Welche?
+
+Person 1:
+Wo wird es ihn als Nächstes hintreiben...? 👀
 
 🎵✨ ERDBEERE AROUND THE WORLD ✨🎵
 12 Songs 🎵
@@ -7035,8 +7039,873 @@ Wo wird es ihn als Nächstes hintreiben...?
 1 exotisches Album ✨
 
 Erdbeeres Reise quer durch die Welt...
+soon..🍓✈️`,"Boarding Pass":`Ehrlich gesagt…
+ich hatte das Gefühl, diese Stadt ist einfach zu klein für mich geworden
 
-soon..`},er=[],tr=`/Koenigliche-Mafia/`,B=e=>`${tr}${e}`,nr=[{id:`S1`,type:`jingle`,category:`standard`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/S1.m4a`),radioOnly:!0},{id:`S2`,type:`jingle`,category:`standard`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/S2.m4a`),radioOnly:!0},{id:`S3`,type:`jingle`,category:`standard`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/S3.m4a`),radioOnly:!0},{id:`S4`,type:`jingle`,category:`standard`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/S4.m4a`),radioOnly:!0},{id:`S5`,type:`jingle`,category:`standard`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/S5.m4a`),radioOnly:!0},{id:`S6`,type:`jingle`,category:`standard`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/S6.m4a`),radioOnly:!0},{id:`S7`,type:`jingle`,category:`standard`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/S7.m4a`),radioOnly:!0},{id:`S8`,type:`jingle`,category:`standard`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/S8.m4a`),radioOnly:!0}],rr=[{id:`L1`,type:`jingle`,category:`latenight`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/L1.m4a`),radioOnly:!0},{id:`L2`,type:`jingle`,category:`latenight`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/L2.m4a`),radioOnly:!0},{id:`L3`,type:`jingle`,category:`latenight`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/L3.m4a`),radioOnly:!0},{id:`L4`,type:`jingle`,category:`latenight`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/L4.m4a`),radioOnly:!0}],ir=[{id:`T1`,type:`jingle`,category:`transition`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:09`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/T1.m4a`),radioOnly:!0},{id:`T2`,type:`jingle`,category:`transition`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:09`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/T2.m4a`),radioOnly:!0},{id:`T3`,type:`jingle`,category:`transition`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:09`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/T3.m4a`),radioOnly:!0},{id:`T4`,type:`jingle`,category:`transition`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:09`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/T4.m4a`),radioOnly:!0},{id:`T5`,type:`jingle`,category:`transition`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:09`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/T5.m4a`),radioOnly:!0}],ar=[{id:`R1`,type:`jingle`,category:`rare`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/R1.m4a`),radioOnly:!0},{id:`R2`,type:`jingle`,category:`rare`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/R2.m4a`),radioOnly:!0},{id:`R3`,type:`jingle`,category:`rare`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/R3.m4a`),radioOnly:!0}],or=o((e=>{var t=Symbol.for(`react.transitional.element`),n=Symbol.for(`react.fragment`);function r(e,n,r){var i=null;if(r!==void 0&&(i=``+r),n.key!==void 0&&(i=``+n.key),`key`in n)for(var a in r={},n)a!==`key`&&(r[a]=n[a]);else r=n;return n=r.ref,{$$typeof:t,type:e,key:i,ref:n===void 0?null:n,props:r}}e.Fragment=n,e.jsx=r,e.jsxs=r})),V=o(((e,t)=>{t.exports=or()}))(),sr=`/Koenigliche-Mafia/`,cr=e=>`${sr}${e}`,lr=`https://forms.gle/NSAUa8ifBkJxrHjn6`,ur={id:`EPMC-OurPlace`,title:`Our Place`,artist:`EuroParksMC`,album:`Making the Impossible Possible`,releaseDate:`2026-04-16`,duration:`03:49`,cover:cr(`covers/EPMC.png`),file:cr(`songs/EPMC-OurPlace.mp3`)};cr(`covers/Trailer1.3.png`),cr(`songs/Trailer1.3.wav`);function dr(e,t,n){return e===`albums`&&t?t.title:e===`playlists`&&n?n.name:e===`songs`?`Songs`:e===`albums`?`Alben`:e===`playlists`?`Playlists`:e===`patchnotes`?`Patchnotes`:e===`extra`?`Extra`:`Startseite`}var fr=e=>({background:e?`linear-gradient(135deg, #ff4dd2, #b84dff)`:`#1db954`,color:`white`,border:`none`,borderRadius:`999px`,padding:`10px 16px`,cursor:`pointer`,fontWeight:700,boxShadow:e?`0 0 18px rgba(255,77,210,0.35)`:`none`,transition:`all 0.25s ease`}),pr=e=>({background:e?`#1b0b2e`:`#1a1f2b`,color:`white`,border:e?`1px solid rgba(255,77,210,0.35)`:`1px solid #2a3142`,borderRadius:`999px`,padding:`10px 16px`,cursor:`pointer`,fontWeight:700,boxShadow:e?`0 0 16px rgba(255,77,210,0.18)`:`none`,transition:`all 0.25s ease`}),mr={width:`100%`,background:`transparent`,color:`white`,border:`none`,textAlign:`left`,padding:`12px 14px`,cursor:`pointer`,fontWeight:700,fontSize:`14px`,borderRadius:`10px`,display:`flex`,alignItems:`center`,justifyContent:`flex-start`,minHeight:`44px`},hr=(e,t=!1)=>({background:e?t?`linear-gradient(135deg, #ff4dd2, #9d4dff)`:`#1db954`:t?`#1b0b2e`:`#171b24`,color:`white`,border:t?`1px solid rgba(255,77,210,0.35)`:`none`,borderRadius:`14px`,padding:`14px 16px`,textAlign:`left`,cursor:`pointer`,fontWeight:700,width:`100%`,boxShadow:e&&t?`0 0 18px rgba(255,77,210,0.35)`:`none`});function gr(){let[e,t]=(0,y.useState)(`home`),[n,r]=(0,y.useState)(null),[i,a]=(0,y.useState)([]),[o,s]=(0,y.useState)([]),[c,l]=(0,y.useState)(null),[u,d]=(0,y.useState)(null),[f,p]=(0,y.useState)(!1),[m,h]=(0,y.useState)(!1),[g,_]=(0,y.useState)(null),[v,b]=(0,y.useState)(!1),[x,S]=(0,y.useState)(!1),[C,w]=(0,y.useState)(!1),[ee,T]=(0,y.useState)(0),[te,E]=(0,y.useState)(0),[ne,re]=(0,y.useState)(0),[ie,ae]=(0,y.useState)(``),[D,oe]=(0,y.useState)(1),[se,O]=(0,y.useState)(1),[k,ce]=(0,y.useState)(!1),[le,ue]=(0,y.useState)(!1),[de,A]=(0,y.useState)(``),[j,fe]=(0,y.useState)(`off`),[me,he]=(0,y.useState)(!1),[M,ge]=(0,y.useState)(!1),[_e,ve]=(0,y.useState)(null),[ye,be]=(0,y.useState)(1),[xe,Se]=(0,y.useState)(``),[Ce,we]=(0,y.useState)(``),[N,Te]=(0,y.useState)(!1),[Oe,ke]=(0,y.useState)(``),[Ae,je]=(0,y.useState)(``),[Me,Ne]=(0,y.useState)(!1),[Fe,Ie]=(0,y.useState)(``),[Le,Re]=(0,y.useState)(``),[ze,Be]=(0,y.useState)(!1),[Ve,He]=(0,y.useState)([]),[Ue,We]=(0,y.useState)(null),[Ge,Ke]=(0,y.useState)(!1),[qe,Je]=(0,y.useState)(null),[Ye,Xe]=(0,y.useState)(``),[Ze,Qe]=(0,y.useState)(!1),[$e,et]=(0,y.useState)(!0),[P,tt]=(0,y.useState)(!0),[nt,rt]=(0,y.useState)(!1),[it,at]=(0,y.useState)(!1),[ot,st]=(0,y.useState)([]),[F,ct]=(0,y.useState)(!1);(0,y.useEffect)(()=>{let e=()=>{l(null)};return window.addEventListener(`scroll`,e,!0),()=>{window.removeEventListener(`scroll`,e,!0)}},[]);let[I,lt]=(0,y.useState)(window.innerWidth<=768),L=(0,y.useRef)(null),ut=(0,y.useRef)(null),dt=(0,y.useMemo)(()=>[...Zn,...er,ur],[]),ft=(0,y.useMemo)(()=>Zn.filter(e=>e.hidden?F&&e.hiddenTag===`berrydeadly`:!0),[F]),pt=(0,y.useMemo)(()=>Zn.filter(e=>!e.hidden).filter(e=>typeof e.id==`number`).sort((e,t)=>e.id-t.id),[]),mt=(0,y.useMemo)(()=>Zn.filter(e=>e.hidden&&e.hiddenTag===`jascha`),[]),R=(0,y.useMemo)(()=>{let e=ie.trim().toLowerCase();return e?ft.filter(t=>t.title.toLowerCase().includes(e)||t.artist.toLowerCase().includes(e)||(t.album||``).toLowerCase().includes(e)):ft},[ie,ft]),ht=(0,y.useMemo)(()=>[...ft].sort((e,t)=>new Date(t.releaseDate)-new Date(e.releaseDate)).slice(0,5),[ft]),gt=(0,y.useMemo)(()=>{let e=new Map;return ft.forEach(t=>{if(!t.album)return;e.has(t.album)||e.set(t.album,{id:t.album,title:t.album,artist:t.artist,cover:t.albumCover||t.cover,releaseDate:t.releaseDate,tracks:[]});let n=e.get(t.album);n.tracks.push(t),new Date(t.releaseDate)>new Date(n.releaseDate)&&(n.releaseDate=t.releaseDate)}),[...e.values()].map(e=>{let t=[...e.tracks].sort((e,t)=>(e.albumTrackNumber??e.trackNumber??999)-(t.albumTrackNumber??t.trackNumber??999));return{...e,releaseDate:t[0]?.releaseDate||e.releaseDate,isAlbum:e.tracks.length>1,releaseType:e.tracks.length>1?`Album`:`Single`,tracks:t}}).sort((e,t)=>new Date(t.releaseDate)-new Date(e.releaseDate))},[ft]),_t=e=>{if(!e)return 0;let[t,n]=e.split(`:`).map(Number);return t*60+n},vt=new Date(`2026-05-22T00:00:00+02:00`).getTime(),yt=()=>{let e=Zn.filter(e=>!e.hidden&&_t(e.duration)>0),t=[];return t.push(nr[0]),e.forEach((e,n)=>{t.push(e);let r=n+1;if(r%10==0){let e=Math.floor(r/10)%nr.length;t.push(nr[e])}if(r%5==0){let e=Math.floor(r/5)%ir.length;t.push(ir[e])}if(r%17==0){let e=Math.floor(r/17)%rr.length;t.push(rr[e])}if(r%29==0){let e=Math.floor(r/29)%ar.length;t.push(ar[e])}}),t.filter(e=>_t(e.duration)>0).map((e,t)=>({...e,radioIndex:t,radioKey:`${e.id}-${t}`}))},bt=()=>{let e=yt(),t=e.reduce((e,t)=>e+_t(t.duration),0);if(!e.length||t<=0)return null;let n=(Math.floor((Date.now()-vt)/1e3)%t+t)%t;for(let t of e){let e=_t(t.duration);if(n<e)return{track:t,offset:n};n-=e}return{track:e[0],offset:0}},xt=()=>{let e=bt();e&&(Te(!0),a([]),s([]),d(null),We(null),r({...e.track,isRadioTrack:!0}),setTimeout(()=>{L.current&&(L.current.currentTime=e.offset,L.current.play().catch(()=>{}))},150))},Ct=(e,t={})=>{if(!e)return;Te(!1);let{fromHistory:i=!1,resetHistory:a=!1}=t;a?s([]):!i&&n&&s(e=>[...e,n]),r(e),l(null)},wt=e=>{let t=pt.find(t=>String(t.id)===String(e));return t?`${t.id}. ${t.title} – ${t.artist}`:``},Tt=`Art der Anfrage: Cover
+nicht schlecht… nicht traurig…
+aber irgendwie… war da mehr in mir drin als das hier
+
+jeden Tag dieselben Straßen
+dieselben Wege
+und ich hab gemerkt… ich will mehr als das hier sehen
+
+also hab ich meinen Koffer gepackt
+und bin einfach los
+ohne perfekten Plan… aber mit einem Ziel im Kopf
+
+ich will die Welt sehen
+nicht nur davon hören
+sondern wirklich da sein
+
+Tokio… Rio… Kairo… Amsterdam… Kingston…
+
+jede Stadt hat ihren eigenen Sound
+ihren eigenen Vibe
+ihre eigene Geschichte
+
+und wenn meine Heimat nur der Anfang ist…
+dann fang ich jetzt erst richtig an
+
+willkommen bei… Erdbeere around the world`,"Shanghai Dreams":`[Intro]
+Shanghai…
+erste Nacht hier draußen
+alles fühlt sich an wie aus einem Film
+
+[Part 1]
+
+Steig aus dem Flieger, kalte Luft in mei’m Gesicht
+tausend Lichter spiegeln sich
+seh die Skyline von Pudong aus dem Taxi
+und ich merk direkt… zuhause fehlt mir das hier irgendwie
+
+Lauf am Bund entlang, alles leuchtet gold
+Schiffe auf dem Huangpu, Straßen niemals still
+Fremde Sprache um mich rum, doch ich fühl mich frei
+als würd diese Stadt sagen: „Bleib noch eine Zeit“
+
+Oriental Pearl Tower zwischen Wolken in der Nacht
+und ich steh nur da und schau wie klein die Heimat war
+Nanjing Road voller Menschen, Farben überall
+jede Ecke dieser Stadt fühlt sich lebendig an
+
+[Hook]
+
+Shanghai Dreams in meinen Augen
+Neonlichter über mir
+fremde Welt, doch irgendwie fühlt sich alles richtig hier
+
+Zwischen Tempeln und den Towers
+such ich irgendwas in mir
+Erdbeere jetzt in Shanghai
+und ich glaub ich verlier mich hier
+
+[Part 2]
+
+Yu Garden wirkt wie aus vergangener Zeit
+ruhige Tempel mitten zwischen all dem Lärm und all dem Licht
+Räucherstäbchen zieh’n langsam durch die Luft
+während draußen schon die nächste Skyline auf mich ruft
+
+Maglev Train fliegt fast schneller als Gedanken
+alles hier bewegt sich ohne Pause ohne warten
+Shanghai Tower kratzt hoch oben an den Sternen
+und ich frag mich wie viel größer diese Welt noch werden kann
+
+Hab zuhause oft gedacht ich wär verloren
+doch vielleicht war ich einfach nur am falschen Ort geboren
+Denn seit ich durch diese Straßen nachts allein geh
+fühlt sich jeder Schritt ein kleines Stück nach Freiheit an
+
+[Hook]
+
+Shanghai Dreams in meinen Augen
+Neonlichter über mir
+fremde Welt, doch irgendwie fühlt sich alles richtig hier
+
+Zwischen Tempeln und den Towers
+such ich irgendwas in mir
+Erdbeere jetzt in Shanghai
+und ich glaub ich verlier mich hier
+
+[Outro]
+
+Nächster Flug kommt irgendwann…
+doch Shanghai bleibt für immer Teil von mir`,"Rio Nights":`[Intro]
+
+Rioooo!
+Yeah yeah
+ganze Stadt wach heute Nacht
+Erdbeere in Brasil!
+
+[Part 1]
+
+Steig aus’m Flieger, sofort diese Hitze
+Musik auf den Straßen, Bass bis in die Rippen
+Copacabana voll mit Menschen am Tanzen
+alle drehen durch, keiner bleibt hier stehen
+
+Caipirinha in der Hand unter Neonlichtern
+Samba auf den Dächern bis zum frühen Morgen
+Christusstatue schaut runter auf die Stadt
+während unten jede Straße schon am Brennen ist
+
+Favela-Lichter funkeln hoch an den Bergen
+Motorräder fahren laut durch die Nächte
+Rio lebt anders, hier schläft niemand ein
+selbst um vier Uhr morgens hört man überall Musik
+
+[Pre-Hook]
+
+Und ich schwör
+diese Stadt hat Energie wie keine andere
+ganze Welt fühlt sich hier plötzlich leichter an
+
+[Hook]
+
+Rio Nights, alle tanzen
+ganze Stadt dreht heute durch
+Samba-Rhythmen auf den Straßen
+und die Nacht hört niemals auf
+
+Unter Palmen an der Küste
+Feuerwerk am Ozean
+Erdbeere jetzt in Rio
+und ich will hier niemals weg
+
+Rio Nights, Rio Nights
+Lichter spiegeln sich im Meer
+Von der Copacabana
+bis hoch zum Zuckerhut
+
+[Part 2]
+
+Lauf durch Lapa unter bunten Farben
+Menschen singen laut zwischen den Bars
+Percussion auf den Straßen ohne Ende
+jeder Beat geht direkt durch den Körper
+
+Karnevalszüge zieh’n durch die Alleen
+Glitzer überall, Trommeln überall
+Tausend Stimmen gleichzeitig am Schreien
+als würde ganz Rio heute explodieren
+
+Steh am Zuckerhut kurz vor Sonnenaufgang
+seh die ganze Stadt gold werden im Licht
+Und ich check erst hier zwischen all den Menschen
+wie groß diese Welt eigentlich wirklich ist
+
+Maracanã voller Gesänge und Fahnen
+selbst die Straßen fühlen sich hier an wie Stadien
+Rio gibt dir keine Zeit stillzustehen
+denn hier bewegt sich einfach alles nonstop
+
+[Bridge]
+
+Samba in mei’m Kopf
+Meerblick jede Nacht
+Rio hat aus einer Reise
+ein Abenteuer gemacht
+
+[Hook]
+
+Rio Nights, alle tanzen
+ganze Stadt dreht heute durch
+Samba-Rhythmen auf den Straßen
+und die Nacht hört niemals auf
+
+Unter Palmen an der Küste
+Feuerwerk am Ozean
+Erdbeere jetzt in Rio
+und ich will hier niemals weg
+
+Rio Nights, Rio Nights
+Lichter spiegeln sich im Meer
+Von der Copacabana
+bis hoch zum Zuckerhut
+
+[Outro]
+
+Rio de Janeiro…
+eine Nacht hier fühlt sich an wie ein ganzes Leben`,"Dolce Vita":`[Intro]
+
+Eh eh…
+Italiaaa
+Dolce Vita, baby
+
+[Part 1]
+
+Fahr auf der Vespa durch die Straßen von Rom
+warme Sommernacht und die Fenster steh’n offen
+Kolosseum leuchtet gold unter’m Himmel
+während irgendwo ein Straßenmusiker singt
+
+Espresso am Morgen direkt am Trevi-Brunnen
+ganze Stadt riecht nach Sommer und Parfum
+Leute lachen laut draußen vor den Cafés
+und ich merk wie mein Kopf endlich ruhig wird
+
+Fahr vorbei an der Spanischen Treppe bei Nacht
+alte Gassen voller Musik und Gelächter
+Alles hier wirkt wie aus einem alten Film
+als wär Italien einfach langsamer als die Welt
+
+[Hook]
+
+Dolce Vita jede Nacht
+fahr durch Italien ohne Plan
+von Mailand bis zur Küste
+fühlt sich alles leichter an
+
+Gondeln fahren durch Venedig
+Lichter spiegeln sich im Wein
+Erdbeere lebt in Italien
+und ich will nie wieder heim
+
+Oh mamma mia
+diese Nächte fühlen sich endlos an
+Dolce Vita
+unter Sternen irgendwo in Rom
+
+[Part 2]
+
+Amalfi-Küste kurz vor Sonnenuntergang
+Meer glänzt golden neben der Küstenstraße
+Musik spielt laut aus einem alten Cabrio
+während Palmen sich im warmen Wind bewegen
+
+In Venedig fahr’n die Gondeln durch die Nacht
+Lichter tanzen langsam auf dem Wasser
+Und selbst die Zeit fühlt sich hier anders an
+als würde niemand hier jemals Stress haben
+
+Später nachts in Mailand zwischen Lichtern
+Luxusrestaurants und teure Fenster
+Doch egal wo ich hier grade bin
+gibt mir Italien dieses Gefühl von Freiheit
+
+Pisa kurz für ein Foto auf der Reise
+dann direkt weiter Richtung Toskana
+Weinberge leuchten gold im Abendlicht
+und ich schwör ich hab mich lang nicht mehr so frei gefühlt
+
+[Bridge]
+
+Vielleicht geht’s gar nicht darum anzukommen
+vielleicht geht’s nur darum das Leben zu fühlen
+und Italien zeigt mir jede Nacht
+wie schön das alles eigentlich sein kann
+
+[Hook]
+
+Dolce Vita jede Nacht
+fahr durch Italien ohne Plan
+von Mailand bis zur Küste
+fühlt sich alles leichter an
+
+Gondeln fahren durch Venedig
+Lichter spiegeln sich im Wein
+Erdbeere lebt in Italien
+und ich will nie wieder heim
+
+Oh mamma mia
+diese Nächte fühlen sich endlos an
+Dolce Vita
+unter Sternen irgendwo in Rom
+
+[Outro]
+
+Italia…
+eine Nacht hier fühlt sich an wie Kino`,"Amsterdam 3AM":`[Intro]
+
+Amsterdam…
+3AM
+yeah
+Bass in meiner Brust
+
+[Build-Up]
+
+Regen auf den Straßen
+Neon in mei’m Blick
+Fahrräder fahr’n vorbei
+doch die Stadt schläft nicht
+
+Rote Fenster
+kalter Wind
+alles leuchtet rot und blau
+
+[Drop / Hook]
+
+Amsterdam um drei Uhr nachts
+Bass drückt gegen meine Brust
+rote Lichter, schwarzer Himmel
+alles bebt unter dem Club
+
+Neonregen auf den Straßen
+Kickdrums bis in meinen Kopf
+Erdbeere in Amsterdam
+und die Nacht hört niemals auf
+
+Amsterdam
+3AM
+alle springen wenn der Bass einsetzt
+
+Amsterdam
+3AM
+ganze Stadt bebt durch die Nacht
+
+[Part 1]
+
+Steig aus’m Club, Rauch hängt in der Luft
+Tausend Menschen unter Strobelights
+Hardtechno dröhnt durch alte Keller
+während draußen kalter Regen fällt
+
+Lauf durchs Rotlichtviertel ohne Ziel
+rote Fenster spiegeln sich im Wasser
+Aus den Bars hörst du verzerrte Bässe
+jede Straße klingt nach Untergrund
+
+Amsterdam Centraal noch voller Leute
+selbst um vier bewegt sich diese Stadt
+Zwischen Grachten, Neon und Sirenen
+fühlt sich jede Nacht hier endlos an
+
+[Build-Up]
+
+Kickdrum
+Herzschlag
+rote Lichter überall
+
+kalter Regen
+nasse Straßen
+doch wir tanzen trotzdem weiter
+
+[Drop / Hook]
+
+Amsterdam um drei Uhr nachts
+Bass drückt gegen meine Brust
+rote Lichter, schwarzer Himmel
+alles bebt unter dem Club
+
+Neonregen auf den Straßen
+Kickdrums bis in meinen Kopf
+Erdbeere in Amsterdam
+und die Nacht hört niemals auf
+
+Amsterdam
+3AM
+alle springen wenn der Bass einsetzt
+
+Amsterdam
+3AM
+ganze Stadt bebt durch die Nacht
+
+[Part 2]
+
+Warehouse irgendwo hinter den Grachten
+Strobos blitzen durch den Nebel
+Acid-Synths schneiden durch die Dunkelheit
+und die Menge springt gleichzeitig im Takt
+
+Fahrradfahrt durch kalten Morgenregen
+Ohren taub vom Bass der letzten Stunden
+Rijksmuseum zieht vorbei im Nebel
+während langsam schon die Sonne kommt
+
+Und vielleicht geht’s gar nicht ums Ziel
+vielleicht nur um diese Nächte hier
+denn zuhause war alles viel zu leise
+doch Amsterdam klingt wie Freiheit für mich
+
+[Final Drop]
+
+Amsterdam um drei Uhr nachts
+Bass drückt gegen meine Brust
+rote Lichter, schwarzer Himmel
+alles bebt unter dem Club
+
+Kickdrums durch die Grachten
+Neon leuchtet auf dem Fluss
+Erdbeere in Amsterdam
+und ich brauch genau diesen Rausch
+
+[Outro]
+
+3AM…
+Regen…
+Neon…
+Amsterdam schläft nie`,"Route 66":`[Intro]
+
+Yeah…
+California dreams
+Route 66, baby
+
+[Part 1]
+
+Steig in den Mustang, Motor startet laut
+Kilometerfresser Richtung Westen raus
+Endlose Straßen mitten durch die Wüste
+nur der Sonnenuntergang und meine Playlist
+
+Tankstellen irgendwo im Nirgendwo
+alte Neon-Schilder an Motels
+Route 66 zieht sich bis zum Horizont
+als würd diese Straße niemals enden
+
+Durch Chicago bis nach Arizona
+jede Stadt hat ihre eigene Geschichte
+Grand Canyon unter rotem Abendhimmel
+und ich schwör ich hab noch nie sowas gesehen
+
+Fenster runter während warmer Wind reinzieht
+Radio spielt alte amerikanische Songs
+Und zum ersten Mal seit langer Zeit
+fühlt sich Freiheit größer an als meine Sorgen
+
+[Hook]
+
+Route 66 durch die Nacht
+Lichter ziehen an mir vorbei
+Von Las Vegas bis L.A.
+jeder Kilometer macht mich frei
+
+Motels unter Neonlichtern
+Wüstenwind im Abendrot
+Erdbeere fährt durch Amerika
+als gäb es kein Zurück mehr mehr
+
+[Part 2]
+
+Las Vegas leuchtet mitten in der Dunkelheit
+Casinos blinken wie ein anderer Planet
+Menschen jagen hier nach Glück bis morgens früh
+während draußen die Wüste niemals schläft
+
+Hollywood Sign hoch oben über L.A.
+Palmen ziehen langsam an mir vorbei
+Venice Beach voll mit Musik und Skatern
+alles wirkt wie aus einem alten Film
+
+Stop kurz an einem Diner an der Straße
+Kaffee schwarz um vier Uhr nachts
+Fremde Leute erzählen ihre Lebensstorys
+als würde jeder hier auf der Suche sein
+
+Und vielleicht geht’s genau darum auf Reisen
+nicht immer wissen wo der nächste Halt kommt
+Denn Amerika zeigt mir auf diesen Highways
+dass Freiheit manchmal einfach nur Bewegung ist
+
+[Bridge]
+
+Nur die Straße
+der Motor
+und der Himmel über mir
+
+keine Grenzen
+kein Zuhause
+nur die nächste Stadt im Licht
+
+[Hook]
+
+Route 66 durch die Nacht
+Lichter ziehen an mir vorbei
+Von Las Vegas bis L.A.
+jeder Kilometer macht mich frei
+
+Motels unter Neonlichtern
+Wüstenwind im Abendrot
+Erdbeere fährt durch Amerika
+als gäb es kein Zurück mehr
+
+[Outro]
+
+Nächster Stop… Ägypten`,"Sandstorm Eyes":`[Intro]
+
+Ägypten…
+warmer Wind
+neuer Horizont
+
+[Part 1]
+
+Steig aus dem Flieger, Sonne brennt auf den Asphalt
+seh die Stadt aus dem Fenster, alles wirkt so alt
+Zwischen Kairo und den Straßen voller Stimmen
+fühlt es sich an als würden Geschichten weiterleben
+
+Fahr Richtung Gizeh durch den goldenen Sand
+und dann stehen sie plötzlich direkt vor mir
+Die Pyramiden größer als ich sie mir vorgestellt hab
+für einen Moment steh ich einfach nur still
+
+Die Sphinx schaut raus über tausend Jahre Zeit
+und ich frag mich wie viele Menschen hier schon standen
+Wüstenwind zieht langsam durch die Nacht
+als würden alte Stimmen mit ihm reisen
+
+[Pre-Hook]
+
+Und vielleicht ist Zeit größer als wir denken
+denn manche Orte vergessen niemals ihren Namen
+
+[Hook]
+
+Sandstorm Eyes unter Sternen
+goldener Himmel über mir
+Wüstenwind zieht durch Gedanken
+und ich verlier mich tief in mir
+
+Zwischen Pyramiden und den Nächten
+fühlt sich alles anders an
+Erdbeere jetzt in Ägypten
+mitten zwischen Sand und Sternen
+
+[Part 2]
+
+Später auf dem Markt in Kairo zwischen Lichtern
+tausend Stimmen, Düfte und Musik
+Jede Straße hat hier ihre eigene Geschichte
+jede Ecke klingt nach einer anderen Zeit
+
+Nillichter spiegeln sich im Wasser
+während langsam schon die Nacht beginnt
+Und ich merk auf dieser Reise immer mehr
+dass jede Welt ihre eigene Sprache spricht
+
+Vielleicht geht's nicht darum weit wegzugehen
+sondern zu sehen wie groß die Welt wirklich ist
+Denn manche Orte bleiben nicht nur Erinnerungen
+sie bleiben irgendwo in dir drin
+
+[Bridge]
+
+Warmer Wind
+tausend Sterne
+und die Zeit scheint stillzustehen
+
+[Hook]
+
+Sandstorm Eyes unter Sternen
+goldener Himmel über mir
+Wüstenwind zieht durch Gedanken
+und ich verlier mich tief in mir
+
+Zwischen Pyramiden und den Nächten
+fühlt sich alles anders an
+Erdbeere jetzt in Ägypten
+mitten zwischen Sand und Sternen
+
+[Outro]
+
+Der Wind trägt Geschichten weiter…`,"Greek Summer":`[Intro]
+
+Oh oh oh…
+Griechenland
+Sommer in der Luft
+
+[Part 1]
+
+Steig aus der Fähre, Meer glänzt unter Licht
+weiße Häuser zieh’n vorbei in meinem Blick
+Santorini wirkt wie aus einem Traum
+blau auf weiß unter einem goldenen Himmel
+
+Warmer Wind zieht langsam durch die Gassen
+Menschen sitzen draußen bis tief in die Nacht
+Musik kommt aus den kleinen Tavernen
+und jeder hier scheint die Zeit vergessen zu haben
+
+Akropolis hoch über den Lichtern von Athen
+tausend Jahre schauen auf die Straßen runter
+Und ich bleib kurz stehen und denk mir nur
+wie viele Geschichten dieser Ort schon gesehen hat
+
+[Pre-Hook]
+
+Jeder Sonnenuntergang hier am Meer
+fühlt sich an als würd die Welt kurz stillstehen
+
+[Hook]
+
+Greek Summer unter Sternen
+blaues Meer und warmer Wind
+weiße Häuser auf den Klippen
+wo der Himmel endlos wirkt
+
+Von Athen bis Santorini
+trägt der Sommer mich durchs Licht
+Erdbeere jetzt in Griechenland
+und ich will grad nichts zurück
+
+[Part 2]
+
+Lauf durch Mykonos bei Nacht am Hafen
+kleine Gassen voller Lachen und Musik
+Boote spiegeln sich auf dunklem Wasser
+und die Luft riecht nach Meer und Sommerwind
+
+Alte Tempel zwischen Bergen und Geschichten
+jeder Stein hier scheint Erinnerungen zu tragen
+Sonne färbt die Straßen langsam gold
+während Wellen ruhig gegen Mauern schlagen
+
+Und ich merk auf dieser Reise langsam mehr
+manche Orte fühlen sich wie Zuhause an
+Denn Griechenland zeigt mir zwischen Meer und Sternen
+wie sich Freiheit mit Ruhe mischen kann
+
+[Bridge]
+
+Sommernächte
+Meeresrauschen
+und Musik zieht durch den Wind
+
+[Final Hook]
+
+Greek Summer unter Sternen
+blaues Meer und warmer Wind
+weiße Häuser auf den Klippen
+wo der Himmel endlos wirkt
+
+Von Athen bis Santorini
+trägt der Sommer mich durchs Licht
+Erdbeere jetzt in Griechenland
+und ich will grad nichts zurück`,"Kingston Sun":`[Intro]
+
+Yeah yeah
+Jamaica...
+Sonne auf meiner Haut
+
+[Part 1]
+
+Steig aus dem Flieger, warme Luft im Gesicht
+Palmen bewegen sich langsam im Wind
+Kingston lebt schon mitten auf den Straßen
+überall Musik und Stimmen in der Nacht
+
+Fahr Richtung Küste unter Abendfarben
+Meer glänzt golden bis zum Horizont
+Seven Mile Beach direkt vor meinen Augen
+und ich bleib einfach stehen und schau nur hin
+
+Später hoch Richtung Blue Mountains
+Wolken ziehen langsam durch die Gipfel
+Jeder Blick sieht aus wie ein Postkartenbild
+als wär die Zeit hier etwas langsamer
+
+[Pre-Hook]
+
+Und plötzlich wirkt die Welt ganz ruhig
+als hätte irgendwer die Zeit langsamer gestellt
+
+[Hook]
+
+Kingston Sun über dem Meer
+warmer Wind zieht durch die Nacht
+Palmen tanzen mit den Wellen
+während die Insel niemals schläft
+
+Von Kingston bis zur Blue Lagoon
+trägt der Sommer mich durchs Licht
+Erdbeere jetzt in Jamaika
+und ich will hier nicht mehr weg
+
+[Part 2]
+
+Musik kommt aus kleinen Bars am Strand
+Menschen lachen draußen bis zum Morgen
+Blue Lagoon glänzt tief im Mondlicht
+während Wellen langsam an die Küste schlagen
+
+Jeder Sonnenuntergang sieht anders aus
+orange Farben über'm Wasser
+Und ich merk auf dieser Reise immer mehr
+dass Freiheit manchmal einfach Ruhe heißt
+
+[Outro]
+
+Jamaica…
+Sonne, Meer und Musik`,"Corazón Caliente":`[Intro]
+
+México...
+yeah yeah
+Erdbeere llegó
+
+[Part 1]
+
+Steig aus dem Flieger, Sonne brennt auf die Straßen
+Farben überall, Musik aus allen Gassen
+Menschen tanzen draußen mitten auf den Plätzen
+als würde hier die Nacht niemals enden
+
+Mexiko-Stadt lebt zwischen Licht und Stimmen
+jede Straße klingt nach einer neuen Geschichte
+Alte Häuser leuchten unter Abendfarben
+und ich lauf einfach weiter ohne Ziel
+
+Später Richtung Chichén Itzá unterwegs
+alte Steine erzählen Geschichten im Wind
+Und ich steh dort zwischen Vergangenheit und Himmel
+und denk mir wie verrückt diese Welt eigentlich ist
+
+[Pre-Hook]
+
+Herz schlägt schneller
+Musik zieht durch die Luft
+und plötzlich fühlt sich alles leichter an
+
+[Hook]
+
+Corazón Caliente
+Feuer tief in meiner Brust
+Sonnenuntergänge brennen
+über'm Meer bis in die Nacht
+
+Von Cancún bis nach Mexiko-Stadt
+trägt die Musik mich durch den Wind
+Erdbeere jetzt in Mexiko
+wo die Nächte niemals still sind
+
+[Part 2]
+
+Bunte Straßen unter tausend Lichtern
+Gitarren klingen bis zum Morgen weiter
+Día-de-los-Muertos-Farben auf den Wänden
+jede Ecke scheint zu leben heute Nacht
+
+Palmen bewegen sich langsam am Strand
+während Wellen gegen die Küste schlagen
+Und ich merk auf dieser Reise immer mehr
+wie viele Welten in einer Welt versteckt sind
+
+[Bridge]
+
+Warmer Wind
+Feuer am Himmel
+Musik trägt mich durch die Nacht
+
+[Final Hook]
+
+Corazón Caliente
+Feuer tief in meiner Brust
+Sonnenuntergänge brennen
+über'm Meer bis in die Nacht
+
+Von Cancún bis nach Mexiko-Stadt
+trägt die Musik mich durch den Wind
+Erdbeere jetzt in Mexiko
+wo die Nächte niemals still sind`,Safari:`[Intro]
+
+Kenia…
+letzter Stop
+bevor die Reise endet
+
+[Part 1]
+
+Steig aus dem Jeep, warmer Wind im Gesicht
+goldene Sonne fällt tief auf die Savanne
+Masai Mara zieht sich bis zum Horizont
+und ich steh da einfach still und schau nur hin
+
+Löwen laufen weit draußen durch die Gräser
+Elefanten zieh’n langsam durch die Landschaft
+Und zum ersten Mal auf dieser ganzen Reise
+denk ich daran wie schnell alles verging
+
+Mount Kenya schaut weit über die Wolken
+als würde er die Welt von oben seh’n
+Und plötzlich wird mir langsam klar
+dass dies das letzte Land auf meiner Karte ist
+
+[Pre-Hook]
+
+Noch ein Sonnenuntergang
+noch eine Nacht unter fremden Sternen
+
+[Hook]
+
+Safari unter Sternen
+Feuer brennt tief in der Nacht
+letztes Land auf meiner Reise
+bevor der Weg nach Hause startet
+
+Von Nairobi bis zur Savanne
+trägt der Wind mich durch die Zeit
+Erdbeere jetzt in Kenia
+und ich halt den Moment noch fest
+
+[Part 2]
+
+Später nachts am Feuer unter Sternen
+hör ich Trommeln irgendwo im Wind
+Jede Reise, jeder Ort und jede Straße
+zieht nochmal langsam durch meinen Kopf
+
+Diani Beach unter dem Abendhimmel
+Wellen schlagen ruhig an die Küste
+Und ich denk an all die Länder die ich sah
+an Shanghai, Rio und die langen Nächte
+
+Denn zuhause war mir damals viel zu langweilig
+ich wollte sehen wie groß die Welt wirklich ist
+Und jetzt beim letzten Land vor meiner Rückkehr
+weiß ich endlich warum ich losgegangen bin
+
+[Bridge]
+
+Letztes Land
+letzte Nacht
+letzte Sterne dieser Reise
+
+[Final Hook]
+
+Safari unter Sternen
+Feuer brennt tief in der Nacht
+letztes Land auf meiner Reise
+bevor der Weg nach Hause startet
+
+Von Nairobi bis zur Savanne
+trägt der Wind mich durch die Zeit
+Erdbeere jetzt in Kenia
+und ich halt den Moment noch fest`,"Home Again":`Weißt du...
+Verrückt, wenn ich jetzt zurückdenke.
+
+Alles hat einfach damit angefangen, dass mir zuhause langweilig war.
+Jeden Tag dieselben Straßen, dieselben Menschen, dieselben Gedanken.
+Und irgendwann hab ich mir gesagt:
+Da draußen muss doch noch mehr sein.
+
+Also hab ich meinen Koffer genommen...
+und bin einfach los.
+
+Shanghai hat mir gezeigt, wie groß die Welt sein kann.
+Rio hat mir gezeigt, wie lebendig sie ist.
+Italien hat sich angefühlt wie ein Film.
+Amsterdam hat niemals geschlafen.
+Amerika hatte Straßen ohne Ende.
+Ägypten hatte Geschichten, die älter waren als alles, was ich kannte.
+Griechenland fühlte sich nach Sommer an.
+Jamaika nach Freiheit.
+Mexiko nach Leben.
+Und Kenia...
+Kenia war wie ein letzter Sonnenuntergang, bevor alles endet.
+
+Und jetzt sitz ich wieder hier...
+mit demselben Koffer wie am Anfang.
+Aber irgendwie fühlt er sich schwerer an.
+Nicht wegen Sachen.
+Sondern wegen Erinnerungen.
+
+Und vielleicht hab ich auf dieser Reise etwas verstanden...
+Man muss nicht um die Welt fliegen, um etwas zu finden.
+Aber manchmal muss man weit weggehen...
+um zu merken, was man eigentlich gesucht hat.
+
+Und egal wie weit man geht...
+irgendwann führt jede Reise wieder nach Hause.
+
+Erdbeere around the world.
+Ende der Reise.`},er=[],tr=`/Koenigliche-Mafia/`,B=e=>`${tr}${e}`,nr=[{id:`S1`,type:`jingle`,category:`standard`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/S1.m4a`),radioOnly:!0},{id:`S2`,type:`jingle`,category:`standard`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/S2.m4a`),radioOnly:!0},{id:`S3`,type:`jingle`,category:`standard`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/S3.m4a`),radioOnly:!0},{id:`S4`,type:`jingle`,category:`standard`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/S4.m4a`),radioOnly:!0},{id:`S5`,type:`jingle`,category:`standard`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/S5.m4a`),radioOnly:!0},{id:`S6`,type:`jingle`,category:`standard`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/S6.m4a`),radioOnly:!0},{id:`S7`,type:`jingle`,category:`standard`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/S7.m4a`),radioOnly:!0},{id:`S8`,type:`jingle`,category:`standard`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/S8.m4a`),radioOnly:!0}],rr=[{id:`L1`,type:`jingle`,category:`latenight`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/L1.m4a`),radioOnly:!0},{id:`L2`,type:`jingle`,category:`latenight`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/L2.m4a`),radioOnly:!0},{id:`L3`,type:`jingle`,category:`latenight`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/L3.m4a`),radioOnly:!0},{id:`L4`,type:`jingle`,category:`latenight`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/L4.m4a`),radioOnly:!0}],ir=[{id:`T1`,type:`jingle`,category:`transition`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:09`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/T1.m4a`),radioOnly:!0},{id:`T2`,type:`jingle`,category:`transition`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:09`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/T2.m4a`),radioOnly:!0},{id:`T3`,type:`jingle`,category:`transition`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:09`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/T3.m4a`),radioOnly:!0},{id:`T4`,type:`jingle`,category:`transition`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:09`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/T4.m4a`),radioOnly:!0},{id:`T5`,type:`jingle`,category:`transition`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:09`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/T5.m4a`),radioOnly:!0}],ar=[{id:`R1`,type:`jingle`,category:`rare`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/R1.m4a`),radioOnly:!0},{id:`R2`,type:`jingle`,category:`rare`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/R2.m4a`),radioOnly:!0},{id:`R3`,type:`jingle`,category:`rare`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/R3.m4a`),radioOnly:!0}],or=o((e=>{var t=Symbol.for(`react.transitional.element`),n=Symbol.for(`react.fragment`);function r(e,n,r){var i=null;if(r!==void 0&&(i=``+r),n.key!==void 0&&(i=``+n.key),`key`in n)for(var a in r={},n)a!==`key`&&(r[a]=n[a]);else r=n;return n=r.ref,{$$typeof:t,type:e,key:i,ref:n===void 0?null:n,props:r}}e.Fragment=n,e.jsx=r,e.jsxs=r})),V=o(((e,t)=>{t.exports=or()}))(),sr=`/Koenigliche-Mafia/`,cr=e=>`${sr}${e}`,lr=`https://forms.gle/NSAUa8ifBkJxrHjn6`,ur={id:`EPMC-OurPlace`,title:`Our Place`,artist:`EuroParksMC`,album:`Making the Impossible Possible`,releaseDate:`2026-04-16`,duration:`03:49`,cover:cr(`covers/EPMC.png`),file:cr(`songs/EPMC-OurPlace.mp3`)};cr(`covers/Trailer1.3.png`),cr(`songs/Trailer1.3.wav`);function dr(e,t,n){return e===`albums`&&t?t.title:e===`playlists`&&n?n.name:e===`songs`?`Songs`:e===`albums`?`Alben`:e===`playlists`?`Playlists`:e===`patchnotes`?`Patchnotes`:e===`extra`?`Extra`:`Startseite`}var fr=e=>({background:e?`linear-gradient(135deg, #ff4dd2, #b84dff)`:`#1db954`,color:`white`,border:`none`,borderRadius:`999px`,padding:`10px 16px`,cursor:`pointer`,fontWeight:700,boxShadow:e?`0 0 18px rgba(255,77,210,0.35)`:`none`,transition:`all 0.25s ease`}),pr=e=>({background:e?`#1b0b2e`:`#1a1f2b`,color:`white`,border:e?`1px solid rgba(255,77,210,0.35)`:`1px solid #2a3142`,borderRadius:`999px`,padding:`10px 16px`,cursor:`pointer`,fontWeight:700,boxShadow:e?`0 0 16px rgba(255,77,210,0.18)`:`none`,transition:`all 0.25s ease`}),mr={width:`100%`,background:`transparent`,color:`white`,border:`none`,textAlign:`left`,padding:`12px 14px`,cursor:`pointer`,fontWeight:700,fontSize:`14px`,borderRadius:`10px`,display:`flex`,alignItems:`center`,justifyContent:`flex-start`,minHeight:`44px`},hr=(e,t=!1)=>({background:e?t?`linear-gradient(135deg, #ff4dd2, #9d4dff)`:`#1db954`:t?`#1b0b2e`:`#171b24`,color:`white`,border:t?`1px solid rgba(255,77,210,0.35)`:`none`,borderRadius:`14px`,padding:`14px 16px`,textAlign:`left`,cursor:`pointer`,fontWeight:700,width:`100%`,boxShadow:e&&t?`0 0 18px rgba(255,77,210,0.35)`:`none`});function gr(){let[e,t]=(0,y.useState)(`home`),[n,r]=(0,y.useState)(null),[i,a]=(0,y.useState)([]),[o,s]=(0,y.useState)([]),[c,l]=(0,y.useState)(null),[u,d]=(0,y.useState)(null),[f,p]=(0,y.useState)(!1),[m,h]=(0,y.useState)(!1),[g,_]=(0,y.useState)(null),[v,b]=(0,y.useState)(!1),[x,S]=(0,y.useState)(!1),[C,w]=(0,y.useState)(!1),[ee,T]=(0,y.useState)(0),[te,E]=(0,y.useState)(0),[ne,re]=(0,y.useState)(0),[ie,ae]=(0,y.useState)(``),[D,oe]=(0,y.useState)(1),[se,O]=(0,y.useState)(1),[k,ce]=(0,y.useState)(!1),[le,ue]=(0,y.useState)(!1),[de,A]=(0,y.useState)(``),[j,fe]=(0,y.useState)(`off`),[me,he]=(0,y.useState)(!1),[M,ge]=(0,y.useState)(!1),[_e,ve]=(0,y.useState)(null),[ye,be]=(0,y.useState)(1),[xe,Se]=(0,y.useState)(``),[Ce,we]=(0,y.useState)(``),[N,Te]=(0,y.useState)(!1),[Oe,ke]=(0,y.useState)(``),[Ae,je]=(0,y.useState)(``),[Me,Ne]=(0,y.useState)(!1),[Fe,Ie]=(0,y.useState)(``),[Le,Re]=(0,y.useState)(``),[ze,Be]=(0,y.useState)(!1),[Ve,He]=(0,y.useState)([]),[Ue,We]=(0,y.useState)(null),[Ge,Ke]=(0,y.useState)(!1),[qe,Je]=(0,y.useState)(null),[Ye,Xe]=(0,y.useState)(``),[Ze,Qe]=(0,y.useState)(!1),[$e,et]=(0,y.useState)(!0),[P,tt]=(0,y.useState)(!0),[nt,rt]=(0,y.useState)(!1),[it,at]=(0,y.useState)(!1),[ot,st]=(0,y.useState)([]),[F,ct]=(0,y.useState)(!1);(0,y.useEffect)(()=>{let e=()=>{l(null)};return window.addEventListener(`scroll`,e,!0),()=>{window.removeEventListener(`scroll`,e,!0)}},[]);let[I,lt]=(0,y.useState)(window.innerWidth<=768),L=(0,y.useRef)(null),ut=(0,y.useRef)(null),dt=(0,y.useMemo)(()=>[...Zn,...er,ur],[]),ft=(0,y.useMemo)(()=>Zn.filter(e=>e.hidden?F&&e.hiddenTag===`berrydeadly`:!0),[F]),pt=(0,y.useMemo)(()=>Zn.filter(e=>!e.hidden).filter(e=>typeof e.id==`number`).sort((e,t)=>e.id-t.id),[]),mt=(0,y.useMemo)(()=>Zn.filter(e=>e.hidden&&e.hiddenTag===`jascha`),[]),R=(0,y.useMemo)(()=>{let e=ie.trim().toLowerCase();return e?ft.filter(t=>t.title.toLowerCase().includes(e)||t.artist.toLowerCase().includes(e)||(t.album||``).toLowerCase().includes(e)):ft},[ie,ft]),ht=(0,y.useMemo)(()=>[...ft].sort((e,t)=>new Date(t.releaseDate)-new Date(e.releaseDate)).slice(0,5),[ft]),gt=(0,y.useMemo)(()=>{let e=new Map;return ft.forEach(t=>{if(!t.album)return;e.has(t.album)||e.set(t.album,{id:t.album,title:t.album,artist:t.artist,cover:t.albumCover||t.cover,releaseDate:t.releaseDate,tracks:[]});let n=e.get(t.album);n.tracks.push(t),new Date(t.releaseDate)>new Date(n.releaseDate)&&(n.releaseDate=t.releaseDate)}),[...e.values()].map(e=>{let t=[...e.tracks].sort((e,t)=>(e.albumTrackNumber??e.trackNumber??999)-(t.albumTrackNumber??t.trackNumber??999));return{...e,releaseDate:t[0]?.releaseDate||e.releaseDate,isAlbum:e.tracks.length>1,releaseType:e.tracks.length>1?`Album`:`Single`,tracks:t}}).sort((e,t)=>new Date(t.releaseDate)-new Date(e.releaseDate))},[ft]),_t=e=>{if(!e)return 0;let[t,n]=e.split(`:`).map(Number);return t*60+n},vt=new Date(`2026-05-22T00:00:00+02:00`).getTime(),yt=()=>{let e=Zn.filter(e=>!e.hidden&&_t(e.duration)>0),t=[];return t.push(nr[0]),e.forEach((e,n)=>{t.push(e);let r=n+1;if(r%10==0){let e=Math.floor(r/10)%nr.length;t.push(nr[e])}if(r%5==0){let e=Math.floor(r/5)%ir.length;t.push(ir[e])}if(r%17==0){let e=Math.floor(r/17)%rr.length;t.push(rr[e])}if(r%29==0){let e=Math.floor(r/29)%ar.length;t.push(ar[e])}}),t.filter(e=>_t(e.duration)>0).map((e,t)=>({...e,radioIndex:t,radioKey:`${e.id}-${t}`}))},bt=()=>{let e=yt(),t=e.reduce((e,t)=>e+_t(t.duration),0);if(!e.length||t<=0)return null;let n=(Math.floor((Date.now()-vt)/1e3)%t+t)%t;for(let t of e){let e=_t(t.duration);if(n<e)return{track:t,offset:n};n-=e}return{track:e[0],offset:0}},xt=()=>{let e=bt();e&&(Te(!0),a([]),s([]),d(null),We(null),r({...e.track,isRadioTrack:!0}),setTimeout(()=>{L.current&&(L.current.currentTime=e.offset,L.current.play().catch(()=>{}))},150))},Ct=(e,t={})=>{if(!e)return;Te(!1);let{fromHistory:i=!1,resetHistory:a=!1}=t;a?s([]):!i&&n&&s(e=>[...e,n]),r(e),l(null)},wt=e=>{let t=pt.find(t=>String(t.id)===String(e));return t?`${t.id}. ${t.title} – ${t.artist}`:``},Tt=`Art der Anfrage: Cover
 Ausgewählter Song: ${wt(xe)}
 Gewünschter Stil / Prompt: ${Ce}`,Et=`Art der Anfrage: Mashup
 Song 1: ${wt(Oe)}
