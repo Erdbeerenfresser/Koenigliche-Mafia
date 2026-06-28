@@ -10161,8 +10161,8 @@ Nächstes Jahr fahre mir an nem ruhige Tag.
 Also wahrscheinlich wieder Brüggetag.
 Silas bringt d’Kamera mit.
 Alexis bringt Snacks.
-Un mir bringe gar kei Erwartunge mehr mit.,
-"Motte Sell Out Stream": 'Motte Sell Out Stream
+Un mir bringe gar kei Erwartunge mehr mit.
+`,"Motte Sell Out Stream":`Motte Sell Out Stream
 
 [Intro – spoken / dark]
 Freitagabend.
@@ -10362,8 +10362,171 @@ Und Motte?
 
 Motte streamt.
 
-Bis Sonntag.',
-`},er=`/Koenigliche-Mafia/`,tr=e=>`${er}${e}`,nr=[{id:`cover-1`,type:`cover`,sourceSongId:51,title:`Ein wunderschönes Haus - Hardstyle Techno Version`,artist:`Erdbeerenfresser;Mr. Moneymaker`,duration:`03:09`,month:`05/2026`,cover:tr(`covers/Ein wunderschönes Haus - Hardstyle Techno Version.png`),file:tr(`songs/Ein wunderschönes Haus - Hardstyle Techno Version.mp3`),lyricsKey:`Ein wunderschönes Haus`},{id:`mashup-1`,type:`mashup`,sourceSongIds:[32,44],title:`Mr. Moneymaker x Mr. Moneymaker Land`,artist:`Erdbeerenfresser;Motte`,duration:`03:37`,month:`05/2026`,cover:tr(`covers/Mr. Moneymaker x Mr. Moneymaker Land (Mashup).png`),file:tr(`songs/Mr. Moneymaker x Mr. Moneymaker Land (Mashup).mp3`)}],rr=`/Koenigliche-Mafia/`,ir=e=>`${rr}${e}`,ar=[{id:`extra2-1`,type:`radio-exclusive`,title:`Fleischwurst x Operation Mottemaker`,artist:`Neo City Radio Exclusive`,duration:`03:09`,month:`05/2026`,cover:ir(`covers/Fleischwurst x Operation Mottemaker.png`),file:ir(`songs/Fleischwurst x Operation Mottemaker.mp3`),radioOnly:!0},{id:`extra2-2`,type:`radio-exclusive`,title:`Motte Nicht Da - Jazz Version`,artist:`Neo City Radio Exclusive`,duration:`02:58`,month:`05/2026`,cover:ir(`covers/Motte Nicht Da - Jazz Version.png`),file:ir(`songs/Motte Nicht Da - Jazz Version.mp3`),radioOnly:!0,lyricsKey:`Motte Nicht Da`}],or=`/Koenigliche-Mafia/`,B=e=>`${or}${e}`,sr=[{id:`S1`,type:`jingle`,category:`standard`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/S1.m4a`),radioOnly:!0},{id:`S2`,type:`jingle`,category:`standard`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/S2.m4a`),radioOnly:!0},{id:`S3`,type:`jingle`,category:`standard`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/S3.m4a`),radioOnly:!0},{id:`S4`,type:`jingle`,category:`standard`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/S4.m4a`),radioOnly:!0},{id:`S5`,type:`jingle`,category:`standard`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/S5.m4a`),radioOnly:!0},{id:`S6`,type:`jingle`,category:`standard`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/S6.m4a`),radioOnly:!0},{id:`S7`,type:`jingle`,category:`standard`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/S7.m4a`),radioOnly:!0},{id:`S8`,type:`jingle`,category:`standard`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/S8.m4a`),radioOnly:!0}],cr=[{id:`L1`,type:`jingle`,category:`latenight`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/L1.m4a`),radioOnly:!0},{id:`L2`,type:`jingle`,category:`latenight`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/L2.m4a`),radioOnly:!0},{id:`L3`,type:`jingle`,category:`latenight`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/L3.m4a`),radioOnly:!0},{id:`L4`,type:`jingle`,category:`latenight`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/L4.m4a`),radioOnly:!0}];B(`covers/Neo-City-Radio.png`),B(`radio/T1.m4a`),B(`covers/Neo-City-Radio.png`),B(`radio/T2.m4a`),B(`covers/Neo-City-Radio.png`),B(`radio/T3.m4a`),B(`covers/Neo-City-Radio.png`),B(`radio/T4.m4a`),B(`covers/Neo-City-Radio.png`),B(`radio/T5.m4a`);var lr=[{id:`R1`,type:`jingle`,category:`rare`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/R1.m4a`),radioOnly:!0},{id:`R2`,type:`jingle`,category:`rare`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/R2.m4a`),radioOnly:!0},{id:`R3`,type:`jingle`,category:`rare`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/R3.m4a`),radioOnly:!0}],ur=[{id:`AD_CARRYGOLD`,type:`ad`,title:`Carrygold`,artist:`Neo City Werbung`,duration:`00:19`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/carrygold.mp3`),radioOnly:!0},{id:`AD_KAESEFIX`,type:`ad`,title:`Käsefix`,artist:`Neo City Werbung`,duration:`00:29`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Käsefix.mp3`),radioOnly:!0},{id:`AD_Äppelwoi Express`,type:`ad`,title:`Äppelwoi Express`,artist:`Neo City Werbung`,duration:`00:27`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Äppelwoi Express.mp3`),radioOnly:!0},{id:`AD_KINDERAGENTUR`,type:`ad`,title:`Kinderagentur`,artist:`Neo City Werbung`,duration:`00:38`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Kinderagentur.mp3`),radioOnly:!0},{id:`AD_Aldi Ost`,type:`ad`,title:`Aldi Ost`,artist:`Neo City Werbung`,duration:`01:16`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Aldi Ost.mp3`),radioOnly:!0},{id:`AD_BlechBombe GmbH`,type:`ad`,title:`BlechBombe GmbH`,artist:`Neo City Werbung`,duration:`00:48`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/BlechBombe GmbH.mp3`),radioOnly:!0},{id:`AD_MUSKEL-MANNI'S POWERBUDE`,type:`ad`,title:`MUSKEL-MANNI'S POWERBUDE`,artist:`Neo City Werbung`,duration:`00:24`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/MUSKEL-MANNI'S POWERBUDE.mp3`),radioOnly:!0},{id:`AD_Krawall 95`,type:`ad`,title:`Krawall 95`,artist:`Neo City Werbung`,duration:`01:11`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Krawall 95.mp3`),radioOnly:!0},{id:`AD_Leberkas_Boost`,type:`ad`,title:`Leberkas-Boost`,artist:`Neo City Werbung`,duration:`00:52`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Leberkas-Boost.mp3`),radioOnly:!0},{id:`AD_Madame Brunhilde`,type:`ad`,title:`Madame Brunhilde`,artist:`Neo City Werbung`,duration:`00:27`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Madame Brunhilde.mp3`),radioOnly:!0},{id:`AD_Müüffelnix`,type:`ad`,title:`Müüffelnix`,artist:`Neo City Werbung`,duration:`00:47`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Müüffelnix.mp3`),radioOnly:!0},{id:`AD_Ravioli King`,type:`ad`,title:`Ravioli King`,artist:`Neo City Werbung`,duration:`00:32`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Ravioli King.mp3`),radioOnly:!0},{id:`AD_Klaus Kinskis Staubsaugerparadies`,type:`ad`,title:`Klaus Kinskis Staubsaugerparadies`,artist:`Neo City Werbung`,duration:`00:39`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Klaus Kinskis Staubsaugerparadies.mp3`),radioOnly:!0},{id:`AD_PIZZERINO EXPRESSO`,type:`ad`,title:`PIZZERINO EXPRESSO`,artist:`Neo City Werbung`,duration:`00:44`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/PIZZERINO EXPRESSO.mp3`),radioOnly:!0}],dr={id:`AD_INTRO`,type:`ad`,title:`Werbung`,artist:`Neo City Radio`,duration:`00:08`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Werbung.m4a`),radioOnly:!0},fr={id:`AD_OUTRO`,type:`ad`,title:`Werbung Ende`,artist:`Neo City Radio`,duration:`00:08`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Werbung Ende.m4a`),radioOnly:!0};function pr(e){let t=(e-1)*2%ur.length;return[ur[t],ur[(t+1)%ur.length]]}var mr=[{id:`AD_Aldi Ost`,type:`ad`,title:`Aldi Ost`,artist:`Neo City 2 Werbung`,duration:`01:16`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Aldi Ost.mp3`),radioOnly:!0},{id:`AD_BlechBombe GmbH`,type:`ad`,title:`BlechBombe GmbH`,artist:`Neo City 2 Werbung`,duration:`00:48`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/BlechBombe GmbH.mp3`),radioOnly:!0},{id:`AD_MUSKEL-MANNI'S POWERBUDE`,type:`ad`,title:`MUSKEL-MANNI'S POWERBUDE`,artist:`Neo City 2 Werbung`,duration:`00:24`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/MUSKEL-MANNI'S POWERBUDE.mp3`),radioOnly:!0},{id:`AD_Leberkas_Boost`,type:`ad`,title:`Leberkas-Boost`,artist:`Neo City 2 Werbung`,duration:`00:52`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Leberkas-Boost.mp3`),radioOnly:!0},{id:`AD_Madame Brunhilde`,type:`ad`,title:`Madame Brunhilde`,artist:`Neo City 2 Werbung`,duration:`00:27`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Madame Brunhilde.mp3`),radioOnly:!0},{id:`AD_Müüffelnix`,type:`ad`,title:`Müüffelnix`,artist:`Neo City 2 Werbung`,duration:`00:47`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Müüffelnix.mp3`),radioOnly:!0},{id:`AD_PIZZERINO EXPRESSO`,type:`ad`,title:`PIZZERINO EXPRESSO`,artist:`Neo City 2 Werbung`,duration:`00:44`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/PIZZERINO EXPRESSO.mp3`),radioOnly:!0},{id:`AD_Ravioli King`,type:`ad`,title:`Ravioli King`,artist:`Neo City 2 Werbung`,duration:`00:32`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Ravioli King.mp3`),radioOnly:!0}],hr={id:`MOTTE_AD_INTRO`,type:`ad`,title:`Werbung`,artist:`Neo City Radio 2`,duration:`00:08`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Werbung.m4a`),radioOnly:!0},gr={id:`MOTTE_AD_OUTRO`,type:`ad`,title:`Werbung Ende`,artist:`Neo City Radio 2`,duration:`00:08`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Werbung Ende.m4a`),radioOnly:!0};function _r(e){let t=(e-1)*2%mr.length;return[mr[t],mr[(t+1)%mr.length]]}var vr=(e=new Date)=>{let t=e.getHours();return t>=0&&t<5},yr=(e,t)=>{let n=vr(new Date(t))?cr:sr,r=n[e.jingleIndex%n.length];return{...r,title:e.title||r.title,artist:e.artist||r.artist,cover:e.cover||r.cover,radioIndex:e.radioIndex,radioKey:e.radioKey,radioStation:e.radioStation,isRadioTrack:!0}},br=(e,t)=>e?.type===`timed-jingle`?yr(e,t):{...e,isRadioTrack:!0},xr=o((e=>{var t=Symbol.for(`react.transitional.element`),n=Symbol.for(`react.fragment`);function r(e,n,r){var i=null;if(r!==void 0&&(i=``+r),n.key!==void 0&&(i=``+n.key),`key`in n)for(var a in r={},n)a!==`key`&&(r[a]=n[a]);else r=n;return n=r.ref,{$$typeof:t,type:e,key:i,ref:n===void 0?null:n,props:r}}e.Fragment=n,e.jsx=r,e.jsxs=r})),V=o(((e,t)=>{t.exports=xr()}))(),Sr=`/Koenigliche-Mafia/`,Cr=e=>`${Sr}${e}`,wr=`https://forms.gle/NSAUa8ifBkJxrHjn6`,Tr=(e=``)=>e.split(`;`).map(e=>e.trim()).filter(Boolean),Er=(e=``)=>e.trim().toLowerCase().replace(/[ä]/g,`ae`).replace(/[ö]/g,`oe`).replace(/[ü]/g,`ue`).replace(/[ß]/g,`ss`).replace(/[^a-z0-9]+/g,`-`).replace(/^-+|-+$/g,``),Dr={erdbeerenfresser:{name:`Erdbeerenfresser`,bio:`Erdbeerenfresser ist der Coder und Visionär hinter Königliche AI Songs und verbindet persönliche Storys, Insider und große Konzeptalben.
+Bis Sonntag.`,"Motte Nicht Da x Der Unfall (Mashup)":`[singer A]
+Uga! Uga!
+Dum dum da!
+Hey!
+
+Motte nicht da.
+Wir hier.
+Feuer an.
+Du nicht hier.
+
+Wir warten.
+Schon lang.
+Zeit geht.
+Wir bang.
+
+Uga uga!
+Wir wart!
+Uga uga!
+Sehr hart!
+
+MOTTE NICHT DA! – UGA UGA!
+WO MOTTE HIN?! – DUM DUM DA!
+WIR NICHT HAPPY! – UGA UGA!
+KOMM JETZT HER! – DUM DUM DA!
+
+MOTTE KOMM BALD! – UGA UGA!
+WIR DREH DURCH! – DUM DUM DA!
+GANZER TRIBE SCHREI LAUT:
+MOTTE! MOTTE! KOMM JETZT RAUS!
+
+[transition]
+
+[singer B]
+Er ging durch die Stadt
+Ohne Böse Gedanken im Kopf
+Normaler Tag, Normaler Weg
+Doch das Schicksal packte die Gelegenheit am Schopf
+
+Ein Rohes Stück Schweinchen da
+ein bisschen Salz und Pfeffer hier
+Fällt der Hells unter den Hammer
+Ist er platt, dass tote Tier
+
+Ohhhh armes Hells
+Ohhh heute Fällst 
+Du in die Pfanne 
+und aus dir wird Schnitzel durch ne Panne
+
+Lecker Lecker Wiener Schnitzel
+Lecker Lecker das esse ich gern
+Oh du armes Hells
+Dein letztes Stündlein ist nicht fern.
+
+[singer A]
+Trommel laut.
+Herz boom boom.
+Alle schau.
+Du kein Room.
+
+Du sonst hier.
+Immer da.
+Jetzt nur wir.
+Nicht so klar.
+
+Dum dum!
+Dum dum!
+Hey!
+Hey!
+
+WO MOTTE?! – (WO ER?!)
+WO MOTTE?! – (KOMM HER!)
+WANN MOTTE?! – (JETZT BALD!)
+SONST TRIBE – ALLES KNALLT!
+
+MOTTE DA?! – UGA UGA!
+NOCH NICHT DA! – DUM DUM DA!
+ALLE WART! – UGA UGA!
+KOMM JETZT BITTE! – DUM DUM DA!
+
+Motte…
+wo du…
+wir wart…
+
+[transition]
+
+[singer B]
+Jetzt steht er da
+der arme Hells
+Vor dem hunrigen Money klar
+ist er versteinert wie ein fels
+
+Er sieht gerade so lecker aus
+So Gold Gebrannt und mit brauner Soße
+Money sabbert schon
+auf leckeres Schnitzel in dieser Sexy pose
+
+Lecker Lecker Wiener Schnitzel
+Lecker Lecker das esse ich gern
+armes Hells liegst du da 
+Dein letztes Stündlein ist jetzt da.
+
+Lecker Lecker Wiener Schnitzel
+Lecker Lecker das aß ich gern
+Armes Hells bist jetzt weg
+Immerhin Money hats geschmeckt
+
+Also fühle dich geehrt
+Money hat dich verzehrt
+Also sei froh....
+Du bist jetzt im Bauch..
+
+Von Mister Money-Maker`,"Alexis Brother x Kingston Sun (Mashup)":`[singer A]
+Ohhh yeah…
+Sing it now…
+Alexis brother… listen to my heart tonight.
+
+Alexis brother, hear my song tonight,
+walking through the dark, searching for the light.
+Alexis brother, don’t turn away,
+es tut mir unfassbar leid, I just gotta say.
+
+[singer B]
+Yeah yeah
+Jamaica...
+Sonne auf meiner Haut
+
+Steig aus dem Flieger, warme Luft im Gesicht
+Palmen bewegen sich langsam im Wind
+Kingston lebt schon mitten auf den Straßen
+überall Musik und Stimmen in der Nacht
+
+[transition]
+
+[singer B]
+Kingston Sun über dem Meer
+warmer Wind zieht durch die Nacht
+Palmen tanzen mit den Wellen
+während die Insel niemals schläft
+
+Von Kingston bis zur Blue Lagoon
+trägt der Sommer mich durchs Licht
+Erdbeere jetzt in Jamaika
+und ich will hier nicht mehr weg
+
+[instrumental]
+
+[singer A]
+Through the streets and the nights I remember your name,
+how I treated you wrong, yeah I carry the shame.
+But a man can change when the truth arrives,
+when he sees the hurt in another man’s eyes.
+
+Ohhhh Alexis, hear my plea,
+friendship is the place I wanna be.
+No more hate, no more pride,
+just good vibes walking side by side.
+
+Alexis brother, hear my song tonight,
+walking through the dark, searching for the light.
+Alexis brother, don’t turn away,
+es tut mir unfassbar leid, I just gotta say.
+
+[singer B]
+Jamaica…
+Sonne, Meer und Musik`},er=`/Koenigliche-Mafia/`,tr=e=>`${er}${e}`,nr=[{id:`cover-1`,type:`cover`,sourceSongId:51,title:`Ein wunderschönes Haus - Hardstyle Techno Version`,artist:`Erdbeerenfresser;Mr. Moneymaker`,duration:`03:09`,month:`05/2026`,cover:tr(`covers/Ein wunderschönes Haus - Hardstyle Techno Version.png`),file:tr(`songs/Ein wunderschönes Haus - Hardstyle Techno Version.mp3`),lyricsKey:`Ein wunderschönes Haus`},{id:`mashup-1`,type:`mashup`,sourceSongIds:[32,44],title:`Mr. Moneymaker x Mr. Moneymaker Land`,artist:`Erdbeerenfresser;Motte`,duration:`03:37`,month:`05/2026`,cover:tr(`covers/Mr. Moneymaker x Mr. Moneymaker Land (Mashup).png`),file:tr(`songs/Mr. Moneymaker x Mr. Moneymaker Land (Mashup).mp3`)},{id:`cover-2`,type:`cover`,sourceSongId:39,title:`Auf der Suche nach Diamanten – Campfire Version`,artist:`Erdbeerenfresser`,duration:`02:21`,month:`06/2026`,cover:tr(`covers/Auf der Suche nach Diamanten – Campfire Version.png`),file:tr(`songs/Auf der Suche nach Diamanten – Campfire Version.mp3`),lyricsKey:`Auf der Suche nach Diamanten`},{id:`mashup-2`,type:`mashup`,sourceSongIds:[32,44],title:`Motte Nicht Da x Der Unfall (Mashup)`,artist:`Motte;Erdbeerenfresser`,duration:`03:52`,month:`05/2026`,cover:tr(`covers/Motte Nicht Da x Der Unfall (Mashup).png`),file:tr(`songs/Motte Nicht Da x Der Unfall (Mashup).mp3`)}],rr=`/Koenigliche-Mafia/`,ir=e=>`${rr}${e}`,ar=[{id:`extra2-1`,type:`radio-exclusive`,title:`Fleischwurst x Operation Mottemaker`,artist:`Neo City Radio Exclusive`,duration:`03:09`,month:`05/2026`,cover:ir(`covers/Fleischwurst x Operation Mottemaker.png`),file:ir(`songs/Fleischwurst x Operation Mottemaker.mp3`),radioOnly:!0},{id:`extra2-2`,type:`radio-exclusive`,title:`Motte Nicht Da - Jazz Version`,artist:`Neo City Radio Exclusive`,duration:`02:58`,month:`05/2026`,cover:ir(`covers/Motte Nicht Da - Jazz Version.png`),file:ir(`songs/Motte Nicht Da - Jazz Version.mp3`),radioOnly:!0,lyricsKey:`Motte Nicht Da`},{id:`extra2-3`,type:`radio-exclusive`,title:`Motte Nicht Da - Jazz Version`,artist:`Neo City Radio Exclusive`,duration:`01:52`,month:`06/2026`,cover:ir(`covers/Mr. Moneymaker – Villain’s Fortune Mix.png`),file:ir(`songs/Mr. Moneymaker – Villain’s Fortune Mix.mp3`),radioOnly:!0,lyricsKey:`Mr. Moneymaker`},{id:`extra2-4`,type:`radio-exclusive`,title:`Motte Nicht Da - Jazz Version`,artist:`Neo City Radio Exclusive`,duration:`04:44`,month:`06/2026`,cover:ir(`covers/Route 66 - Heavy Metal Version.png`),file:ir(`songs/Route 66 - Heavy Metal Version.mp3`),radioOnly:!0,lyricsKey:`Route 66`},{id:`extra2-5`,type:`radio-exclusive`,title:`Alexis Brother x Kingston Sun (Mashup)`,artist:`Neo City Radio Exclusive`,duration:`03:14`,month:`06/2026`,cover:ir(`covers/Alexis Brother x Kingston Sun (Mashup).png`),file:ir(`songs/Alexis Brother x Kingston Sun (Mashup).mp3`),radioOnly:!0}],or=`/Koenigliche-Mafia/`,B=e=>`${or}${e}`,sr=[{id:`S1`,type:`jingle`,category:`standard`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/S1.m4a`),radioOnly:!0},{id:`S2`,type:`jingle`,category:`standard`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/S2.m4a`),radioOnly:!0},{id:`S3`,type:`jingle`,category:`standard`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/S3.m4a`),radioOnly:!0},{id:`S4`,type:`jingle`,category:`standard`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/S4.m4a`),radioOnly:!0},{id:`S5`,type:`jingle`,category:`standard`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/S5.m4a`),radioOnly:!0},{id:`S6`,type:`jingle`,category:`standard`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/S6.m4a`),radioOnly:!0},{id:`S7`,type:`jingle`,category:`standard`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/S7.m4a`),radioOnly:!0},{id:`S8`,type:`jingle`,category:`standard`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/S8.m4a`),radioOnly:!0}],cr=[{id:`L1`,type:`jingle`,category:`latenight`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/L1.m4a`),radioOnly:!0},{id:`L2`,type:`jingle`,category:`latenight`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/L2.m4a`),radioOnly:!0},{id:`L3`,type:`jingle`,category:`latenight`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/L3.m4a`),radioOnly:!0},{id:`L4`,type:`jingle`,category:`latenight`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/L4.m4a`),radioOnly:!0}];B(`covers/Neo-City-Radio.png`),B(`radio/T1.m4a`),B(`covers/Neo-City-Radio.png`),B(`radio/T2.m4a`),B(`covers/Neo-City-Radio.png`),B(`radio/T3.m4a`),B(`covers/Neo-City-Radio.png`),B(`radio/T4.m4a`),B(`covers/Neo-City-Radio.png`),B(`radio/T5.m4a`);var lr=[{id:`R1`,type:`jingle`,category:`rare`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/R1.m4a`),radioOnly:!0},{id:`R2`,type:`jingle`,category:`rare`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/R2.m4a`),radioOnly:!0},{id:`R3`,type:`jingle`,category:`rare`,title:`Neo City Radio`,artist:`Neo City Radio`,duration:`00:17`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/R3.m4a`),radioOnly:!0}],ur=[{id:`AD_CARRYGOLD`,type:`ad`,title:`Carrygold`,artist:`Neo City Werbung`,duration:`00:19`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/carrygold.mp3`),radioOnly:!0},{id:`AD_KAESEFIX`,type:`ad`,title:`Käsefix`,artist:`Neo City Werbung`,duration:`00:29`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Käsefix.mp3`),radioOnly:!0},{id:`AD_Äppelwoi Express`,type:`ad`,title:`Äppelwoi Express`,artist:`Neo City Werbung`,duration:`00:27`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Äppelwoi Express.mp3`),radioOnly:!0},{id:`AD_KINDERAGENTUR`,type:`ad`,title:`Kinderagentur`,artist:`Neo City Werbung`,duration:`00:38`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Kinderagentur.mp3`),radioOnly:!0},{id:`AD_Aldi Ost`,type:`ad`,title:`Aldi Ost`,artist:`Neo City Werbung`,duration:`01:16`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Aldi Ost.mp3`),radioOnly:!0},{id:`AD_BlechBombe GmbH`,type:`ad`,title:`BlechBombe GmbH`,artist:`Neo City Werbung`,duration:`00:48`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/BlechBombe GmbH.mp3`),radioOnly:!0},{id:`AD_MUSKEL-MANNI'S POWERBUDE`,type:`ad`,title:`MUSKEL-MANNI'S POWERBUDE`,artist:`Neo City Werbung`,duration:`00:24`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/MUSKEL-MANNI'S POWERBUDE.mp3`),radioOnly:!0},{id:`AD_Krawall 95`,type:`ad`,title:`Krawall 95`,artist:`Neo City Werbung`,duration:`01:11`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Krawall 95.mp3`),radioOnly:!0},{id:`AD_Leberkas_Boost`,type:`ad`,title:`Leberkas-Boost`,artist:`Neo City Werbung`,duration:`00:52`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Leberkas-Boost.mp3`),radioOnly:!0},{id:`AD_Madame Brunhilde`,type:`ad`,title:`Madame Brunhilde`,artist:`Neo City Werbung`,duration:`00:27`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Madame Brunhilde.mp3`),radioOnly:!0},{id:`AD_Müüffelnix`,type:`ad`,title:`Müüffelnix`,artist:`Neo City Werbung`,duration:`00:47`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Müüffelnix.mp3`),radioOnly:!0},{id:`AD_Ravioli King`,type:`ad`,title:`Ravioli King`,artist:`Neo City Werbung`,duration:`00:32`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Ravioli King.mp3`),radioOnly:!0},{id:`AD_Klaus Kinskis Staubsaugerparadies`,type:`ad`,title:`Klaus Kinskis Staubsaugerparadies`,artist:`Neo City Werbung`,duration:`00:39`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Klaus Kinskis Staubsaugerparadies.mp3`),radioOnly:!0},{id:`AD_PIZZERINO EXPRESSO`,type:`ad`,title:`PIZZERINO EXPRESSO`,artist:`Neo City Werbung`,duration:`00:44`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/PIZZERINO EXPRESSO.mp3`),radioOnly:!0}],dr={id:`AD_INTRO`,type:`ad`,title:`Werbung`,artist:`Neo City Radio`,duration:`00:08`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Werbung.m4a`),radioOnly:!0},fr={id:`AD_OUTRO`,type:`ad`,title:`Werbung Ende`,artist:`Neo City Radio`,duration:`00:08`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Werbung Ende.m4a`),radioOnly:!0};function pr(e){let t=(e-1)*2%ur.length;return[ur[t],ur[(t+1)%ur.length]]}var mr=[{id:`AD_Aldi Ost`,type:`ad`,title:`Aldi Ost`,artist:`Neo City 2 Werbung`,duration:`01:16`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Aldi Ost.mp3`),radioOnly:!0},{id:`AD_BlechBombe GmbH`,type:`ad`,title:`BlechBombe GmbH`,artist:`Neo City 2 Werbung`,duration:`00:48`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/BlechBombe GmbH.mp3`),radioOnly:!0},{id:`AD_MUSKEL-MANNI'S POWERBUDE`,type:`ad`,title:`MUSKEL-MANNI'S POWERBUDE`,artist:`Neo City 2 Werbung`,duration:`00:24`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/MUSKEL-MANNI'S POWERBUDE.mp3`),radioOnly:!0},{id:`AD_Leberkas_Boost`,type:`ad`,title:`Leberkas-Boost`,artist:`Neo City 2 Werbung`,duration:`00:52`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Leberkas-Boost.mp3`),radioOnly:!0},{id:`AD_Madame Brunhilde`,type:`ad`,title:`Madame Brunhilde`,artist:`Neo City 2 Werbung`,duration:`00:27`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Madame Brunhilde.mp3`),radioOnly:!0},{id:`AD_Müüffelnix`,type:`ad`,title:`Müüffelnix`,artist:`Neo City 2 Werbung`,duration:`00:47`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Müüffelnix.mp3`),radioOnly:!0},{id:`AD_PIZZERINO EXPRESSO`,type:`ad`,title:`PIZZERINO EXPRESSO`,artist:`Neo City 2 Werbung`,duration:`00:44`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/PIZZERINO EXPRESSO.mp3`),radioOnly:!0},{id:`AD_Ravioli King`,type:`ad`,title:`Ravioli King`,artist:`Neo City 2 Werbung`,duration:`00:32`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Ravioli King.mp3`),radioOnly:!0}],hr={id:`MOTTE_AD_INTRO`,type:`ad`,title:`Werbung`,artist:`Neo City Radio 2`,duration:`00:08`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Werbung.m4a`),radioOnly:!0},gr={id:`MOTTE_AD_OUTRO`,type:`ad`,title:`Werbung Ende`,artist:`Neo City Radio 2`,duration:`00:08`,cover:B(`covers/Neo-City-Radio.png`),file:B(`radio/Werbung Ende.m4a`),radioOnly:!0};function _r(e){let t=(e-1)*2%mr.length;return[mr[t],mr[(t+1)%mr.length]]}var vr=(e=new Date)=>{let t=e.getHours();return t>=0&&t<5},yr=(e,t)=>{let n=vr(new Date(t))?cr:sr,r=n[e.jingleIndex%n.length];return{...r,title:e.title||r.title,artist:e.artist||r.artist,cover:e.cover||r.cover,radioIndex:e.radioIndex,radioKey:e.radioKey,radioStation:e.radioStation,isRadioTrack:!0}},br=(e,t)=>e?.type===`timed-jingle`?yr(e,t):{...e,isRadioTrack:!0},xr=o((e=>{var t=Symbol.for(`react.transitional.element`),n=Symbol.for(`react.fragment`);function r(e,n,r){var i=null;if(r!==void 0&&(i=``+r),n.key!==void 0&&(i=``+n.key),`key`in n)for(var a in r={},n)a!==`key`&&(r[a]=n[a]);else r=n;return n=r.ref,{$$typeof:t,type:e,key:i,ref:n===void 0?null:n,props:r}}e.Fragment=n,e.jsx=r,e.jsxs=r})),V=o(((e,t)=>{t.exports=xr()}))(),Sr=`/Koenigliche-Mafia/`,Cr=e=>`${Sr}${e}`,wr=`https://forms.gle/NSAUa8ifBkJxrHjn6`,Tr=(e=``)=>e.split(`;`).map(e=>e.trim()).filter(Boolean),Er=(e=``)=>e.trim().toLowerCase().replace(/[ä]/g,`ae`).replace(/[ö]/g,`oe`).replace(/[ü]/g,`ue`).replace(/[ß]/g,`ss`).replace(/[^a-z0-9]+/g,`-`).replace(/^-+|-+$/g,``),Dr={erdbeerenfresser:{name:`Erdbeerenfresser`,bio:`Erdbeerenfresser ist der Coder und Visionär hinter Königliche AI Songs und verbindet persönliche Storys, Insider und große Konzeptalben.
 
 Von Schedule I: The Mottemaker Files über Erdbeere Underground und Mottenmann bis hin zu Traumatica Nights entsteht ein Mix aus Lore, Chaos, Freizeitpark-Vibes und echten Erinnerungen. Zu den prägenden Songs gehören Königliche A.I. Songs, Rückkehr des Königs und Motte, komm bitte bald zurück.`,image:`artists/Erdbeere.png`},motte:{name:`Motte`,bio:`Motte verbindet Insider-Singles wie Alexis Brother, Die Bußhymne an Alexis und EPMC – The Park Awaits mit großen Konzeptideen.
 
